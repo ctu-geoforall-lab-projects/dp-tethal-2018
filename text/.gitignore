@@ -1,0 +1,8 @@
+*.synctex.gz
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*~
+david-tethal-dp-2018.pdf
