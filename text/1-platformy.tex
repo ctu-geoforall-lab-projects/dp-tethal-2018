@@ -1,0 +1,344 @@
+\newpage
+\part{Webové publikační mapové platformy}
+\newpage
+\section{Principy publikačních mapových platforem}
+%\label{sec:WPS}
+
+%moznost pridani ilustrativniho obrazku
+%moznost pridani tabulky porovnavajici staticke a interaktivni
+\subsection{Mapy a internet}
+Lidé vytvářejí mapy odjakživa, ale již dávno je dobám kdy bylo nutné pro nahlédnutí mapy mít její fyzický otisk či originál. Problém u takových map je jejich nákladná distribuce a omezené možnosti obsahu. Mnohem efektivnější způsobem jak distribuovat mapy pro veřejnost se v dnešní době stávají webové mapové platformy. Nejedná se však o žádný nový pojem. Vždyť například jedna z nejznámějších služeb \textit{Google Maps} byla spuštěná již začátkem roku 2005 \cite{google_history}.
+Obecně se mapové platformy dělí na dvě skupiny: statické a interaktivní.
+
+Statické mapové platformy nejsou z důvodu jejich úzkého zaměření dnes již tolik běžné, avšak jejich tvorba je oproti mapám interaktivním velice snadná. Dají se vytvořit přímo pomoci specializovaných kartografických programů, nebo scanem již existujících map. Takto vytvořené mapy jsou velice snadno distribuovatelné a kladou výrazně menší nároky na výpočetní techniku.
+
+Jak již název napovídá interaktivní mapy jsou takové mapy, s kterými může uživatel interagovat tj. měnit jejich obsah. Nejčastěji se jedná o výběr podkladové mapy, filtraci mapových prvků, přibližování a oddalování. Zjednodušeně řečeno se jedná o interakci uživatele s webovým rozhraním dané aplikace, které dle aktuálního nastavení opakovaně aktualizuje svůj obsah\cite{web_mapping}. Tato zkutečnost dělá z interaktivních map velice účinný nástroj. Na druhou stranu je nutné říci, že výroba a distribuce interaktivních map je o poznání složitější. 
+
+\newpage
+\subsection{Fungování interaktivní mapové platformy}
+Jak bylo zmíněno v předešlé podkapitole, většímu zájmu se v dnešní době těší právě interaktivní mapové platformy. Proto se jimi tato podkapitola bude zajímat více podrobně. 
+
+Existuje nespočetně mnoho mapových platforem, jejich základní princip fungování je však stejný a liší se pouze svými možnostmi, obsahem a využitím.  
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1\textwidth]{../img/map-web-diagram.png}
+	\caption{diagram znázorňující interakci uživatele a částí webové aplikace uložené na servrech: \cite{web_mapping}}
+	\label{fig:WPS_class_diagram}
+\end{figure}
+
+V obrázku 1 je znázorněn jednoduchý diagram, který popisuje fungování interaktivní webové aplikace a jejích základních komponentů. Při pohledu zleva se jedná především tyto části:
+
+\textit{Koncové zařízení} označované také jako klient, využívající počítač, tablet, nebo mobilní telefon. Výsledná rychlost a požitek z webové aplikace dnes již není limitován tolik výpočetní rychlosti klienta, spíš jako rychlostí internetového připojení. Všechnu nutnou komunikaci přitom zastává webový prohlížeč, který je pomocí \textit{request URL} získává informace z hostujícího serveru, na kterém je webová aplikace reálně uložena.
+
+\textit{Webový server} přijímá požadavky od klienta a zastává nutnou komunikaci mezi mapovým serverem a uložištěm dat. Na webovém serveru je uložena aplikace a na vyžádání poskytuje obsah webové aplikace klientovy.  
+
+\textit{Webový mapový server} jedná se o program, který na základně požadavků poslaných od webového serveru a uložených vytvoří požadovaný obraz mapy a odešle jej zpět. Mapových serverů existuje více. Těm nejvíce používaným se bude věnováno v dalších kapitolách.
+
+
+\textit{Uložiště dat} zde jsou fyzicky uložena všechna data potřebná k vytvoření mapy, nebo její části. Jedná se o mapová data rastrová, či vektorová data ve vhodném formátu, který dokáže webový mapový server přečíst. Dále jsou zde uložena metadata, která jsou nutnou součástí prostorových dat. Popisují data sloužící k vytvoření mapy a dále jejich původ, způsob použití, samotný obsah dat \cite{web_mapping}.
+
+
+Důležitou součástí každé webové mapové aplikace je komunikace mezi jednotlivými jejími komponenty. V následujících podkapitolách bude brán zřetel převážně na komunikaci mezi klientem a webovým mapovým serverem konkrétně na protokoly, které jsou používané pro získání mapového obrazu. Tyto standarty jsou poskytovány mezinárodní standardizační organizací \textit{Open Geospatial Consortium (OGC)}
+
+\subsection{Open Geospatial Consortium}
+Open Geospatial Consortium (OGC) je mezinárodní nezisková organizace zahrnující komerční, vědecké, vládní a nevýdělečné organizace, které se zabývají vytvářením kvalitních specifikací pro prostorová data. Tyto specifikace jsou jsou volně dostupné pro kohokoli za účelem zlepšení sdílení prostorových dat po celém světě \cite{oqc_web}.
+
+OGC specifikace jsou technické dokumenty detailně popisující rozhraní, nebo kódování. Tyto dokumenty jsou dále použity na straně vývojářů ke tvorbě jejich produktů. Hlavní myšlenka je taková, že dva nezávisle vyvíjené programy používající OGC standarty by měly být vzájemně kompatibilní \cite{oqc_web}. Celkem se jedná o více než 50 specifikací, více konkrétně se však budou popsány pouze následující:
+
+\newpage
+\begin{itemize}
+	\item\textit{Web Map Services (WMS)} - WMS nabízí jednoduché HTTP rozhraní pro posílání žádostí o georeferencovaný mapový obraz. Na základě WMS dotazu server odpoví odesláním rastrové mapy, která obsahuje požadované mapové prvky v daném výřezu (dlaždice).
+	 
+	\item\textit{Web Map Tile Services (WTMS)} - princip fungování WMTS komunikace klient-server obdobný jako u WMS. Hlavní rozdíl je však v tom, že požadované dlaždice jsou již předem vytvořeny a uloženy interní paměti serveru. Server je tedy nemusí při každém dotazu znovu vytvářet, což při jeho velkém zatížení celý proces výrazně zrychlí. 
+\end{itemize}
+
+\subsection{Web Map Services (WMS)}
+WMS, v českém překladu webový mapový servis, na základě geografických informací vytváří georeferencované mapy. Mezinárodní dále standart definuje "mapu" jako digitální vyobrazení geografických informací, které je vhodné pro počítačové obrazovky a displeje. V případě mapy jako takové se nejedná o data. Mapy vytvořené na základě WMS specifikace mohou být v obecných formátech např. PNG, GIF, nebo JPEG. Méně často se také jedná o vektorovou grafiku ve formátech SVG, nebo WebCGM \cite{oqc_wms}.     
+
+Popisovaný standart definuje několik operací, každou s odlišným výstupem. Tyto operace vrací dávají uživateli buďto informace o samotném servisu, poskytují mapu, nebo informace o zobrazovaných mapových prvcích.
+
+\begin{itemize}
+	\item\textit{GetCapabilities} - operace vrací dokument ve formátu XML, který obsahuje veškeré informace nutné k vytvoření \textit{GetMap} požadavku. Jedná se tedy o detaily samotného servisu jako takového. Pomocí GetCapabilities lze zjistit počet vrstev, jejich souřadnice v referenčním systému atd. 
+	
+	\item\textit{GetMap} - jedná se o nejdůležitější operaci, protože jejím výsledkem je samotná geolokalizovaná mapa. K tomu její získání je potřeba poskytnout sadu parametrů, na základě kterých je mapa vytvořena. Těmto parametrům bude věnována další podkapitola. 
+	
+	\item\textit{GetFeatureInfo} - operace vrací informace o prvcích zobrazených na mapě.
+	
+	\item\textit{GetLegendGraphic} - dle poskytnutých parametrů vytvoří tato operace legendu, kterou server vrátí jako obraz ve zvoleném formátu.
+\end{itemize}
+
+\subsection{Parametry WMS}
+Parametry slouží ke specifikaci úkonu, který od serveru požadujeme. Jedná se tedy o vstupní informace na základě kterých nám server odpoví. Parametrů je velké množství, některé jsou používány vždy, některé jen velice ojediněle. Možnosti použití parametrů se liší dle operace (requestu), kterou provádíme. 
+
+Níže uvedené parametry se vztahují pouze k operaci \textbf{\textit{GetMap}}. U operací jako \textit{GetCapabilities}, nebo \textit{GetFeatureInfo} může bý popsaný význam arametů odlišný, nebo se parametr nedá použít vůbec.
+
+\begin{itemize}
+	\item\textit{VERSION} - specifikace verze WMS.
+	
+	\item\textit{REQUEST} - výběr provedené operace (v případě požadavku o mapu se jako request parametr použije "GetMap".
+	
+	\item\textit{LAYERS} - list oddělený čárkami obsahující názvy vrstev, které budou použity pro tvorbu mapy
+	
+	\item\textit{STYLES} - list oddělený čárkami, který definuje jakým stylem se budou jednotlivé vrstvy vzkreslovat. List stylů proto musí korespondovat s listem vrstev. Pro implicitní hodnoty je možné použít "STYLES=".
+	
+	\item\textit{SRS} - SRS v překladu znamená "geodetický referenční systém". Tímto parametrem je tedy určeno v jakém geodetickém referenčním systému jsou poskytnuté parametry např. BBOX stejně jako výsledná mapa. 
+	
+	\item\textit{BBOX} - jedná se o souřadnice výřezu pro který se bude generovat výsledná mapa. Pro definování výřezu je třeba zadat souřadnice levého spodního a pravého horního rohu. Pole souřadnic tedy vypadá jako "minx,miny,maxx,maxy".  
+	
+	\item\textit{FORMAT} - nastavení formátu výstupního souboru (mapy). Nejčastěji používané jsou formáty GIF, PNG, JPEG, které mohou být jednoduše zobrazeny na webových prohlížečích. Je však možnost nastavit formát také jako SVG, nebo WebCMG. 
+	
+	\item\textit{WIDTH} - celočíselná hodnota udávající šířku výsledné mapy v pixelech. Jinak řečeno se jedná o vzdálenost v pixelech mezi body zadané parametrem \textit{BBOX} tj. vzdálenost minx a maxx.
+	
+	\item\textit{HEIGHT} - hodnota odpovídající parametru \textit{WIDTH} s tím rozdílem, že se jedná o vzdálenost miny a maxy. Pokud je poměr stran \textit{WIDTH}/\textit{HEIGHT} odlišný od poměru stran \textit{BBOX} je výsledný rozměr v pixelech přizpůsoben poměru stran \textit{BBOX}.
+	
+	\item\textit{TRANSPARENT} - udává zda-li je mapové pozadí průhledné, nebo ne.  
+\end{itemize}
+
+Mezi další méně používané parametry patří např. \textit{EXCEPTIONS}, \textit{TIME}, \textit{ELEVATION}, \textit{BGCOLOR} \cite{oqc_wms}.
+
+Výše uvedené parametry lze rozdělit na dvě části a to povinné a nepovinné viz. tabulka:
+
+\bigskip
+\begin{table}[h!]
+	\catcode`\-=12
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		parametr & povinný \\ \hline
+		\hline
+		VERSION & ano \\ \hline
+		REQUEST & ano \\ \hline
+		STYLES & ano \\ \hline
+		SRS & ano \\ \hline
+		BBOX & ano \\ \hline
+		WIDTH & ano \\ \hline
+		HEIGHT & ano \\ \hline
+		TRANSPARENT & ne \\ \hline
+		EXCEPTIONS & ne \\ \hline
+		TIME & ne \\ \hline
+		ELEVATION & ne \\ \hline
+		BGCOLOR & ne \\ \hline
+\end{tabular}
+	\caption{Výpis parametrů a jejich povinnost použití: \cite{oqc_wms}}
+	\label{tab:WPS_ExecuteRequest}
+\end{table}
+
+\subsection{Parametr TIME}
+S ohledem na téme této práce je vhodné přiblížit si parametr \textit{TIME} více podrobně a popsat způsob jeho použití a možnosti, které nabízí.
+
+Dle OGC je formát parametru TIME dán normou ISO 8601:1988(E), která rozšiřuje normu ISO 8601. Oproti té jsou přidány další specifikace\cite{oqc_wms}:
+%http://cite.opengeospatial.org/OGCTestData/wms/1.1.1/spec/wms1.1.1.html#basic_elements.params.time
+\begin{itemize}
+	\item Syntax pro datové kolekce. Jejich začátek, konec a periodické opakování.
+	\item Definice speciálních znaků pro vyjádření sedmi dní v týdnu.  
+	\item Možnost zadání data před rokem 1 našeho letopočtu a to až do časově vzdálených geologických období (milióny a miliardy let v minulosti).
+\end{itemize}
+
+Základní časový formát ISO 8601:1988(E) rozšířené normy je umožňuje specifikovat časový formát až na úroveň tisícin sekund. Né pro každou hodnotu je však vyžadována takováto přesnost. Proto lze formát upravit tak, že jsou odstraněny zpřesňující číslice. Základní formát vypadá následovně:
+
+\begin{verbatim}
+ccyy-MM-ddThh:mm:ss.SSSZ
+\end{verbatim}
+
+\noindent
+A jeho zjednodušená forma pro vyjádření hodnoty s přesností na dny:
+
+\begin{verbatim}
+ccyy-MM-dd
+\end{verbatim}
+
+\noindent
+V ukázkách časových formátů jsou použita jednotlivá označení:
+
+\begin{itemize}
+	\item cc \textit{2 číslice století}
+	\item yy \textit{2 číslice rok}
+	\item MM \textit{2 číslice měsíc}
+	\item dd \textit{2 číslice den}
+	\item hh \textit{2 číslice hodina}
+	\item mm \textit{2 číslice minuta}
+	\item ss \textit{2 číslice sekunda}
+	\item SSS \textit{3 číslice milisekunda}
+\end{itemize}
+
+\begin{itemize}
+	\item T \textit{slouží k oddělení hodnot určující den a hodnot určující čas uvnitř dne}
+	\item Z \textit{slouží k definici časového pásma vztaženému ke koordinovanému světovému času UTC}
+\end{itemize}
+
+Speciální znaky pro zadávání dnů v týdnu jsou: 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'. Pravěká období se definují následovně: M150 \textit{150 mil. let před Kristem (období Jura)}.
+
+\newpage
+\section{Webové mapové servery a platformy}
+
+ Mapových publikačních platforem existuje v dnešní době velké množství. Mohou být přizpůsobeny účelu za kterým jsou vytvořeny, nebo konkrétním vstupním datům s kterými pracují. Né tedy všechny mají integrovanou podporu pro časoprostorová data. Tato zkutečnost je zároveň způsobena tím, že práce s časoprostorovými daty není podporována všemi mapovými servery. Právě podpora na straně webového mapového serveru je při tvorbě mapové publikační platformy klíčová. Jak se ale dozvíme dál, né nutná.
+ 
+ Tato kapitola se zabývá jednotlivými webovými mapovými servery a jejich možnostem podpory časoprostorových dat. Jednotlivé podkapitoly jsou vždy věnovány jednomu webovému mapovému serveru, který bude představen a dále bude popsán princip podpory časoprostorových dat. N závěr každé podkapitoly je přidaná ukázka z webových mapových platforem využívající konkrétní mapový server.
+
+\subsection{MapServer}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\textwidth]{../img/mapserver-logo.png}
+	\label{fig:mapserver-logo}
+\end{figure}
+\bigskip
+
+MapServer je platforma s otevřeným kódem, která byla vytvořena pro publikaci prostorových dat a interaktivních mapových aplikací. Vznik se datuje ke středu devadesátých let v Minnesotské univerzitě. V té době se jednalo o jeden z prvních podporovaných projeků organizací OSGeo Je nutno podotknout, že MapServer není a ani nebyl navržen jako stoprocentní GIS systém. Důvod jeho vzniku je dán potřebou organizací NASA, která hledala způsob jakým zprostředkovat satelitní snímky veřejnosti. MapServer je psaný v jazyce C a podporuje všechny hlavní operační systémy jakou jsou Windows, Linux a Mac OS X \cite{mapserver_about}.
+
+\bigskip
+\noindent
+\textbf{Podpora časových dat}
+
+Od verze 4.4 je přidána podpora pro MapServer, která dokáže interpretovat WMS parametr TIME obsahující časovou hodnotu. MapServer tuto hodnotu zpracuje a v requestu vrátí odpovídající mapový snímek. 
+
+K tomu, aby bylo možné jednotlivé vrstvy selektovat pomocí atributu TIME, tak každá musí v obsahovat následující metadata \cite{mapserver_about}:
+
+\begin{itemize}
+	\item\textit{wms-timeextent} - povinná hodnota obsahující interval časových hodnot, které vrstva obsahuje. Tento interval lze zjistit pomocí operace. \textit{GetCapabilities}.
+	\item\textit{wms-timeitem} - povinná hodnota obsahující název záznamu v databázi, ve kterém jsou časová data uložena.  
+	\item\textit{wms-timedefault} - nepovinná hodnota určující implicitní hodnotu v případě, že časová hodnota pro daný záznam chybí.   
+\end{itemize}
+
+Vrstva obsahující časoprostorová data vypadá následovně:
+
+\begin{verbatim}
+LAYER
+	NAME "earthquakes"
+	METADATA
+	"wms_title"    "Earthquakes"
+	"wms_timeextent" "2004-01-01/2004-02-01"
+	"wms_timeitem" "TIME"
+	"wms_timedefault" "2004-01-01 14:10:00"
+	"wms_enable_request" "*"
+	END
+	TYPE POINT
+	STATUS ON
+	DATA "quakes"
+	FILTER (`[TIME]`=`2004-01-01 14:10:00`)
+	CLASS
+	..
+	END
+END
+\end{verbatim}
+
+\bigskip
+\noindent
+\textbf{Formáty časových dat a syntaxe}
+
+% moznost pridat tabulku formatu
+Výhodou použití MapServeru je jeho podpora dalších časových formátů, které nejsou v normě používané pro operaci \textit{WMS TIME} definovány. Ke specifikování validních časových formátů je možné pro každou vrstvu definovat \textit{wms-timeformat}
+
+\begin{verbatim}
+"wms_timeformat" "YYYY-MM-DDTHH
+\end{verbatim}
+
+Při requestu s parametrem \textit{TIME} je možné požadavek pomocí hodnoty parametru blíže specifikovat. Můžeme tak filtrovat vrstvu pro specifický datum, nebo interval. MapServer podporuje následující syntax s hodnoty uvedenými ve formátu 'YYYY-MM-DD':
+
+\begin{itemize}
+	\item TIME=2004-10-12 \textit{pro jednu konkrétní hodnotu atributu.}
+	\item TIME=2004-10-12, 2004-10-13, 2004-10-14 \textit{pro více daných hodnot.}
+	\item TIME=2004-10-12/2004-10-13 \textit{pro jeden konkrétní interval hodnot.}
+	\item TIME=2004-10-12/2004-10-13, 2004-10-15/2004-10-16 \textit{pro více intervalů.}
+\end{itemize}
+
+\bigskip
+\noindent
+\textbf{Princip podpory časoprostorových dat}
+
+Princip fungování při requestu s parametrem \textit{TIME} je velice snadný. Po té co MapServer přijme tento request, převede parametr \textit{TIME} na parametr \textit{FILTER}. Tento parametr má na vstupu název atributu obsahující časová data, který je uložený v metadatech časové vrstvy\cite{mapserver_about}. Další hodnotou je pouze převedena hodnota časového parametru. V praxi vypadá filtr následovně:
+
+\bigskip
+\textit{Pro selektování mapových prvků s konkrétní hodnotou atributu} 
+
+(2004-10-12) \textit{převede na} (`[time-item]` eq `2004-10-12`)
+
+\textit{Pro selektování mapových prvků s konkrétním intervalem hodnot} 
+
+2004-10-12/2004-10-13 \textit{převede na} ((`[time-item]` ge `2004-10-12`) AND (`[time-item]` le `2004-10-13`))
+
+\bigskip
+Nutno podotknout, že pro definování časových hodnot používá mapový server zpětné uvozovky. Výše uvedená syntaxe platí pouze pro vrstvy ve formátu Shapefile a OGR. Pokud tomu tak není, je ve filtru použito '=' namísto 'eq'.\cite{mapserver_about}. Odlišně jsou rovněž řešeny vrstvy PostGIS/PostgreSQL. 
+
+\bigskip
+\noindent
+\textbf{Webové mapové publikační platformy}
+
+Webová mapová platforma zobrazující vývoj písčité pláže \textbf{Gay Stand Sands} (http://spatial.mtri.org/stampsands/) využívá možnost filtrování časových dat. Její zvláštností je však, že k tomu není použit parametr \textit{TIME}. Jelikož se jedná o malé množství časových epoch, jsou rozděleny do jednotlivých vrstev s pojmenováním podle časového filtru. Při requestu na konkrétní rok se tedy z mapového serveru vrací konkrétní vrstva. Tento způsob je zvolen z důvodu nekonzistence rastrových dat, která byla pořizována mezi lety 1938 až 2016.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1\textwidth]{../img/gay-sands.png}
+	\caption{screenshot zobrazující webovou platformu Gay Stand Sands a její uživatelské rozhraní}
+	\label{fig:gay-sands}
+\end{figure}
+
+\newpage
+\subsection{GeoServer}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\textwidth]{../img/geoserver-logo.png}
+	\label{fig:geoserver-logo}
+\end{figure}
+\bigskip
+
+Stejně jako u MapServeru se jedná o serverový program s otevřeným kódem. GeoServer je napsán v Jazyce Java a umožňuje sdílet a upravovat geografická data ze všech hlavních datových zdrojů na základě otevřených standardů poskytovaných organizací OGC. 
+
+GeoServer vznikl v roce 2001 v neziskovém technologickém inkubátoru \textit{The Open Planning Project} v New Yourku. V té době hlavním cílem bylo vytvoření sady nástrojů, který umožní větší vládní průhlednost. Jako první nástroj vynikl právě GeoServer. Pomocí něj mohli být občané lépe zapojeni do vládních záležitostí, především územního plánování.
+
+\bigskip
+\noindent
+\textbf{Podpora časových dat}
+
+Podpora časoprostorových dat na straně GeoServeru je dost podobná té v MapServeru. GeoServer podporuje v operaci \textit{GetMap} atribut \textit{TIME}. Pro jeho použití je nutné mít správně nastavenou vrstvu, která časová data obsahuje.
+
+% moznost pridat obrazek s popiskem
+Nejjednodušším způsobem nastavení vrstvy je využití webového rozhraní pro GeoServer. V záložce \textit{Dimensions} je veškeré nutné nastavení. Nastavit se může jak pro časový parametr \textit{TIME}, tak pro výškový parametr \textit{ELEVATION}.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{../img/geoserver-layer-edit.png}
+	\caption{záložka konfigurace časové vrstvy na GeoServeru \cite{geoserver-layer-edit}}
+	\label{fig:geoserver-layer-edit}
+\end{figure}
+
+\bigskip
+\noindent
+\textbf{Formáty časových dat a syntaxe}
+
+Obecná syntaxe pro request s konkrétní hodnotou parametru \textit{TIME} vypadá následnovně: 
+
+\begin{verbatim}
+TIME=<timestring>
+\end{verbatim}
+
+Parametr \textit{TIME} je při \textit{GetMap} requestu vždy aplikován na všechny dočasně aktivní vrstvy definované parametrem \textit{LAYERS}. Vrstvy bez časové složky tedy nejsou parametrem \textit{TIME} nijak ovlivněny.
+
+Pro zobrazení jednotlivých časových hodnot, intervalu a více hodnot je syntaxe následující \cite{geoserver-time}: 
+
+\begin{itemize}
+	\item TIME=2004-10-12 \textit{pro jednu konkrétní hodnotu atributu.}
+	\item TIME=2004-10-12,2004-10-13,2004-10-14 \textit{pro více daných hodnot.}
+	\item TIME=2004-10-12/2004-10-13 \textit{pro jeden konkrétní interval hodnot.}
+	\item TIME=2004-10-12/2004-10-13,2004-10-15/2004-10-16 \textit{pro více intervalů.}
+\end{itemize}
+
+Na první pohled je vidět, že rozdíl v syntaxi oproti MapServeru je minimální.
+
+Výhoda GeoServeru je ta, že se 
+
+%https://gis.stackexchange.com/questions/12493/list-of-map-service-software?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+
+%	 qgis server
+%https://gis.stackexchange.com/questions/34667/does-qgis-have-wms-t-wms-with-time-support?rq=1
+%https://docs.qgis.org/2.18/en/docs/user_manual/working_with_ogc/ogc_server_support.html
+
+%	arcgis
+%https://enterprise.arcgis.com/en/server/latest/publish-services/linux/serving-time-aware-layers.htm
+%https://developers.arcgis.com/javascript/3/jshelp/inside_temporal.html
+
+%notes
+%http://tiles.metgis.com/tiles-demo/
+ 

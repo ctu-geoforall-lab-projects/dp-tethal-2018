@@ -1,47 +1,18 @@
-\necislovana{Úvod} Časoprostorová data jsou pro mnoho lidí velice obecný pojem, pod kterým si často nedovedou nic konkrétního představit. Takto označovaná data jsou však v dnešní době běžně používána ve velké škále oborů od archeologie, geodézie, geologie, stavební inženýrství až po armádní účely, zemědělství, nebo územní plánování. Nejedná se tedy v žádném případě o specializovaný termín v jednom vědním oboru. 
+\necislovana{Úvod} Časoprostorová data jsou pro mnoho lidí velice obecný pojem, pod kterým si často nedovedou nic konkrétního představit. Takto označovaná data jsou v dnešní době již běžně používána ve velké škále oborů od archeologie, geodézie, geologie, stavební inženýrství až po armádní účely, zemědělství, nebo územní plánování. Nejedná se tedy v žádném případě o specializovaný termín používaný pouze v jednom vědním oboru. 
 
-Z tohoto ohledu lze práci s časoprostorovými daty rozdělit na dvě skupiny. Na jedné jsou odborníci, kteří časoprostorová data sbírají, provádějí analýzy a vyhodnocují je pomoci specializovaných programů. Na druhé straně je poté široká veřejnost, která používá pouze finální produkt jejich práce. 
+Práci s časoprostorovými daty lze rozdělit na dvě skupiny. Na jedné jsou odborníci, kteří časoprostorová data sbírají, provádějí analýzy a vyhodnocují je pomoci specializovaných programů. Na druhé straně je poté široká veřejnost, která používá pouze finální produkt jejich práce. 
 
-V dřívější době byla však možnost publikace těchto dat jen velice omezena. To se rozšířením internetu a nástupem elektronicky publikovaných map pomoci publikačních platforem v poslední době rapidně změnilo. Právě Publikační platformy vyplňují mezeru mezi odborníky a širokou veřejností a dávají téměř každému možnost prezentace dat v ucelené formě. 
+V dřívější době byla možnost publikace těchto dat jen velice omezena. To se rozšířením internetu a nástupem elektronicky publikovaných map pomoci publikačních platforem v poslední době rapidně změnilo. Právě Publikační platformy vyplňují mezeru mezi odborníky a širokou veřejností a dávají téměř každému možnost prezentace dat v ucelené formě. 
 
-Právě jednou z takových publikačních platforem je také Gisquick. V tomto případě se navíc jedná o interaktivní platformu, kde může uživatel nejenom na data nahlížet, ale také v omezeném rozsahu měnit způsob jejich vizualizace. Ke stávajícím datům se rovněž dá přidat podkladový vrstva, což mnohdy uživateli usnadní orientaci.
+Jednou z takových publikačních platforem je také Gisquick. V tomto případě se navíc jedná o interaktivní platformu, kde může uživatel nejenom na data nahlížet, ale také v omezeném rozsahu měnit způsob jejich vizualizace. Ke stávajícím datům se rovněž dají přidat podkladové vrstvy, které uživateli zlepší celkový pohled na zobrazovanou situaci.
 
-Spojení publikační platformy a časoprostorových dat je potom dalším krokem, který celkovou prezentaci dat ještě umocní. Pomocí vhodně vytvořených nástrojů pro filtrování dat na základě jejich časové složky se dají vytvářet simulace zobrazující průběh určitého vlivu v čase na určitém místě. Tímto způsobem se dá například jednoduchým způsobem simulovat vývoj zalesnění, migrace zvěře, nebo vývoj měst. Pro lepší časový vjem je také možné, vzhledem na charakter dat, vytvářet animace, kdy se zobrazovaný stav mění s nastaveným krokem. 
-Výhodou při publikaci časoprostorových dat na platformě Gisquick je také jejich univerzálnost. Je tedy jedno, jestli jsou data s odstupem milisekund, či měsíců, nebo v jakém jsou formátu.  
+Spojení publikační platformy a časoprostorových dat je potom dalším krokem, který možnost prezentace dat ještě povýší. Pomocí vhodně vytvořených nástrojů pro filtrování dat na základě jejich časové osy se dají vytvářet simulace zobrazující průběh určitého vlivu v čase na určitém místě. Tímto způsobem se dá například jednoduchým způsobem simulovat vývoj zalesnění, migrace zvěře, nebo expanze měst. Pro uživatele lepšího časového vjemu lze také dosáhnout, vzhledem k charakteru dat, vytvořením animace, kdy se zobrazovaný stav mění s předem nastaveným časovým krokem. 
+Výhodou při publikaci časoprostorových dat na platformě Gisquick je také jejich univerzálnost. Nezáleží tedy, zdali jsou data s odstupem milisekund či měsíců. Díky jednoduchému nastavení lze nástroj přizpůsobit téměř jakémukoli časovému intervalu. Velká benevolence je rovněž ve vstupním formátu časového řetězce.  
 
 
 \bigskip
-The main topic of this thesis is process isolation in PyWPS framework. A process is just some geospatial operation which 
-has its defined inputs and outputs and which is deployed on a server. The server is able to execute multiple 
-processes at the same time. This thesis deals with the isolation of individual processes, especially for security and 
-performance reasons. With every process fully isolated, so they cannot interact with each other, the higher security 
-level is ensured.
+Na platformu Gisquick resp. její rozšíření o podporu pro časoprostorová data se zaměřuje obsah této práce. Hlavní téma je zaměřeno na implementaci rozhraní pro podporu pro zobrazování vektorových dat. V práci je podrobně popsán nástroj pro práci s časoprostorovými daty, jeho jednotlivé části a postup práce na jeho implementaci na platformu Gisquick, která je psána programovacím jazykem JavasScript s použitím frameworku Vue.js. 
 
-The thesis is composed of several parts. The first part describes the WPS standard, its operations 
-\textit{GetCapabilities}, \textit{DescribeProcess} and \textit{Execute} and inputs and outputs structures. A quick
-overview of some implementations of WPS standard follows and brings a basic information about them.
+S rozšířením platformy také úzce souvisí výzkum možných metod použitelných pro platformu Gisquick, který je popsán v první části práce. Je zde rovněž rozebrán způsob práce s časoprostorovými daty pro webové platformy obecně a stručný popis jejich základního fungování.
 
-Nevertheless, this work is dedicated to PyWPS, an implementation in
-Python. In the second part, its current state is described as well as
-\textit{pywps-demo} - a side project providing demo server instance -
-%% ML: and covers? opet divne formulovana veta
-%% AL: prepsano. To cover - ve vyznamu pojednavat.
-which the practical part is based on. Following research 
-covers various projects and technologies which were considered as a
-solution for process isolation. Eventually, the Docker technology is
-chosen for the implementation part.  Docker has been selected as one
-of the most used technology for containerization. It puts every
-process into a separate container so the isolation is
-ensured. Moreover, Docker provides a mechanism to pause, stop and
-start a container so it looks like a possible solution for the future
-WPS 2.0.0 standard implementation which requires this
-functionality. Using Docker, it also opens new possibilities,
-e.g. being able to deploy running job to cloud.
-
-The third part describes the implementation. It explains the Execute
-operation workflow, a process execution and how the Docker containers
-are used for the PyWPS process isolation. New \textit{Container}
-%% ML: were -> was?
-%% AL: was
-class, which was developed during the work on this thesis, is
-introduced as well as its methods.
+Poslední část je zaměřena na rozšíření zásuvného modulu pro QGIS. Do něj bylo vloženo nutné uživatelské rozhraní umožňující uživateli zvolit pro jednotlivé vrstvy jejich časový atribut tj. atribut obsahující časovou hodnotu. V této závěrečné části je popsán samotný plugin, jeho funkce v publikaci projektu a postup, kterým je jeho bylo uživatelské rozhraní doplněno. 

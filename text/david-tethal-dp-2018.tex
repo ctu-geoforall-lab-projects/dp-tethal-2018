@@ -80,13 +80,11 @@ bottom=35mm]
 \selectlanguage{english}
 \begin{abstract}
 \bigskip
-Cílem této diplomové práce bylo navrhnutí a vytvoření nástroje pro platformu Gisquick, který umožní pracovat s časoprostorovými daty. Gisquick platforma umožňuje snadnou a rychlou publikaci projektu vytvořeného v programu QGIS. Pomoci nového nástroje bude moci uživatel snadno a rychle pracovat s vrstvy obsahující časoprostorová data, jednotlivě je filtrovat a vytvářet jednoduché animace.
+Cílem této diplomové práce bylo navrhnutí a vytvoření nástroje pro platformu Gisquick za účelem rozšíření její možností o práci s časoprostorovými daty. Nástroj nabídne uživateli přehledné rozhraní, které umožní možnost filtrace jednotlivých vrstev na základě jejich časové osy. Nástroj dále poskytuje možnost tvorby jednoduché animace dle vybraného časového kroku.
 
-V první řadě byla provedena rešerše možných obecných řešení pro webové publikační platformy. Na základě toho bylo vybráno optimální řešení, které bylo vhodně aplikované pro již stávající platformu.
+Součástí práce je také obecný popis fungování webových publikačních platforem a provedení rešerše možných metod řešení pro práci s časoprostorovými daty. Na základě rešerše bylo zvoleno optimální řešení. To bylo posléze vhodně aplikované na již stávající platformu.
 
-Dalším krokem byla implementace nalezeného řešení na straně Gisquick klienta. Nástroj byl vyvíjen v programovacím jazyce JavaScript s použitím frameworku Vue.js, do kterého je stávající klient přepisován. 
-
-Pro možnosti práce s časoprostorovými daty bylo dále nutné upravit zásuvný modul QGIS sloužícího k publikaci předem vytvořených projektů. Pomocí něj je možné pro jednotlivé vrstvy vybrat atribut obsahující časovou složku ve formě textového řetězce.
+Dalším krokem byla implementace nalezeného řešení na straně Gisquick klienta. Nástroj byl vyvíjen v programovacím jazyce JavaScript s použitím frameworku Vue.js, do kterého je stávající klient v tuto chvíli migrován. Spolu s úpravy klienta bylo dále nutné zahrnout novou funkcionalitu do zásuvného modulu pro QGIS, sloužícího k publikaci předem vytvořených projektů. Pomocí něj je možné pro jednotlivé vrstvy vybrat atribut obsahující časovou dimenzi ve formě textového řetězce.
 
 \bigskip
 \bigskip
@@ -94,32 +92,20 @@ Pro možnosti práce s časoprostorovými daty bylo dále nutné upravit zásuvn
 OGC WMS, časoprostorová data, QGIS, JavaScript, Python, Vue.js, plugin.
 \end{abstract}
 
-%abstract EN
+
+%Absktrakt anglicky
 \newpage
 \selectlanguage{english}
 \begin{abstract}
 	\bigskip
-	Tato diplomová práce se věnuje možnostem izolace procesů v rámci frameworku PyWPS jako jedné z implementací OGC WPS. Web Processing 
-	Service je standard vydaný a dále rozšiřovaný Open Geospatial Consorciem. 
-	
-	První část popisuje samotný standard včetně všech základních požadavků \textit{GetCapabilities}, \textit{DescribeProcess} a \textit{Execute}.
-	V závěru první části jsou zmíněny některé z implementací WPS standardu.
-	
-	Druhá část se zaměřuje na \textit{PyWPS}, což je implementace WPS
-	standardu napsaná v programovacím jazyce Python. Čtenáři jsou
-	seznámeni jak se současným stavem PyWPS, tak s projektem
-	\textit{PyWPS-demo}, ukázkovou instancí PyWPS serveru, na kterém je
-	postavena praktická část.  Následuje rešerše, která mapuje možné
-	řešení izolace procesů, a nakonec je popsána \textit{Docker}
-	technologie, která slouží pro kontejnerizaci. Tato technologie byla vybrána pro
-	samotnou implementaci izolace.
-	
-	Poslední část se zabývá použitím Docker kontejnerů pro izolaci procesů. Detailně je vysvětleno, jak funguje \textit{Execute} operace a následně je popsána nově vytvořená třída \textit{Container} se všemi svými metodami.
+Main goal of my thesis was design and implementation of new tool into Gisquick platform, that is focused on handling with spatio-temporal data. Gisquick platform provides fast and easy QGIS project publication. New tool will enable users to work easily with layers containing time attribute, filter its content and make simple animations.
+
+First part was focused on web map platforms. This chapter contains brief description of procces that produce requested map for user. Second part of the first chapter describes existing solutions for spatio-temporal data handling that may be used for web map platforms in general. 
 	
 	\bigskip
 	\bigskip
 	\keywords{Klíčová slova}
-	OGC WPS, PyWPS, Docker kontejner, Python, izolace procesu, geoprocesing, zpracování dat.
+	klicova slova
 \end{abstract}
 
 
@@ -157,6 +143,9 @@ text poděkování
 \pagestyle{fancy}
 
 \include{0-uvod}
+\include{1-platformy}
+\include{2-gisquick}
+\include{3-qgis-plugin}
 %\include{appendix}
 
 \newpage
@@ -169,10 +158,26 @@ text poděkování
 \newpage
 \begin{thebibliography}{99}
 \label{Bibliography}
-%\bibitem{OGC_news}
-%Mark Reichardt \textit{OGC Newsletter - October 2004, OGC document number 04-043} [online].
-%%URL: \textless\url{http://www.opengeospatial.org/pressroom/newsletters/200410}\textgreater
-
+\bibitem{google_history}
+Google Company \textit{Our history in depth - June 13, 2016} [online].
+URL: \textless\url{https://www.scribd.com/document/334801840/Our-History-in-Depth-Company-Google}\textgreater
+\bibitem{web_mapping}
+Tyler Mitchell \textit{Web Mapping ilustrated }\textgreater
+\bibitem{oqc_web}
+Open Geospatial Consortium %\textit{Our history in depth - June 13, 2016} [online].
+URL: \textless\url{http://www.opengeospatial.org/}\textgreater
+\bibitem{oqc_wms}
+Open Geospatial Consortium Inc. \textit{OpenGIS® Web Map Server Implementation Specification - 2006-03-15} číslo dokumentu OGC® 06-042.
+Dostupné na: \textless\url{http://www.opengeospatial.org/standards/wms}\textgreater
+\bibitem{mapserver_about}
+Mapserver\textit{OpenGIS® Web Map Server Implementation Specification - 2006-03-15} číslo dokumentu OGC® 06-042.
+Dostupné na: \textless\url{http://mapserver.org/about.html#about}\textgreater
+\bibitem{geoserver-layer-edit}
+GeoServer dokumentace vrstev\textit{OpenGIS® Web Map Server Implementation Specification - 2006-03-15} číslo dokumentu OGC® 06-042.
+Dostupné na: \textless\url{http://docs.geoserver.org/stable/en/user/data/webadmin/layers.html#data-webadmin-layers-edit-dimensions}\textgreater
+\bibitem{geoserver-time}
+GeoServer podpora TIME parametru \textit{OpenGIS® Web Map Server Implementation Specification - 2006-03-15} číslo dokumentu OGC® 06-042.
+Dostupné na: \textless\url{http://docs.geoserver.org/stable/en/user/services/wms/time.htmls}\textgreater
 \end{thebibliography}
 
 
