@@ -27,6 +27,7 @@
       "labels": false,
       "original_time_attribute": "platiod", 
       "timeAttribute": "UTconvert", 
+      "date_mask": "DD-MM-YYYY HH:mm", 
       "visible": true, 
       "extent": [
         -746311.14, 
@@ -57,6 +58,7 @@
       "labels": false,
       "original_time_attribute": "platiod",
       "timeAttribute": "UTconvert", 
+      "date_mask": "DD-MM-YYYY",
       "visible": true, 
       "extent": [
         -746304.3, 
@@ -87,6 +89,7 @@
       "labels": false,
       "original_time_attribute": "jiny",
       "timeAttribute": "UTconvert", 
+      "date_mask": "HH:mm",
       "visible": true, 
       "extent": [
         -746323.54, 
