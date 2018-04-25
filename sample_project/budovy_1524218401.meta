@@ -13,10 +13,10 @@
   ], 
   "abstract": "", 
   "zoom_extent": [
-    -746759.304, 
-    -1033520.426, 
-    -743002.215, 
-    -1032088.006
+    -747078.38, 
+    -1033398.697, 
+    -741540.635, 
+    -1031966.277
   ], 
   "fees": "conditions unknown", 
   "message": null, 
@@ -24,24 +24,25 @@
     {
       "drawing_order": 0, 
       "projection": "EPSG:5514", 
-      "labels": false,
-      "original_time_attribute": "platiod", 
-      "timeAttribute": "UTconvert", 
-      "date_mask": "DD-MM-YYYY HH:mm", 
+      "labels": false, 
       "visible": true, 
+      "unix": false, 
       "extent": [
-        -746311.14, 
+        -746323.54, 
         -1033435.68, 
         -743553.73, 
-        -1032470.21
+        -1032071.47
       ], 
       "geom_type": "POLYGON", 
       "timeValues": [
-        1309471200, 
-        1502920800
+        1309471200.0, 
+        1502920800.0
       ], 
+      "input_datetime_mask": "YYYY-MM-DD", 
       "name": "husinec-budovy-a", 
+      "output_datetime_mask": "DD-MM-YYYY HH:mm", 
       "serverName": "", 
+      "original_time_attribute": "platiod", 
       "hidden": false, 
       "provider_type": "ogr", 
       "type": "vector", 
@@ -55,11 +56,9 @@
     {
       "drawing_order": 1, 
       "projection": "EPSG:5514", 
-      "labels": false,
-      "original_time_attribute": "platiod",
-      "timeAttribute": "UTconvert", 
-      "date_mask": "DD-MM-YYYY",
+      "labels": false, 
       "visible": true, 
+      "unix": false, 
       "extent": [
         -746304.3, 
         -1033435.68, 
@@ -68,11 +67,14 @@
       ], 
       "geom_type": "POLYGON", 
       "timeValues": [
-        1309471200, 
-        1507672800
+        1309471200.0, 
+        1507672800.0
       ], 
+      "input_datetime_mask": "YYYY-MM-DD", 
       "name": "husinec-budovy-b", 
+      "output_datetime_mask": "YYYY-MM-DD", 
       "serverName": "", 
+      "original_time_attribute": "platiod", 
       "hidden": false, 
       "provider_type": "ogr", 
       "type": "vector", 
@@ -86,11 +88,10 @@
     {
       "drawing_order": 2, 
       "projection": "EPSG:5514", 
-      "labels": false,
-      "original_time_attribute": "jiny",
+      "labels": false, 
       "timeAttribute": "UTconvert", 
-      "date_mask": "HH:mm",
       "visible": true, 
+      "unix": true, 
       "extent": [
         -746323.54, 
         -1033435.68, 
@@ -103,7 +104,9 @@
         1507672800
       ], 
       "name": "husinec-budovy", 
+      "output_datetime_mask": "HH:mm", 
       "serverName": "", 
+      "original_time_attribute": "platiod1", 
       "hidden": false, 
       "provider_type": "ogr", 
       "type": "vector", 
@@ -158,9 +161,9 @@
   "canvas_color": "#ffffffff", 
   "composer_templates": [], 
   "access_constrains": "None", 
-  "plugin_version": "1.0.0", 
-  "publish_date_unix": 1522329338, 
-  "publish_date": "Thu Mar 29 15:15:38 2018", 
+  "plugin_version": "1.1", 
+  "publish_date_unix": 1524218401, 
+  "publish_date": "Fri Apr 20 12:00:01 2018", 
   "expiration": "", 
   "contact_person": "", 
   "extent_buffer": 0.0, 

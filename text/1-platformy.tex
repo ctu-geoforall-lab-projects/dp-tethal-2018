@@ -263,7 +263,7 @@ Nutno podotknout, že pro definování časových hodnot používá mapový serv
 
 \bigskip
 \noindent
-\textbf{Webové mapové publikační platformy}
+\textbf{Webové mapové platformy}
 
 Webová mapová platforma zobrazující vývoj písčité pláže \textbf{Gay Stand Sands} (http://spatial.mtri.org/stampsands/) využívá možnost filtrování časových dat. Její zvláštností je však, že k tomu není použit parametr \textit{TIME}. Jelikož se jedná o malé množství časových epoch, jsou rozděleny do jednotlivých vrstev s pojmenováním podle časového filtru. Při requestu na konkrétní rok se tedy z mapového serveru vrací konkrétní vrstva. Tento způsob je zvolen z důvodu nekonzistence rastrových dat, která byla pořizována mezi lety 1938 až 2016.
 
@@ -288,21 +288,36 @@ Stejně jako u MapServeru se jedná o serverový program s otevřeným kódem. G
 
 GeoServer vznikl v roce 2001 v neziskovém technologickém inkubátoru \textit{The Open Planning Project} v New Yourku. V té době hlavním cílem bylo vytvoření sady nástrojů, který umožní větší vládní průhlednost. Jako první nástroj vynikl právě GeoServer. Pomocí něj mohli být občané lépe zapojeni do vládních záležitostí, především územního plánování.
 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.6\textwidth]{../img/geoserver-layer-edit.png}
+	\caption{záložka konfigurace časové vrstvy na GeoServeru \cite{geoserver-layer-edit}}
+	\label{fig:geoserver-layer-edit}
+\end{figure}
+
 \bigskip
 \noindent
+
 \textbf{Podpora časových dat}
 
 Podpora časoprostorových dat na straně GeoServeru je dost podobná té v MapServeru. GeoServer podporuje v operaci \textit{GetMap} atribut \textit{TIME}. Pro jeho použití je nutné mít správně nastavenou vrstvu, která časová data obsahuje.
 
 % moznost pridat obrazek s popiskem
-Nejjednodušším způsobem nastavení vrstvy je využití webového rozhraní pro GeoServer. V záložce \textit{Dimensions} je veškeré nutné nastavení. Nastavit se může jak pro časový parametr \textit{TIME}, tak pro výškový parametr \textit{ELEVATION}.
+Nejjednodušším způsobem nastavení vrstvy je využití webového rozhraní pro GeoServer viz. obrázek 3. V záložce \textit{Dimensions} je veškeré nutné nastavení. V případě nastavení časové vrstvy je nutné nejprve zaškrtnout políčko \textit{Time}. Další nastavení je následující \cite{geoserver-layer-edit}:
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=0.7\textwidth]{../img/geoserver-layer-edit.png}
-	\caption{záložka konfigurace časové vrstvy na GeoServeru \cite{geoserver-layer-edit}}
-	\label{fig:geoserver-layer-edit}
-\end{figure}
+\begin{itemize}
+	\item \textit{Attribute} - zde je nutné vybrat atribut, který obsahuje časovou složku. Na základě toho jsou zjištěny časové hodnoty. Volba atributu je možná pouze pro vektorové vrstvy.  
+	\item \textit{End Attribute} - nejedná se o povinné pole. Pomocí \textit{End Attribute} je nastavena horní hranice intervalu hodnot. 
+	\item \textit{Presentation} - nastavení prezentace dat pro \textit{GetCapabilities} operaci. Pokud jsou hodnoty diskrétní, tak je možné nastavit možnost \textit{List}, \textit{interval and resolution} pro hodnoty v intervalu s daným krokem, nebo \textit{continuous interval} pro souvislý interval hodnot. Možnost \textit{List} je vhodná například pro aplikace využívající animací, kdy jeden časový okamžik odpovídá jednomu snímku animace.
+	\item \textit{Default value} - jedná se o hodnotu, která zastupuje data, která pro zvolený attribut neobsahují žádnou časovou hodnotu. existuje několik možností jak \textit{Default value} zvolit:    
+	\begin{itemize}
+		\item \textit{smallest domain value} - uloží nejnižší hodnotu časového atributu
+		\item \textit{biggest domain value} - uloží nejvyšší hodnotu časového atributu
+		\item \textit{nearest to the reference value} - uloží hodnotu časového attributu, která je nejblíže dané referenční hodnotě (\textit{Reference value}) 
+		\item \textit{reference value} - uloží danou referenční hodnotu tak jak je nehleě na to jestli je její použití vhodné.   
+	\end{itemize}
+	\item \textit{Reference value} - pole pro zvolení referenční hodnoty sloužící při určení \textit{Default value}.
+\end{itemize}
 
 \bigskip
 \noindent
@@ -325,20 +340,114 @@ Pro zobrazení jednotlivých časových hodnot, intervalu a více hodnot je synt
 	\item TIME=2004-10-12/2004-10-13,2004-10-15/2004-10-16 \textit{pro více intervalů.}
 \end{itemize}
 
-Na první pohled je vidět, že rozdíl v syntaxi oproti MapServeru je minimální.
+Na první pohled je vidět, že rozdíl v syntaxi oproti MapServeru je minimální. Mapserver však nabízí navíc možnost specifikace relativních časových intervalů. Namísto přesné specifikace začátku a konce intervalu je možné specifikovat začátek, nebo konec intervalu a přidat dobu jeho trvání. Začátek či konec intervalu je zadán stejným formátem, který je zobrazen výše. Pro hodnotu aktuálního času je možné časovou hodnotu nahradit slovem \textit{PRESENT}.
 
-Výhoda GeoServeru je ta, že se 
+Syntaxe pro specifikování relativních intervalů je následující\cite{geoserver-time}:
 
+\begin{itemize}
+	\item TIME=2002-09-01T00:00:00.0Z/P1M \textit{pro interval hodnot pokrývající celý měsíc září 2002. Pro celý den prvního září 2002 by bylo možné použít hodnotu} P1D.
+	\item TIME=P1D/2010-12-25T00:00:00.0Z \textit{pro interval hodnot pokrývající celý předchozí den 24. prosince 2010.}
+	\item TIME=PT36H/PRESENT \textit{pro časový interval 36 hodin v minulosti od aktuálního časového okamžiku.}
+\end{itemize}
+
+\bigskip
+\noindent
+\textbf{Webové mapové platformy}
+
+%nejsem si jist jestli je na GeoServeru
+\textbf{MetEye} (http://www.bom.gov.au/australia/meteye/) je webová mapová platforma zobrazující meterologické observace a předpovědí pro celý australský kontinent. Jedná se o interaktivní mapovou platformu vytvořenou Bureaou of Meto\textbf{MetEye} (http://www.bom.gov.au/australia/meteye/) je webová mapová platforma zobrazující meterologické observace a předpovědí pro celý australský kontinent. Jedná se o interaktivní mapovou platformu vytvořenou Australským úřadem pro metorologii (Australian Bureaou of Metorologi).
+
+Webové rozhraní obsahuje panel s tématickými mapy, pomocí kterých se dá mapový obsah modifikovat. Zde lze vybrat typ předpovědi jako například vodní srážky, teplotu, sílu a směr větru atd. Mapové okno mimo standartních mapových prvků jako jsou legenda a grafické měřítko nabízí rovněž možnost zobrazení předpovědi počasí pro daný časový okamžik. Toho je docíleno pomoci velice pěkně zpracované časové osy v horní části mapového okna. Zde lze data rovněž data po časových úsecích animovat.
+
+Rastrové vrstvy jsou filtrovány na základě parametru \textit{TIMESTAMP}, který je vždy shodný u všech dlaždic. Vzhledem k tomu, že pro jednotlivé předpovědi se mění pouze rastrové vrstvy, je možné je na webovém serveru cashovat a distribuovat ve formě dlaždic. 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.67\textwidth]{../img/meteye.png}
+	\caption{screenshot zobrazující webovou platformu MetEye}
+	\label{fig:gay-sands}
+\end{figure}
+
+\textbf{Pennsylvania Cancer Atlas} (https://www.geovista.psu.edu/grants/CDC/) je webová platforma zobrazující výskyt rakoviny prostaty a tlustého střeva ve státě Pensylvánie na severovýchodě USA. V tomto případě se jedná o webovou mapovou aplikaci využívající software Adobe Flash Player, který se spouští pomoci webového prohlížeče. 
+
+Uživatelské rozhraní nabízí tématickou mapu celého státu, která je rozdělena na regiony. Ty jsou barevně zvýrazněny dle zastoupení rakoviny v populaci. Pro každé období jsou dále vyhotoveny celostátní statistiky, které jsou zobrazeny v grafech a tabulce okolo. Data jsou sbírána pro období jednoho až dvou let a pomoci jednoduchého roletového menu je možné jednotlivě je selektovat, nebo spustit animaci. Zde pomocí panelu animace jde animaci spustit, kdy se jednotlivá období střídají s předem daným časovým krokem. Ten dále nabízí přeskočení na následující období a ukončení animování.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{../img/pennsylvania-cancer-atlas.png}
+	\caption{screenshot zobrazující webovou platformu Pennsylvania Cancer Atlas a její uživatelské rozhraní s možností animace dle časového období statistik}
+	\label{fig:gay-sands}
+\end{figure}
+ 
+\newpage
+\subsection{ArcGIS}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\textwidth]{../img/arcgis-logo.jpg}
+	\label{fig:arcgis-logo}
+\end{figure}
+\bigskip
+
+ArcGIS je platforma obsahující řadu aplikací které společně tvoří geografický informační systém sloužící pro práci s prostorovými daty. Nejedná se tedy o webový mapový server jako takový. ArcGIS je soukromý systém vytvořený firmou Esri (Environmental Systems Research Institute). Ta již v devedesátých letech pracovala na GIS aplikacích. V roce 1999 byla vydána desktopová aplikace ArcMap 8.0 (později přejmenovaná na ArcGIS Desktop a poté pouze na ArcGIS), která se od té doby stala nejpoužívanější komerčním softwarem na poli geografických informačních systémů \cite{arcgis_history}. 
+
+Pod ArcGis mimo jiné patří aplikace pro webovou mapovou publikaci. Jedná se o \textbf{ArcGIS server}, \textbf{ArcGIS Online} a \textbf{Portal for ArcGIS}. Poslední jmenovaný používá jako backend již zmíněný ArcGIS server, proto se mu v další části není potřeba dále věnovat.
+
+\newpage
+\subsection{ArcGIS server}
+
+Jedná o službu zahrnující mapování, geoprocessing, obrazové a síťové analýzy, 3D data a možnost tvorby geografických prvků \cite{arcgis-publishing-service}. 
+
+Funkcionalita ArcGIS serveru se liší dle balíčků, které na základě ceny omezují jeho možnosti.   
+
+\bigskip
+\noindent
+\textbf{Podpora časových dat}
+ 
+ArcGIS nabízí možnost pracování s vrstvy obsahující časová data. K tomu je nutné jednotlivé vrstvy ještě před jejich publikací nastavit. V desktopové aplikaci k tomu slouží dialogové okno, které je možné nalézt v nastavení vrstev.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{../img/arcgis-layer-edit.png}
+	\caption{dialogové okno nastavení časové vrstvy v desktopové aplikaci ArcGIS}
+	\label{fig:arcgis-time-settings}
+\end{figure}
+
+K možnosti publikace je nejprve zaškrtnout možnost \textit{Enable time on this layer} tím bude vrstva jasně identifikována jako časová. Dále je nutno specifikovat jakým způsobem jsou časové hodnoty v datech uloženy. Ty mohou být jako atributové pole pro vektorová data, nebo jako rastrový katalog pro rastrová data. Nutné je rovněž nastavení kroku, který by měl co nejlépe korespondovat s krokem v jakém jsou jednotlivá data pořízena. Následující pole slouží k nastavení:
+
+\begin{itemize}
+	\item \textit{Time Properties} - v roletovém menu \textit{Layer Time} je možnost zvolit jestli data jsou pouze v jednom atributovém poli, nebo ve dvou. V tom případě jeden obsahuje začátek a druhý konec časového intervalu. Konkrétní názvy atributů je dále nutné zvolit z nabídky atributů pro příslušnou vrstvu. Pokud formát atributu, kde jsou časová data uložena nepodporuje časová data např. řetězec, nebo číselná hodnota, je nutné daný formát dále specifikovat. Poté je možné pomocí tlačítka \textit{Calculate} vypočítat časový rozsah. Tato hodnota je posléze použita k inicializaci časového posuvníku a rovněž k validaci časových dat. Po výpočtu je vypsán doporučený krok určený pro časový posuvník. Hodnotu kroku lze případně změnit. 
+	
+	\item \textit{Time Properties} - část s rozšířeným nastavením není povinné nijak modifikovat. Obsahuje možnost specifikování časové zóny pro použitá časová data. Takové nastavení je vhodné především pro publikací více časových vrstev obsahující data z jiných časových pásem. Pokud jsou jejich pásma specifikována lze tato data snadno kombinovat dohromady. Stejného výsledku lze také dosáhnout pomoci nastavení časového posunu níže. V případě že jsou některá časová data pořízena v zemích používající změnu času na čas letní \textit{daylight saving time}, nabízí ArcGIS tuto skutečnost u dat specifikovat. Poslední možnost, kterou tato sekce nabízí je \textit{Display data cumulatively} tedy kumulativní zobrazení dat. V tom případě jsou zobrazena veškerá data mající počáteční časovou hodnotu stejnou, nebo menší, než aktuálně zvolenou. Pokud taková data mají nastavený konec časového intervalu je tato hodnota ignorována. 
+\end{itemize}
+
+Takto nastavené vrstvy lze publikovat na ArcGIS server a pomocí webových mapových servisů vytvářet požadované mapové obrázky. K jejich finálnímu použití je však nutné mapový projekt publikovat na server. Proces publikace již žádné dodatečné nastavení pro vrstvy obsahující časová data neobsahuje, proto se mu tato kapitola věnovat nebude. V kostce s jedná o jednoduché nastavení servisu pomocí dialogového okna s možností náhledu projektu.
+
+\bigskip
+\noindent
+\textbf{Formáty časových dat a syntaxe}
+
+Jak již bylo řečeno časové hodnoty jsou podporovány ve třech datových typech. Datový typ podporující datum, textový řetězec a číselná hodnota. Pro nižší výpočetní náročnost je doporučeno datové typy podporující datum maximálně využívat. V případě textových řetězců je podporováno 13 formátů a v případě číselných hodnot se jedná o 4 formáty \cite{arcgiq-data-types}.
+%moznost pridat formaty
+
+\newpage
+\subsection{ArcGIS Online}
+
+\newpage
+\section{Souhrn}
 %https://gis.stackexchange.com/questions/12493/list-of-map-service-software?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
 %	 qgis server
+%	 qgis clound
 %https://gis.stackexchange.com/questions/34667/does-qgis-have-wms-t-wms-with-time-support?rq=1
 %https://docs.qgis.org/2.18/en/docs/user_manual/working_with_ogc/ogc_server_support.html
 
-%	arcgis
+%	arcgis server
 %https://enterprise.arcgis.com/en/server/latest/publish-services/linux/serving-time-aware-layers.htm
 %https://developers.arcgis.com/javascript/3/jshelp/inside_temporal.html
 
 %notes
 %http://tiles.metgis.com/tiles-demo/
+
+%arcgis online
  
