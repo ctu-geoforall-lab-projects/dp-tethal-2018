@@ -59,7 +59,7 @@ bottom=35mm]
 
 %%%%%%%%%%Zahlavi%%%%%%%%%%%
 \usepackage{fancyhdr}
-\fancyhead[L]{Česte vysoké učení technické v Praze}
+\fancyhead[L]{České vysoké učení technické v Praze}
 \setlength{\headheight}{16pt}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -80,11 +80,11 @@ bottom=35mm]
 \selectlanguage{english}
 \begin{abstract}
 \bigskip
-Cílem této diplomové práce bylo navrhnutí a vytvoření nástroje pro platformu Gisquick za účelem rozšíření její možností o práci s časoprostorovými daty. Nástroj nabídne uživateli přehledné rozhraní, které umožní možnost filtrace jednotlivých vrstev na základě jejich časové osy. Nástroj dále poskytuje možnost tvorby jednoduché animace dle vybraného časového kroku.
+Cílem této diplomové práce je navrhnutí a vytvoření nástroje rozšiřujícího platformu Gisquick o podporu práce s časoprostorovými daty. Nástroj nabídne uživateli přehledné uživatelské rozhraní, které umožní možnost filtrace vektorových vrstev na základě jejich časových dat. Nad daty bude rovněž možnost tvorby jednoduché animace dle vybraného časového kroku.
 
-Součástí práce je také obecný popis fungování webových publikačních platforem a provedení rešerše možných metod řešení pro práci s časoprostorovými daty. Na základě rešerše bylo zvoleno optimální řešení. To bylo posléze vhodně aplikované na již stávající platformu.
+Práce dále zahrnuje rešerši fungování webových publikačních platforem a nastínění jejich metod řešení pro práci s časoprostorovými daty. Na základě rešerše byla zvolena optimální metoda, která byla posléze vhodně aplikované na již stávající platformu.
 
-Dalším krokem byla implementace nalezeného řešení na straně Gisquick klienta. Nástroj byl vyvíjen v programovacím jazyce JavaScript s použitím frameworku Vue.js, do kterého je stávající klient v tuto chvíli migrován. Spolu s úpravy klienta bylo dále nutné zahrnout novou funkcionalitu do zásuvného modulu pro QGIS, sloužícího k publikaci předem vytvořených projektů. Pomocí něj je možné pro jednotlivé vrstvy vybrat atribut obsahující časovou dimenzi ve formě textového řetězce.
+Další část práce se zabývá implementací nalezeného řešení na straně Gisquick klienta. Nástroj byl vyvíjen v programovacím jazyce JavaScript s použitím frameworku Vue.js, do kterého je v tuto chvíli webový klient přepisován. Spolu s úpravy klienta bylo dále nutné zahrnout novou funkcionalitu do zásuvného modulu Gisquick plugin pro QGIS, sloužícího k publikaci předem vytvořených projektů. V pluginu je možné jednotlivé vrstvy před publikací nastavit a identifikovat jejich atribut obsahující časovou složku.
 
 \bigskip
 \bigskip
@@ -196,7 +196,12 @@ Dostupné na: \textless\url{http://blog.evanyou.me/2014/02/11/first-week-of-laun
 \bibitem{arcgiq-data-types}
 ArcMap - Supported field formats \textit{}
 Dostupné na: \textless\url{http://desktop.arcgis.com/en/arcmap/latest/map/time/supported-field-formats.htm}\textgreater
-
+\bibitem{qgis-server}
+QGIS as OGC Data Server\textit{}
+Dostupné na: \textless\url{https://docs.qgis.org/2.8/en/docs/user_manual/working_with_ogc/ogc_server_support.html}\textgreater
+\bibitem{pyqt}
+What is PyQt?\textit{}
+Dostupné na: \textless\url{https://riverbankcomputing.com/software/pyqt/intro}\textgreater
 
 \end{thebibliography}
 
