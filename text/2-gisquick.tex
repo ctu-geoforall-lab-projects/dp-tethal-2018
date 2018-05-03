@@ -49,6 +49,7 @@ Gisquick plugin rovněž disponuje uživatelským rozhraním, kde pomocí jednod
 	\label{fig:arcgis-time-settings}
 \end{figure}	
 	
+\noindent
 \textbf{Vue.js} - jedná se o moderní framework s otevřeným kódem napsaný v programovacím jazyce JavaScript jehož první verze byla vydaná začátkem roku 2014 Evanem You \cite{vue-history}. Jeho hlavní použití je vývoj uživatelského rozhraní aplikací, tedy na straně klienta. Uživatelské rozhraní je za pomoci Vue.js rozděleno na několik  komponent, kdy každá obsahuje vlastní javascriptové, html a css skripty. Jednotlivé komponenty dělají kód přehlednější a aplikace méně náročnější. Protože vždy jsou použity jenom ty komponenty, které koncový uživatel potřebuje. Mezi další výhody Vue.js patří mimo práce s komponenty jeho reaktivita, možnosti routingu a úpravu objektového modulu dokumentu (DOM).  
 
 Původní verze webového klienta Gisquicku jsou psány za použití frameworku AngularJS. V současné chvíli je však celý klient vytvářen znovu za pomoci medernějšího Vue.js. Z toho důvodu bylo rozšíření platformy o podporu časoprostorových dat na straně klienta psáno ve stejném framevorku Vue.js. Pokud by se nástroj osvědčil pro jeho použití v produkční verzi, nebude nutné do budoucna kód přepisovat.
@@ -66,19 +67,16 @@ Gisquick pro deploy svých komponent (mimo Gisquick pluginu) v produkční verzi
 
 \bigskip
 \noindent
-\textbf{Open Layers} - 
+\textbf{OpenLayers} - jedná se o knihovnu napsanou v programovacím jazyce JavaScript, která umožňuje správu a vizualizaci map ve webových prohlížečích. Jedná se o software s otevřeným kódem nabízející široké rozhraní pro tvorbu geografických aplikací. OpenLayers byly vytvořeny soukromou společností MetaCarta v roce 2005. Od roku 2007 spadají OpenLayers pod organizaci OSGeo.
 
 \newpage
-\section{Implementace nástroje}
+\section{Implementace nástroje pro Gisquick plugin}
 
-Následující kapitola popisuje způsob jakým byla platforma Gisquick respektive její komponenty rozšířeny o podporu práce s časoprostorovými daty. Jednotlivé podkapitoly zmiňují základní funkcionalitu, která byla nutná udělat a způsob její implementace.
+%Následující kapitola popisuje způsob jakým byla platforma Gisquick respektive její komponenty rozšířeny o podporu práce s časoprostorovými daty. Jednotlivé podkapitoly zmiňují základní funkcionalitu, která byla nutná udělat a způsob její implementace.
 
-\subsection{Gisquick plugin}
 V kapitole 3.1 jsou zmíněny výstupy z Gisquick pluginu. Jedná se o sloužku obsahující projekt ve formátu .qgs, data použita v projektu a metadatový textový soubor. Soubor obsahuje nastavení a popis dat použité na straně mapového serveru a webového klienta. Hlavním cílem úprav Gisquick pluginu bylo tedy vytvoření jednoduchého uživatelského rozhraní, které umožní definovat všechny potřebná data, pomocí kterých budou do metadatového souboru vepsány potřebné informace identifikující vrstvu jako časovou. Ty poté souží ve webovém klientu k inicializaci nástroje pro práci s časovými daty.
 
-\bigskip
-\noindent
-\textbf{Uživatelské rozhraní}
+\subsection{Uživatelské rozhraní}
 
 \begin{figure}[h!]
 	\centering
@@ -96,9 +94,7 @@ Sloupec \textit{Date Mask} obsahuje roletové menu s datovými masky, které ur�
 Jestli jsou časové vrstvy dobře nastaveny se lze v předposledním kroku publikace přesvědčit v souhrnu publikovaného projektu.
 %obrazek ze souhrnu (az bude)
 
-\bigskip
-\noindent
-\textbf{Funkcionalita}
+\subsection{Funkcionalita}
 
 Poté co uživatel v záložce Vrstvy nastaví všechny požadované parametry může svou volbu potvrdit tlačítkem \textit{Next}, které spustí výpočet a zobrazí další krok publikace.
 
@@ -138,9 +134,7 @@ Posledním krokem je poté pouze export zjištěných hodnot do metadatového so
 
 %vyvojovy diagram
 
-\bigskip
-\noindent
-\textbf{Metadatový soubor}
+\subsection{Metadatový soubor}
 
 Metadatový soubor je textový soubor, který vniká publikací projektu pluginem Gisquick. Obsahuje množství informací, které jsou nutné pro správnou konfiguraci straně mapového serveru a webového klienta. V případě časových vrstev jsou dodatečné informace použité pouze na straně webového klienta. 
 
@@ -155,16 +149,107 @@ Pokud jsou vrstvy při publikaci označeny jako časové a jejich data jdou vali
 	\item\textit{timeAttribute} - parametr je vytvořen pouze pokud je nutné vytvářet nový atribut obsahující hodnoty ve formátu \textit{UNIX TIME}. Obsahuje název nově vytvořeného atributu. Parametr slouží stejně jako \textit{originalTimeAttribute} k určení atributu při filtrování časové vrstvy.  
 \end{itemize}
 
+\newpage
+\bigskip
+\noindent
 
+Níže je ukázka části metadatového souboru. Ta obsahuje dvě vrstvy, kdy každá z nich má odlišné parametry. Pro kompaktnost ukázky zde parametry, které se netýkají implementovaného rozšíření zobrazeny nejsou: 
+
+\begin{verbatim}
+{
+	"unix": false, 
+	"timeValues": [
+	1309471200.0, 
+	1507672800.0
+	], 
+	"input_datetime_mask": "YYYY-MM-DD", 
+	"output_datetime_mask": "YYYY-MM-DD", 
+	"original_time_attribute": "platiod", 
+}, 
+{
+	"timeAttribute": "UTconvert", 
+	"unix": true, 
+	"timeValues": [
+	1309471200, 
+	1507672800
+	], 
+	"output_datetime_mask": "HH:mm", 
+	"original_time_attribute": "platiod1", 
+}
+\end{verbatim}
 
 \newpage
-\subsection{Webový klient}
+\section{Implementace nástroje do webového klienta}
+Webový klient obsahuje hlavní část implementace rozšíření pro podporu časoprostorových dat. Jedná se o intuitivní nástroj, který umožňuje filtrovat obsah jednotlivých vrstev na základě jejich časového parametru. Časový interval je možné nastavit pomoci posuvníku, nebo přímo změnit ručně. Nástroj na webovém klientu umožňuje dále vytvářet jednoduché animace. Uživatel má rovněž možnost zmíněnou filtraci mapových prvků provádět pro jednotlivé vrstvy, nebo na více vrstev současně. 
 
-Jejich výčtem je možné obecně určit nutné data, která jsou pro práci s časoprostorovými nezbytná:
+\subsection{Uživatelské rozhraní}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1\textwidth]{../img/gisquick-time-tool.png}
+	\caption{webové rozhraní Gisquick platformy s aktivovaným nástrojem pro páci s časoprostorovými daty}
+	\label{fig:arcgis-time-settings}
+\end{figure}
+
+Celý nástroj je ukrytý v postranním menu a obsahuje jen několik prvků, které však uživateli poskytují velké množství operací. Všechny jsou zobrazeny v obrázku 12 a jednotlivě se jedná o:
 
 \begin{itemize}
-	\item \textit{časové hodnoty} - jedná se o nejdůležitější data, na kterých je závislé nastavení dílčích nástrojů pro časovou filtraci a vytváření animace na základě časové osy. Jedná se o interval hodnot, definovaný minimální a maximální
+	\item\textit{roletové menu s výběrem časové vrstvy} - v případě aktivace nástroje je toto pole jediný prvek, který je uživateli zobrazen. Jako první krok je totiž nutné vybrat časovou vrstvu, jejíž mapové prvky budou filtrovány. Toho lze docílit pomocí zmíněného roletového menu, které obsahuje všechny vrstvy, které byly při jejich exportu označeny jako časové. Dále je zde možnost "All visible layers", která uživateli umožní filtraci více vrstev zároveň.
+	\item\textit{jméno časového atributu} - tento prvek neumožňuje uživateli jakoukoli interakci a má tedy čistě informativní charakter. Je zde vypsán atribut vrstvy, ve kterém jsou časové hodnoty použité při filtraci uloženy. Jeho existence je přínosná především v případě kdy projekt obsahuje více časových vrstev s odlišným časovým parametrem. V případě filtrace více vrstev najednou je možné filtrovat pouze vrstvy se stejným parametrem. Uživatel je tedy tomto případě informován pro jaký parametr jsou vrstvy filtrovány.
+	\item\textit{dvojitý časový posuvník} - jedná se posuvník se dvěma šoupátky. Díky němu je možné snadno a rychle data filtrovat. Uživatel tak ihned získá představu o jejich časové ose. Minimum a maximum posuvníku odpovídá minimu a maximu intervalu časových hodnot jednotlivé vrstvy. Pro více vrstev se jedná o sjednocení intervalů. Krok je vždy určen jako jedna setina intervalu hodnot posuvníku. Je tedy zřejmé, že posuvník slouží především pro rychlou filtraci než přesnou definici hledaného intervalu. 
+	\item\textit{časové štítky} - na dvou řádcích jsou dvě pole s minimálním a maximálním datem filtrovaných časových hodnot. Tato pole slouží k přesné definici časového úseku. K tomu slouží integrovaný kalendář s hodiny. Časový formát zobrazený v těchto polích je nutné definovat při publikaci projektu. Pokud formát neobsahuje možnost zobrazení minut, nebo hodin v tom případě se možnost zadání hodin a minut nenabízí. Stejným způsobem není nabídnut možnost filtrování za pomoci kalendáře v případě, že časový formát obsahuje jen hodiny, nebo minuty.
+	\item\textit{animační tlačítko} - tlačítkem \textit{PLAY} je možné spustit animování aktivní časové vrstvy. Po jeho aktivaci je vždy po jedné sekundě zvyšována hodnota horní hranice intervalu časových hodnot a to o jeden krok posuvníku. Pokud je animace aktivovaná změní se tlačítko na \textit{STOP}. Tím je tak možné animování zastavit.
 \end{itemize}
+
+\subsection{Princip časové filtrace}
+Jak bylo zmíněno v kapitole 2.6, QGIS server nepodporuje v operaci \textit{GetMap} parametr \textit{TIME}. Z toho důvodu je nutné použít obdobnou metodu, kterou používá MapServer, a to nahrazení parametru \textit{TIME} parametrem \textit{FILTER}.
+
+\noindent
+Parametr \textit{FILTER} lze použít v operaci \textit{GetMap} následovně \cite{qgis-service}:
+\begin{verbatim}
+http://myserver.com/?
+REQUEST=GetMap
+&LAYERS=mylayer1,mylayer2
+&FILTER=mylayer1:"OBJECTID" = 3;mylayer2:'text' = 'something'&....
+\end{verbatim}
+
+Tato skutečnost dovoluje filtrovat časové vrstvy na základě jejich atributu obsahujícího časové hodnoty a samotné hodnoty časového atributu. Lze tak filtrovat jednu i více vrstev najednou. Za použití speciálních znaků jako jsou \textit{‘AND’, ’OR’, ’IN’, ’=’, ’<’, ’>=’,  ‘>’, ’>=’, ’!=*,’(‘,’)’} lze rovněž filtrovat intervaly hodnot i jejich sjednocení.
+
+Parametr \textit{FILTER} podporuje zadané hodnoty ve datovém typu textového řetězce, nebo jako celé číslo. Pro zachování konzistence výsledků filtrování je nutné, aby datový typ a časový formát hodnoty vstupující do parametru \textit{FILTER} korespondovaly příslušným časovým atributem. Z toho důvodu je při publikaci projektu ve speciálních případech nutné vytvoření nového atributu. Ten obsahuje hodnoty časového atributu převedeny do formátu \textit{UNIX TIME}. To dovoluje k časovým hodnotám přistupovat jako k celočíselným hodnotám. V případě časového filtrování této vrstvy není tedy použit námi zvolený časový atribut, ale nově vytvořený. Nutnost vytvářet nový atribut je v následujících případech:
+
+\begin{itemize}
+	\item\textit{časový atribut obsahuje validní ale nekonzistentní časové řetězce} - v procesu publikace je provedena validace hodnot časového atributu. Pokud je zjištěno, že atribut obsahuje validní záznamy ve více časových formátech nebylo by v takovém případě možné oba tyto formáty použít. Proto je pro konkrétní vrstvu nutné vytvořit nový atribut s jednotným formátem (v tomto případě \textit{UNIX TIME}). Tato zkutečnost je poté zanesena do metadatového souboru.
+	\item\textit{časový atribut obsahuje jeden validní formát se speciálními znaky} - při filtraci mapových prvků na základě časového řetězce nelze použít všechny běžně používané formáty. Například při použití data v textovém formátu 'YYYY-MM-DDTHH:mm:SS', kdy je použit znak 'T' oddělující datum a čas, nelze textový řetězec v parametru \textit{FILTER} použít.
+\end{itemize}
+
+\subsection{Inicializace nástroje}
+
+Pokud není volba \textit{Use cache} při publikování projektu vypnutá,  používá Gisquick webový klient pro zobrazování mapových vrstev předem vytvořených mapových dlaždic uložených v mezipaměti serveru. Pro možnosti filtrace vrstev na základě jejich časové hodnoty parametru však tato metoda nelze použít. Bylo by totiž nutné vytvořit mapové dlaždice pro všechny možné časové intervaly a kombinace vrstev. Z toho důvodu je při aktivaci nástroje pro práci s časoprostorovými daty načítání dlaždic vypnuto a jednotlivé mapové obrazy jsou vždy znovu generovány při \textit{WMS} požadavku s operací \textit{GetMap}.
+
+První a také jediný krok, který může v tuto chvíli uživatel udělat je volba časové vrstvy. Vrstvy, které byly při exportování projektu označeny jako časové jsou v roletovém menu nástroje. Pokud je jedna vrstva vybrána, je nejprve zkontrovováno, jestli byla vybrána možnost jedné, nebo všech vrstev. Možnost výběru všech viditelných vrstev není v tuto chvíli uvažována. 
+
+V druhém kroku nejprve nutná inicializace časového posuvníku, na něm jsou závislé další uživatelské prvky jako například \textit{časové štítky}. Jeho minimální a maximální hodnota je získána z metadatového parametru \textit{timeAttribute}. Velikost kroku posuvníku určena jako setina rozdílu jeho maximální a minimální hodnoty. V případě, že nebyla vrstva již použitá jsou obě šoupátka posuvníku na jeho levé straně s tím, že levé šoupátko má hodnotu minima intervalu časových hodnot, pravé je o hodnotu kroku posuvníku větší. 
+
+Stejně jako hodnoty parametru \textit{timeAttribute}, tak hodnoty šoupátek jsou v časovém formátu \textit{UNIX Time}, tedy jako datový typ \textit{Integer}. \textit{Vue.js} umožňuje nastavení proměnné jako \textit{Watched Property}. Takto jsou nastaveny i hodnoty šoupátek. Pokud se tedy jedna z hodnot změní, provede se její převod z \textit{UNIX Time} do datového formátu \textit{Integer}, který svým časovým formátem odpovídá formátu zvolenému během publikace projektu. Jakmile je tedy časový posuvník inicializován, jsou ihned inicializovány i časové štítky.
+
+
+\subsection{Filtrace pro jednotlivou vrstvu}
+V případě výběru časové vrstvy z roletového menu se inicializují jednotlivé prvky nástroje. V tuto chvíli je možné mapové prvky pro zvolenou vrstvu filtrovat dle jejich data.
+
+Změnu obsahu mapy na základě filtrace jejích prvků lze provést dvojím způsobem. Buďto změnou polohy šoupátek časového posuvníku, v tom případě se mapový obsah aktualizuje až po uvolnění šoupátka. Druhý způsob je výběr přesného data a času v časových štítcích. Mapa se tak aktualizuje pouze když je výběr potvrzen tlačítkem \textit{"OK"}. To dovoluje uživateli změnit své rozhodnutí během samotné filtrace. 
+
+Při spuštění časové filtrace je provedeno několik po sobě jdoucích operací:
+\begin{itemize}
+	\item\textit{detekce předem filtrovaných vrstev} - nejprve je nutné zjistit, zda-li ostatní viditelné vrstvy již filtrovány byly. V takovém případě je nutné do parametru \textit{"FILTER"} zahrnout nastavení předem filtrované vrstvy. Pokud by tak nebylo provedeno, z předem filtrovaných vrstev by byly zobrazeny všechny jejich prvky. 
+\end{itemize}
+
+
+
+
+\subsection{Filtrace pro více vrstev}
+
+
+
 
 %\section{Gisquick plugin pro QGIS}
 
