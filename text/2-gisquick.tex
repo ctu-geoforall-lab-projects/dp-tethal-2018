@@ -98,11 +98,11 @@ Jestli jsou časové vrstvy dobře nastaveny se lze v předposledním kroku publ
 
 Poté co uživatel v záložce Vrstvy nastaví všechny požadované parametry může svou volbu potvrdit tlačítkem \textit{Next}, které spustí výpočet a zobrazí další krok publikace.
 
-Do výpočetního procesu se dostanou pouze ty vrstvy, které splňují dvě podmínky. Jejich časový atribut \textit{Time Attribute} musí existovat. Tato podmínka eliminuje výpočet nad rastrovými vrstvy. Dále je nutné, aby byl nastavený časový atribut jiný než prázdný string. Tímto způsobem se do výpočtu dostanou pouze vrstvy, které uživatel výběrem atributu označí jako časové.
+Do výpočetního procesu se dostanou pouze ty vrstvy, které splňují dvě podmínky. Jejich časový atribut \textit{Time Attribute} musí existovat. Tato podmínka eliminuje výpočet nad rastrovými vrstvy. Dále je nutné, aby byl nastavený časový atribut jiný než prázdný textový řetězec. Tímto způsobem se do výpočtu dostanou pouze ty vrstvy, které uživatel výběrem atributu označí jako časové.
 
-Výpočet probíhá pro jednotlivé vrstvy splňující vstupní podmínky totožně. Proces bude tety popsán pouze pro jednu.
+Výpočet probíhá pro jednotlivé vrstvy splňující vstupní podmínky totožně. Pro každou mapovou vrstvu je volána metoda \verb|get_time_info|.
 
-V prvním kroku je vytvořena validační maska. Jedná se o pole, které svou velikostí odpovídá počtu mapových prvků \textit{Features} ve vrstvě. Každý prvek validační masky může nabývat dvou hodnot. Buďto obsahuje formát časového textového řetězce \textit{time string}, ve kterém je časová hodnota uložena. Pokud však časová hodnota není v textovém řetězci, nebo její časový formát textového řetězce neodpovídá podporovaným formátům, je do daného prvku validační masky uložena hodnota \textit{-1}. Podporované formáty jsou explicitně vypsány ve zdrojovém kódu Gisquick pluginu.
+V prvním kroku je metodou \verb|validate_time_attribute| vytvořena validační maska. Jedná se o pole, které svou velikostí odpovídá počtu mapových prvků \textit{Features} ve vrstvě. Každý prvek validační masky může nabývat dvou hodnot. Buďto obsahuje formát časového textového řetězce \textit{time string}, ve kterém je časová hodnota uložena. Pokud však časová hodnota není v textovém řetězci, nebo její časový formát textového řetězce neodpovídá podporovaným formátům, je do daného prvku validační masky uložena hodnota \textit{-1}. Podporované formáty jsou explicitně vypsány ve zdrojovém kódu Gisquick pluginu v proměnné \verb|datetime_mask_array|.
 
 Pro vrstvu obsahující šest prvků, kdy pouze pět z nich má validní datum a to ještě v odlišných časových formátech může validační maska vypadat následovně:
 
@@ -117,26 +117,36 @@ Pro vrstvu obsahující šest prvků, kdy pouze pět z nich má validní datum a
 ]
 \end{verbatim}
 
-Během vytváření validační masky jsou rovnou data kontrolována. Díky tomu je možné zjistit jak maska vypadá aniž by bylo nutné její jednotlivé prvky procházet. Po její vytvoření jsou pouze tři možné scénáře jsou možné.
+Během vytváření validační masky jsou rovnou data kontrolována metodou \verb|validate|. Díky tomu je možné zjistit jak maska vypadá aniž by bylo nutné její jednotlivé prvky procházet. Po její vytvoření jsou pouze tři možné scénáře jsou možné.
+
+%specialni znak
 
 \begin{itemize}
 	\item\textit{Data nejsou validní} - znamená, že ani jeden hodnota v zadaném časovém atributu nemá validní časovou hodnotu. Validační maska tedy obsahuje pouze hodnoty \textit{-1}. Výpočet je v tomto případě ukončen.
-	\item\textit{Data jsou validní a obsahují pouze jeden časový formát} - v tomto případě je zjištěno, jestli je časový formát neobsahuje speciální znak, který by jeho použití v původní podobě znemožnil.
+	\item\textit{Data jsou validní a obsahují pouze jeden časový formát} - v tomto případě je zjištěno, jestli je časový formát neobsahuje speciální znak, který by jeho použití pro následnou filtraci mapových prvků v původní podobě znemožnil použít.
 	\begin{itemize}
-		\item\textit{Obsahuje speciální znak} - v tom případě se pokračuje způsobem stejným jako v případě \item\textit{Data jsou validní, ale obsahují více časových formátů}
-		\item\textit{neobsahuje speciální znak} - časové textové řetězce jsou za pomocí zjištěného časového formátu převedeny do časového formátu \textit{UNIX TIME}. Z těchto hodnot jsou poté zjištěny jejich maximální a minimální hodnota.
+		\item\textit{Obsahuje speciální znak} - v tom případě se pokračuje způsobem stejným jako v případě \textit{Data jsou validní, ale obsahují více časových formátů} popsaném níže.
+		\item\textit{Neobsahuje speciální znak} - časové textové řetězce jsou metodou \\* \verb|get_min_max_mask| za pomocí formátu, zjištěného časového z validační masky, převedeny do časového formátu \textit{UNIX TIME}. Z těchto hodnot jsou poté zjištěny jejich maximální a minimální hodnota.
+		Pro získání časového formátu z validační masky je použita metoda \verb|most_common|, která vybere nejvíce zastoupený prvek v poli. K její funkčnosti je tedy nutné nejprve metodou \verb|remove_values_from_list| odstranit záznamy obsahující hodnoty \textit{-1}.
 	\end{itemize}
-	\item\textit{Data jsou validní, ale obsahují více časových formátů} - jedná se tedy o validní nekonzistentní data. K tomu aby vrstvu s těmito časovými hodnoty bylo možné označit za časovou je nutné vytvořit nový atribut, který obsahuje časové hodnoty v jednotném formátu. Toho je docíleno pomoci validační masky, kdy se prochází jednotlivé hodnoty a pokud pro ně existuje formát časového textového řetězce, jsou převedeny do formátu \textit{UNIX TIME}. Ten je následně uložen v novém atributovém sloupci. V případě nevalidní časové hodnoty je pole prázdné. Na základě hodnot v atributu obsahující časové hodnoty ve formátu \textit{UNIX TIME} je určena hodnota minimálního a maximálního časového atributu.
+	\item\textit{Data jsou validní, ale obsahují více časových formátů} - jedná se tedy o validní nekonzistentní data. Pro tento případ slouží metoda \\* \verb|create_unix_time_attribute|, která má návratovou hodnotu stejnou jako metoda \verb|get_min_max_mask|. K tomu aby vrstvu s časovými hodnoty bylo možné označit za časovou je v této metodě je nutné metodou \verb|create_new_attribute| vytvořit nový atribut, který obsahuje časové hodnoty v jednotném formátu. Toho je docíleno pomoci validační masky, kdy se prochází jednotlivé hodnoty. Pokud pro záznam existuje formát časového textového řetězce, je jeho hodnota převedena do formátu \textit{UNIX TIME}. Ten je následně uložen v novém atributovém sloupci metodou \verb|changeAttributeValues|. V případě nevalidní časové hodnoty je pole prázdné. Na základě hodnot v atributu obsahující časové hodnoty ve formátu \textit{UNIX TIME} je určena hodnota minimálního a maximálního časového atributu.
 	V případě, že nový atribut již jednou vytvořen byl, jsou jeho hodnoty přepsány.
 \end{itemize}
 
-Posledním krokem je poté pouze export zjištěných hodnot do metadatového souboru. Pro každou časovou vrstvu je vypsána časový formát pro zobrazení hodnot na webovém klientu. Dále název časového atributu, minimální a maximální hodnota časového atributu ve formátu \textit{UNIX TIME} a další parametry které budou popsány a vysvětleny dále. V případě, že data jsou validní a není vytvořen nový atribut obsahující časové hodnoty ve formátu \textit{UNIX TIME} je vypsán formát obsažený ve validační masce. Pokud je atribut vytvořen je vypsán jeho název.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{../img/getTimeInfo.png}
+	\caption{vývojový diagram publikace časové vrstvy}
+	\label{fig:plugin-chart}
+\end{figure}
+
+Posledním krokem je poté pouze export zjištěných hodnot do metadatového souboru. Pro každou časovou vrstvu je vypsána časový formát pro zobrazení hodnot na webovém klientu. Dále název časového atributu, minimální a maximální hodnota časového atributu ve formátu \textit{UNIX TIME} a další parametry které budou popsány a vysvětleny dále. V případě, že data jsou validní a není vytvořen nový atribut obsahující časové hodnoty ve formátu \textit{UNIX TIME} je vypsán formát obsažený ve validační masce. Pokud je pomocný atribut použit, je vypsán jeho název.
 
 %vyvojovy diagram
 
 \subsection{Metadatový soubor}
 
-Metadatový soubor je textový soubor, který vniká publikací projektu pluginem Gisquick. Obsahuje množství informací, které jsou nutné pro správnou konfiguraci straně mapového serveru a webového klienta. V případě časových vrstev jsou dodatečné informace použité pouze na straně webového klienta. 
+Metadatový soubor (viz. kapitola 3.1 \textit{Gisquick plugin}) je textový soubor, který vniká publikací projektu pluginem Gisquick. Obsahuje množství informací, které jsou nutné pro správnou konfiguraci straně mapového serveru a webového klienta. V případě časových vrstev jsou dodatečné informace použité pouze na straně webového klienta. 
 
 Pokud jsou vrstvy při publikaci označeny jako časové a jejich data jdou validní, jsou do nich vepsány následující hodnoty:
 
@@ -215,6 +225,15 @@ REQUEST=GetMap
 
 Tato skutečnost dovoluje filtrovat časové vrstvy na základě jejich atributu obsahujícího časové hodnoty a samotné hodnoty časového atributu. Lze tak filtrovat jednu i více vrstev najednou. Za použití speciálních znaků jako jsou \textit{‘AND’, ’OR’, ’IN’, ’=’, ’<’, ’>=’,  ‘>’, ’>=’, ’!=*,’(‘,’)’} lze rovněž filtrovat intervaly hodnot i jejich sjednocení.
 
+V implementovaném nástroji pro časovou filtraci je při filtrování použit dvojitý časový posuvník. Proto je obsah parametru \textit{FILTER} vždy tvořen jako textový řetězec, který v obecné formě vypadá následovně:
+
+\begin{verbatim}
+mylayer1:
+"timeAttribute" >= 'lowerValue' 
+AND 
+"timeAttribute" <= 'upperValue'
+\end{verbatim}
+
 Parametr \textit{FILTER} podporuje zadané hodnoty ve datovém typu textového řetězce, nebo jako celé číslo. Pro zachování konzistence výsledků filtrování je nutné, aby datový typ a časový formát hodnoty vstupující do parametru \textit{FILTER} korespondovaly příslušným časovým atributem. Z toho důvodu je při publikaci projektu ve speciálních případech nutné vytvoření nového atributu. Ten obsahuje hodnoty časového atributu převedeny do formátu \textit{UNIX TIME}. To dovoluje k časovým hodnotám přistupovat jako k celočíselným hodnotám. V případě časového filtrování této vrstvy není tedy použit námi zvolený časový atribut, ale nově vytvořený. Nutnost vytvářet nový atribut je v následujících případech:
 
 \begin{itemize}
@@ -224,34 +243,94 @@ Parametr \textit{FILTER} podporuje zadané hodnoty ve datovém typu textového �
 
 \subsection{Inicializace nástroje}
 
-Pokud není volba \textit{Use cache} při publikování projektu vypnutá,  používá Gisquick webový klient pro zobrazování mapových vrstev předem vytvořených mapových dlaždic uložených v mezipaměti serveru. Pro možnosti filtrace vrstev na základě jejich časové hodnoty parametru však tato metoda nelze použít. Bylo by totiž nutné vytvořit mapové dlaždice pro všechny možné časové intervaly a kombinace vrstev. Z toho důvodu je při aktivaci nástroje pro práci s časoprostorovými daty načítání dlaždic vypnuto a jednotlivé mapové obrazy jsou vždy znovu generovány při \textit{WMS} požadavku s operací \textit{GetMap}.
+Pokud není volba \textit{Use cache} při publikování projektu vypnutá (viz. obrázek 11),  používá Gisquick webový klient pro zobrazování mapových vrstev předem vytvořených mapových dlaždic uložených v mezipaměti serveru. Pro možnosti filtrace vrstev na základě jejich časové hodnoty parametru však tento způsob nelze aplikovat. Bylo by totiž nutné vytvořit mapové dlaždice pro všechny možné časové intervaly a kombinace vrstev. Z toho důvodu je při aktivaci nástroje pro práci s časoprostorovými daty použit \textit{Lifecycle Hook Created}. Jedná se o funkci, která se spustí jakmile je Vue komponent inicializován. V ní je původní instance třídy \textit{ImageLayer} uložena do proměnné \textit{originalLayer} a skryta. Následně je vytvořena instance nová, která obsahuje stejné vrstvy jako původní. Ta je poté nastavena jako aktivní. Pokud je nástroj vypnut je použita původní instance a mapa je tedy opět v původním nastavení.
 
-První a také jediný krok, který může v tuto chvíli uživatel udělat je volba časové vrstvy. Vrstvy, které byly při exportování projektu označeny jako časové jsou v roletovém menu nástroje. Pokud je jedna vrstva vybrána, je nejprve zkontrovováno, jestli byla vybrána možnost jedné, nebo všech vrstev. Možnost výběru všech viditelných vrstev není v tuto chvíli uvažována. 
+\subsection{Filtrace jedné časové vrstvy}
 
-V druhém kroku nejprve nutná inicializace časového posuvníku, na něm jsou závislé další uživatelské prvky jako například \textit{časové štítky}. Jeho minimální a maximální hodnota je získána z metadatového parametru \textit{timeAttribute}. Velikost kroku posuvníku určena jako setina rozdílu jeho maximální a minimální hodnoty. V případě, že nebyla vrstva již použitá jsou obě šoupátka posuvníku na jeho levé straně s tím, že levé šoupátko má hodnotu minima intervalu časových hodnot, pravé je o hodnotu kroku posuvníku větší. 
+První a také jediný krok, který lze po inicializaci časového nástroje udělat je volba časové vrstvy. Zde je možno zvolit jednotlivé časové vrstvy (viz, kapitola 4.1), nebo filtraci všech viditelných časových vrstev. Pokud je vybrána možnost filtrace mapových prvků pouze jedné vrstvy, je tato vrstva v případě jejího skrytí znovu zviditelněna. Následný postup je popsán dále. 
 
-Stejně jako hodnoty parametru \textit{timeAttribute}, tak hodnoty šoupátek jsou v časovém formátu \textit{UNIX Time}, tedy jako datový typ \textit{Integer}. \textit{Vue.js} umožňuje nastavení proměnné jako \textit{Watched Property}. Takto jsou nastaveny i hodnoty šoupátek. Pokud se tedy jedna z hodnot změní, provede se její převod z \textit{UNIX Time} do datového formátu \textit{Integer}, který svým časovým formátem odpovídá formátu zvolenému během publikace projektu. Jakmile je tedy časový posuvník inicializován, jsou ihned inicializovány i časové štítky.
+\bigskip
+\noindent \textbf{Inicializace}
 
+Nejprve nutná inicializace časového posuvníku, na něm jsou závislé další uživatelské prvky jako například \textit{časové štítky}. Jeho minimální a maximální hodnota je získána z metadatového parametru \textit{timeAttribute} (viz. kapitola 4.3). Velikost kroku posuvníku určena jako setina rozdílu jeho maximální a minimální hodnoty. Metoda \textit{setSliderValue} inicializuje hodnoty šoupátek na jejich poslední použité. V případě, že nebyla vrstva ještě filtrována, je hodnota levého šoupátka rovna minimu časového posuvníku a hodnota pravého šoupátka o krok časového posuvníku větší. 
 
-\subsection{Filtrace pro jednotlivou vrstvu}
-V případě výběru časové vrstvy z roletového menu se inicializují jednotlivé prvky nástroje. V tuto chvíli je možné mapové prvky pro zvolenou vrstvu filtrovat dle jejich data.
+Stejně jako hodnoty parametru \textit{timeAttribute}, tak hodnoty šoupátek jsou v časovém formátu \textit{UNIX Time}, tedy jako datový typ \textit{Integer}. \textit{Vue.js} umožňuje nastavení \textit{Watched Property}. Takto jsou nastavené proměnné hodnoty šoupátek. Pokud se tedy jedna z hodnot změní je spuštěna metoda, která provede převod původního celočíselného časového formátu \textit{UNIX Time} do datového formátu \textit{OutputDatetimeMask} zvolenému během publikace projektu (viz. kapitola 4.1, 4.3). Jakmile je tedy časový posuvník inicializován, jsou ihned inicializovány i časové štítky časovou hodnotou v daném formátu.
 
-Změnu obsahu mapy na základě filtrace jejích prvků lze provést dvojím způsobem. Buďto změnou polohy šoupátek časového posuvníku, v tom případě se mapový obsah aktualizuje až po uvolnění šoupátka. Druhý způsob je výběr přesného data a času v časových štítcích. Mapa se tak aktualizuje pouze když je výběr potvrzen tlačítkem \textit{"OK"}. To dovoluje uživateli změnit své rozhodnutí během samotné filtrace. 
+\bigskip
+\noindent \textbf{Filtrace}
 
-Při spuštění časové filtrace je provedeno několik po sobě jdoucích operací:
+%to je spis dokumentace
+%Změnu obsahu mapy na základě filtrace jejích prvků lze provést dvojím způsobem. Buďto změnou polohy šoupátek časového posuvníku, v tom případě se mapový obsah aktualizuje až po uvolnění šoupátka. Druhý způsob je výběr přesného data a času v časových štítcích. Mapa se tak aktualizuje pouze když je výběr potvrzen tlačítkem \textit{"OK"}. To dovoluje uživateli změnit své rozhodnutí během samotné filtrace. 
+
+Způsob, jakým je aktualizována mapa na základě změny časových hodnot je popsána v dokumentaci časového nástroje. Zde je popsán princip, kterým je mapový obraz aktualizován.
+
+Při spuštění časové filtrace je v metodě \textit{updateSingleLayer} provedeno několik po sobě jdoucích operací:
 \begin{itemize}
-	\item\textit{detekce předem filtrovaných vrstev} - nejprve je nutné zjistit, zda-li ostatní viditelné vrstvy již filtrovány byly. V takovém případě je nutné do parametru \textit{"FILTER"} zahrnout nastavení předem filtrované vrstvy. Pokud by tak nebylo provedeno, z předem filtrovaných vrstev by byly zobrazeny všechny jejich prvky. 
+	\item\textit{detekce předem filtrovaných vrstev} - nejprve je nutné zjistit, zda-li ostatní viditelné vrstvy již filtrovány byly. V takovém případě je nutné do parametru \textit{FILTER} zahrnout nastavení předem filtrované vrstvy. Pokud by tak nebylo provedeno, z předem filtrovaných vrstev by byly zobrazeny všechny jejich prvky. To je provedeno metodou \textit{getFilterFromLayers}, která vrací textový řetězec obsahující obsah parametru \textit{FILTER}  (viz. kapitola 5.2) časových vrstev, které byly již předem filtrovány.
+	\item\textit{sestavení filtru pro danou vrstvu} - další krok zahrnuje vytvoření obsahu parametru \textit{FILTER} pro právě filtrovanou vrstvu. Tento krok se liší v závislosti na existenci pomocného atributu s hodnoty ve formátu \textit{UNIX TIME} (viz. kapitola 4.2). Parametr \textit{unix} v metadatovém souboru (kapitola 4.3) obsahuje informaci o jeho vytvoření.
+	\begin{itemize}
+		\item\textit{unix = TRUE} - znamená to, že filtrace není provedena nad hodnoty časového atributu, ale pomocného atributu. Pro tuto kofiguraci je textový řetězec sestaven pouze z parametrů poskytovaných metadatovým souborem. Pro časovou hodnotu je přímo použita hodnota posuvníku, která je v časovém formátu \textit{UNIX TIME}.
+		\item\textit{unix = FALSE} - v tomto případě je nutné nejprve časové hodnoty převést z formátu \textit{UNIX TIME} do textového řetězce, který svým časovým formátem odpovídá formátu časového atributu pro danou vrstvu. Formát pro záznamy časového atributu je součástí metadatového souboru jako \textit{inputDatetimeMask} (viz. kapitola 4.3). Sestavení textového řetězce je poté obdobné jako v předchozím případě.
+	\end{itemize}
+	Na konci tohoto kroku jsou poté spojeny dohromady obsahy parametru \textit{FILTER} z ostatních časových vrstev a nově vytvořený.
+	%$overlays object
+	\item\textit{nastavení filtrované vrstvy} - tento krok ne nezbytný z několika důvodů. Je nutné uložit hodnoty časového posuvníku v případě že vrstva bude v budoucnu filtrována znovu. Dále je nutné uložit použitý obsah parametru \textit{FILTER}, který je použit při filtrování ostatních časových vrstev. Jako poslední věc je změněn název vrstvy tak, aby obsahoval její jméno spolu s časovou hodnotou. Tímto způsobem uživatel ihned ví, které vrstvy byly již filtrovány.
+	\item\textit{provedení operace GetMap} - v posledním kroku je metodou \textit{updateParams} poslán požadavek na server obsahující parametr \textit{FILTER} s obsahem složeným z filtru pro všechny viditelné časové vrstvy. Server vrátí v odpovědi mapový obraz s filtrovanými mapovými prvky, pomocí kterých je původní obsah mapy nahrazen.
 \end{itemize}
 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{../img/getSingleLayer.png}
+	\caption{vývojový diagram filtrace více časových vrstev najednou}
+	\label{fig:single-chart}
+\end{figure}
 
+\subsection{Filtrace všech viditelných časových vrstev}
 
+Možnost selekce více vrstev je možné aktivovat v roletovém menu obsahujícím jednotlivé časové vrstvy. Možnost \textit{Select all visible layers} umožní provádět filtraci mapových prvků pro všechny viditelné časové vrstvy najednou.
 
-\subsection{Filtrace pro více vrstev}
+\bigskip
+\noindent \textbf{Inicializace}
 
+Jednotlivé časové vrstvy mohou obsahovat navzájem odlišné časové atributy, které v jistých případech nedovolují společnou filtraci. Například pokud by projekt obsahoval dvě odlišné časové vrstvy, kdy jedna by zachycovala časový průběh v intervalu jednoho dne a druhá v intervalu jednoho roku. Výsledný krok časové filtrace by v takovém případě nebyl schopný postihnout nekonzistentní rozdělení dat vůči společné časové ose. Z toho důvodu je při výběru možnosti \textit{Select all visible layers} nejprve zjištěno, zdali viditelné časové vrstvy mají zvolen stejný, nebo odlišný časový atribut. Tato zkutečnost je zjištěna metodou \textit{checkMultipleAttributes}, která pro všechny viditelné časové vrstvy zjistí unikátní časové atributy a uloží je do pole. Pokud takové pole obsahuje více, než jeden prvek je zobrazeno další roletové menu ve kterém je nutné časový atribut specifikovat.
 
+Při inicializaci časového posuvníku je nutné brát v potaz odlišné časové intervaly pro jednotlivé vrstvy. Metoda \textit{getSliderRange} postupně projde viditelné časové vrstvy a z hodnot jejich \textit{timeValues} (viz kapitola 4.3) určí celkové maximální a minimální hodnoty. Tímto způsobem je zajištěno, že všechny hodnoty časového atributu pro všechny časové vrstvy budou náležet intervalu časového posuvníku. Hodnoty šoupátek jsou nastaveny na minimální hodnoty intervalu časového posuvníku, resp. na hodnotu, která je o časový krok větší. Není přitom zohledňováno předchozí použití časových vrstev při jejich filtraci.
 
+Dále je nutné zajistit, aby časové hodnoty zobrazované ve webovém klientu, při filtraci více vrstev najednou, měly společný časový formát. časový formát je pro jednotlivé vrstvy definovaný v metadatovém souboru (viz kapitola 4.3). Metoda \textit{setDateMask} má za úkol mezi časovými formáty filtrovaných vrstev najít takový, který poskytuje nejdetailnější zobrazení. Pokud tedy jedna z vrstev má nastaveno zobrazování minut, je její časový formát upřednostněn. Metoda pro jednotlivé časové formáty nejprve zjišťuje zda-li obsahují zároveň roky, hodiny a minuty. Pokud ano je první nalezený formát použit. Pokud tomu tak není je hledán formát obsahující alespoň roky. V případě, že ani takový není nalezen, je použit časový formát první časové vrstvy.
 
-%\section{Gisquick plugin pro QGIS}
+Pro správné zobrazení kalendáře a hodinového ciferníků pro výběr hodnot časových štítků je nutné zjistit, zdali vybraný časový formát obsahuje datum a čas. K tomu slouží metoda \textit{maskIncludeDate}. Na základě jejího výsledku je skryta možnost výběru časových hodnot pomocí kalendáře. Zobrazení hodinového ciferníku je řešeno obdobně s tím rozdílem, že k detekci času v časovém formátu je použito JavaScriptové metody \textit{includes}.
 
-%\subsection{Mapy a internet}
+\bigskip
+\noindent \textbf{Filtrace}
 
+Princip a jednotlivé kroky samotné filtrace mapových prvků pro všechny zobrazené časové vrstvy odpovídají popsanému principu pro filtraci jednotlivých vrstev. Je zde však jedna podstatná změna při vytváření obsahu parametru \textit{FILTER}. V metodě \textit{updateMultipleLayers} je oproti metodě \textit{updateSingleLayer} cyklus, který prochází jednotlivě všechny viditelné časové vrstvy a zjišťuje jestli jejich časový atribut je shodný s časovým atributem všech zobrazovaných viditelných časových vrstev. Dále je z jednotlivých vrstev sestaven obsah parametru \textit{FILTER}. Pro každou vrstvu mohou nastat dva případy:
+	\begin{itemize}
+		\item\textit{atribut není totožný} - pokud již byla vrstva předem filtrována obsahuje předem použitý obsah parametru \textit{FILTER}. Ten je v tomto případě zjištěn a přidán do nově vytvářeného obsahu.
+		\item\textit{atribut je totožný} - časová vrstva je filtrována a je tedy nutné sestavit obsah parametru znovu. Tento princip je stejný jako v případě filtrace jednotlivé vrstvy. Obsah parametru je rovněž přidán do nově vytvářeného obsahu. Pro vrstvu jsou navíc uloženy stejné hodnoty jako v případě filtrace jednotlivých vrstev. Pokud by tedy vrstva byla filtrována samostatně inicializuje se časový posuvník naposledy uloženými hodnoty. 
+	\end{itemize}
+Pokud jsou všechny viditelné časové vrstvy zpracovány je nově vytvořený obsah parametru \textit{FILTER} použit při operaci \textit{GetMap} stejným způsoben jako u filtrace jednotlivé vrstvy.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.9\textwidth]{../img/getMultipleLayers.png}
+	\caption{vývojový diagram filtrace více časových vrstev najednou}
+	\label{fig:multiple-chart}
+\end{figure}
+
+\subsection{Animace filtrace}
+
+Jak při možnosti filtrace jednotlivé vrstvy, tak při více vrstev najednou je možnost provádět filtraci mapových prvků automatizovaně a vytvářet tak jednoduché animace. K tomu slouží tlačítko \textit{PLAY} na spodní straně nástroje viz. kapitola 5.1.
+
+Jedná se jednoduchou metodu \textit{animate}, která v daném intervalu mění hodnotu časového posuvníku. Tato metoda pouze kontroluje hodnotu proměnné \textit{animateStop}. Pokud je tato hodnota FALSE, je volána metoda \textit{newFrame}. Metoda \textit{newFrame} při každém svém zavolání zkontroluje hodnotu checkoboxu cumulative:
+\begin{itemize}
+	\item\textit{cumulative = TRUE} - pokud je hodnota horního šoupátka menší než naximální hodnota časového posuvníku, je zvýšena o krok posuvníku. Pokud je vyšší, je zvýšena hodnota dolního šoupátka.
+	\item\textit{cumulative = FALSE} - pokud je hodnota horního šoupátka menší než naximální hodnota časového posuvníku, jsou zvýšeny obě hodnoty šoupátek o krok časového posuvníku.
+\end{itemize}
+Po zvýšení hodnot zavolá metodu \textit{getNewUrl} (viz. kapitola 5.4), která aktualizuje mapový obsah podle nově nastavených filtrovaných hodnot. Nakonec v případě, že hodnota \textit{animateStop = FALSE}, zavolá rekurzivně sama sebe s časovou prodlevou jedna sekunda. 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.9\textwidth]{../img/animate.png}
+	\caption{vývojový diagram metody animate}
+	\label{fig:animate-chart}
+\end{figure}

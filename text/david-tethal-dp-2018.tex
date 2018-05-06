@@ -1,6 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
+%\usepackage[czech]{babel}
+\usepackage[czech, english]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -59,7 +60,7 @@ bottom=35mm]
 
 %%%%%%%%%%Zahlavi%%%%%%%%%%%
 \usepackage{fancyhdr}
-\fancyhead[L]{České vysoké učení technické v Praze}
+\fancyhead[L]{ČVUT v Praze}
 \setlength{\headheight}{16pt}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -77,7 +78,7 @@ bottom=35mm]
 
 %abstract CS
 \newpage
-\selectlanguage{english}
+\selectlanguage{czech}
 \begin{abstract}
 \bigskip
 Cílem této diplomové práce je navrhnutí a vytvoření nástroje rozšiřujícího platformu Gisquick o podporu práce s časoprostorovými daty. Nástroj nabídne uživateli přehledné uživatelské rozhraní, které umožní možnost filtrace vektorových vrstev na základě jejich časových dat. Nad daty bude rovněž možnost tvorby jednoduché animace dle vybraného časového kroku.
@@ -110,7 +111,7 @@ First part was focused on web map platforms. This chapter contains brief descrip
 
 
 %Prohlaseni a podekovani
-\selectlanguage{english}
+\selectlanguage{czech}
 \newcommand{\odsaditodzhora}{\hskip1pt\vfill}
 \newpage
 \odsaditodzhora
@@ -146,7 +147,7 @@ text poděkování
 \include{1-platformy}
 \include{2-gisquick}
 %\include{3-qgis-plugin}
-%\include{appendix}
+\include{3-zaver}
 
 \newpage
 \necislovana{Seznam zkratek}
