@@ -44,10 +44,14 @@ distribuce map pro takové platformy je o poznání složitější.
 \newpage
 \subsection{Fungování interaktivních mapových platforem}
 
+%% ML: navrhuji vynechat ``hlavne'', chybi tam porovnani s necim
 V dnešní době se hlavně v očích uživatelů těší většímu zájmu právě
 interaktivní mapové platformy. Proto se jimi tato podkapitola bude
+%% ML: zabyvat ?
 zajímat více podrobně.
 
+%% ML: pozor na dlouhe vety, souveti na jeden odstavec. Prvni cast
+%% vety muze byt samostatna.
 Existuje velké množství interaktivních mapových platforem, jejich
 základní princip fungování je však ve většině případů stejný a liší se
 pouze svými možnostmi, obsahem a využitím.
@@ -55,7 +59,8 @@ pouze svými možnostmi, obsahem a využitím.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=1\textwidth]{../img/map-web-diagram.png}
-	\caption{diagram znázorňující interakci uživatele a částí webové aplikace uložené na servrech: \cite{web_mapping}}
+        %% ML: serverové části webové aplikace?
+	\caption{Diagram znázorňující interakci uživatele a částí webové aplikace uložené na serverech: \cite{web_mapping}}
 	\label{fig:WPS_class_diagram}
 \end{figure}
 
@@ -67,6 +72,7 @@ pohledu zleva se jedná především o tyto části:
 využívající počítač, tablet, nebo mobilní telefon. Výsledná rychlost a
 požitek z webové aplikace dnes již není limitován tolik výpočetní
 rychlosti klienta, spíš jako rychlostí internetového
+%% ML: Vetsinu nutne komunikace
 připojení. Všechnu nutnou komunikaci přitom zastává webový prohlížeč,
 který je pomocí \textit{request URL} získává informace z hostujícího
 serveru, na kterém je webová aplikace reálně uložena.
@@ -74,17 +80,22 @@ serveru, na kterém je webová aplikace reálně uložena.
 \textit{Webový server} přijímá požadavky od klienta a zastává nutnou
 komunikaci mezi mapovým serverem a uložištěm dat. Na webovém serveru
 je uložena aplikace a na vyžádání poskytuje obsah webové aplikace
+%% ML: text nech nekym jeste precist, mas tam hrubky(!), silna kava, viz nize
 klientovy.
 
 \textit{Webový mapový server} jedná se o program, který na základně
+%% ML ta veta zni divne, zkus preformulovat
 požadavků poslaných od webového serveru a dat z uložiště vytvoří
 požadovaný mapový obraz a odešle jej zpět. Mapových serverů existuje
+%% ML: pridej odkazy na kapitoly
 více. Těm nejvíce používaným se bude věnováno v dalších kapitolách.
 
 \textit{Uložiště dat} zde jsou fyzicky uložena všechna data potřebná k
 vytvoření mapy, nebo její části. Jedná se o rastrová, či vektorová
+%% ML: mapova -> geograficka ?
 mapová data ve vhodném formátu, který dokáže webový mapový server
 zpracovat. Dále jsou zde uložena metadata, která jsou nutnou součástí
+%% ML: ta posledni data moc nedava smysl
 prostorových dat. Popisují data sloužící k vytvoření mapy a dále
 jejich původ, způsob použití a samotný obsah dat \cite{web_mapping}.
 
@@ -92,21 +103,26 @@ Důležitou součástí každé webové mapové aplikace je samotná komunikace
 mezi jednotlivými jejími komponenty. V následujících podkapitolách
 bude brán zřetel převážně na komunikaci mezi webovým klientem a
 webovým mapovým serverem. Konkrétně na protokoly, které jsou používané
+%% ML: dalsi hrubka ...
+%% ML: zkus posledni vetu preformulovat, v prvni vete mluvis o
+%% protokolech, v druhe pise ``Tyto standardy''
 pro získání mapového obrazu. Tyto standarty jsou poskytovány
 mezinárodní standardizační organizací \textit{Open Geospatial
-  Consortium (OGC)}
+  Consortium (OGC)}.
 
 \subsection{Open Geospatial Consortium}
 
 Open Geospatial Consortium (OGC) je mezinárodní nezisková organizace
 zahrnující komerční, vědecké, vládní a nevýdělečné organizace, které
 se zabývají vytvářením kvalitních specifikací pro prostorová
-data. Tyto specifikace jsou jsou volně dostupné pro kohokoli za účelem
+data. Tyto specifikace jsou volně dostupné pro kohokoli za účelem
 zlepšení sdílení prostorových dat po celém světě \cite{oqc_web}.
 
 OGC specifikace jsou technické dokumenty detailně popisující rozhraní,
-nebo kódování. Tyto dokumenty jsou dále použity na straně vývojářů ke
+nebo kódování. Tyto dokumenty jsou dále použity na straně vývojářů k
+%%% ML: vyvojari vetsinou nevlastni produkty :-)
 tvorbě jejich produktů. Hlavní myšlenka je taková, že dva nezávisle
+%% ML: standart -> standard (opakuje se v textu pravidelne)
 vyvíjené programy používající OGC standarty by měly být vzájemně
 kompatibilní \cite{oqc_web}. Celkem se jedná o více než 50
 specifikací, více konkrétně se však budou popsány pouze následující:
@@ -121,39 +137,59 @@ specifikací, více konkrétně se však budou popsány pouze následující:
 \item\textit{Web Map Tile Services (WTMS)} - princip fungování WMTS
   komunikace klient-server obdobný jako u WMS. Hlavní rozdíl je však v
   tom, že požadované dlaždice jsou již předem vytvořeny a uloženy
-  interní paměti serveru. Server je tedy nemusí při každém dotazu
+  v interní paměti serveru. Server je tedy nemusí při každém dotazu
   znovu vytvářet, což při jeho velkém množství dotazů celý proces
   výrazně zrychlí.
 \end{itemize}
 
 \subsection{Web Map Services (WMS)}
 
+%% ML: ten preklad mas odkud, zni priserne, vubec bych ho radeji
+%% neuvadel, kdyz uz tak webova mapova sluzba
 WMS, v českém překladu webový mapový servis, na základě geografických
+%% ML: s tim terminem ``mapa'' opatrne, kartografove by Ti to omlatili
+%% o hlavu, tak alespon mapova kompozice.
+%% ML: georeferencovana neni uplne korektni, georeference je soucasti
+%% dotazu (bbox), vysledny obrazek uz referencovany neni, klient ho
+%% ale umi korektne umistit, zna bbox
+%% ML: standarta vetsinou visi nad hradem, knebo trenky ;-)
 informací vytváří georeferencované mapy. Mezinárodní standart dále
-definuje "mapu" jako digitální vyobrazení geografických informací,
+definuje \uv{mapu} jako digitální vyobrazení geografických informací,
+%% ML: preformulovat, produkt -> kompozici?
 které je vhodné pro počítačové obrazovky a displeje. V případě mapy
+%% ML: s terminem ``mapa'' bych setril, tak snad mapova kompozice?
+%% ML: mapa obsahuje kartografickou omacku, tohle je pouze obrazova
+%% kompozice geografickych dat, nic vic
 jako takové se tedy nejedná o data, ale o jejich produkt. Mapy
+%% ML: jsou poskytovány mapovych serverem v beznych obrazovych formatech...
 vytvořené na základě WMS specifikace mohou být v obecných formátech
 např. PNG, GIF, nebo JPEG. Méně často se také jedná o vektorovou
 grafiku ve formátech SVG, nebo WebCGM \cite{oqc_wms}.
 
 Popisovaný standart definuje několik operací, každou s odlišným
+%% ML: vraci vs. davaji
 výstupem. Tyto operace vrací dávají uživateli buďto informace o
+%% ML: myslis automobilovy servis? ;-) sluzbe!
 samotném servisu, poskytují mapu, nebo informace o zobrazovaných
 mapových prvcích.
 
 \begin{itemize}
 
+%% ML: obecne poskytuje metadata
 \item\textit{GetCapabilities} - operace vrací dokument ve formátu XML,
   který obsahuje veškeré informace nutné k vytvoření \textit{GetMap}
   požadavku. Jedná se tedy o detaily samotného servisu jako
+  %% ML: souradnice -> rozsah v podporovanych souradnicovych systemech?
   takového. Pomocí GetCapabilities lze zjistit počet vrstev, jejich
   souřadnice v referenčním systému atd.
 	
 \item\textit{GetMap} - jedná se o nejdůležitější operaci, protože
+  %% ML: lepsi nez mapa
   jejím výsledkem je samotný geolokalizovaný mapový obraz. K jeho
   získání je potřeba poskytnout sadu parametrů, na základě kterých je
+  %% ML: v?
   v mapovém serveru vytvořen. Těmto parametrům bude věnována další
+  %% ML: jaka
   podkapitola.
 	
 \item\textit{GetFeatureInfo} - operace vrací informace o prvcích
@@ -170,8 +206,11 @@ Parametry obecně slouží ke specifikaci úkonu, který od mapového
 serveru požadujeme. Jedná se tedy o vstupní informace na základě
 kterých nám server odpoví. Parametrů je velké množství, některé jsou
 používány vždy, některé jen velice ojediněle. Možnosti použití
+%% ML: v textu pouzivas operace, presnejsi by byla asi ``dotaz''
 parametrů se liší dle operace (requestu), kterou provádíme.
 
+%% ML: mel bys uvest proc tak detailne rozepisujes parametry pro
+%% GetMap
 Níže uvedené parametry se vztahují pouze k operaci
 \textbf{\textit{GetMap}}. U operací jako \textit{GetCapabilities},
 nebo \textit{GetFeatureInfo} může bý popsaný význam parametrů odlišný,
@@ -181,11 +220,15 @@ nebo není možné parametr použít vůbec.
 \item\textit{VERSION} - specifikace verze WMS.
 	
 \item\textit{REQUEST} - výběr provedené operace (v případě požadavku o
-  mapu se jako request parametr použije "GetMap".
-	
+ %% ML: mapu...
+  mapu se jako request parametr použije "GetMap").
+
+%% ML: list -> seznam 
 \item\textit{LAYERS} - list oddělený čárkami obsahující názvy vrstev,
   které budou použity pro tvorbu mapy
-	
+
+%% ML: seznam (dale v textu!), dokonce ten hruby anglikanismus i
+%% sklonujes...
 \item\textit{STYLES} - list oddělený čárkami, který definuje jakým
   stylem se budou jednotlivé vrstvy vykreslovat. List stylů proto musí
   korespondovat s listem vrstev. Pro implicitní hodnoty je možné
@@ -196,20 +239,26 @@ nebo není možné parametr použít vůbec.
   geodetickém referenčním systému jsou poskytnuté parametry
   např. BBOX. Rovněž se jedná o určení referenčního systému pro
   výsledný mapový obraz.
-	
+
+%% ML: veta neda moc smysl, jinak Ti v textu casto chybi interpunkce
 \item\textit{BBOX} - jedná se o souřadnice výřezu pro který generuje
   výsledný mapový obraz. Pro definování výřezu je třeba zadat
+  %% ML: Pole -> Seznam
   souřadnice levého spodního a pravého horního rohu. Pole souřadnic
   tedy parametr vypadá následovně "minX,minY,maxX,maxY".
 	
 \item\textit{FORMAT} - nastavení formátu výstupního souboru (mapového
   obrazu). Nejčastěji používané jsou formáty GIF, PNG, JPEG, které
   mohou být jednoduše zobrazeny na webových prohlížečích. Je však
+  %% ML: nezapomen rozepsat zkratky v ``seznamu zkratek'', idealni by
+  %% mely byt v pdf prokliky, ale to uz ted neres
   možnost nastavit formát také jako SVG, nebo WebCMG.
 	
 \item\textit{WIDTH} - celočíselná hodnota udávající šířku výsledné
+  %% ML: mapa
   mapy v pixelech. Jinak řečeno se jedná o vzdálenost v pixelech mezi
-  body zadané parametrem \textit{BBOX} tj. vzdálenost minx a maxx.
+  %% osa X
+  body zadanými parametrem \textit{BBOX} tj. vzdálenost minx a maxx.
 	
 \item\textit{HEIGHT} - hodnota odpovídající parametru \textit{WIDTH} s
   tím rozdílem, že se jedná o vzdálenost miny a maxy. Pokud je poměr
@@ -272,7 +321,7 @@ specifikace\cite{oqc_wms}:
 \end{itemize}
 
 Základní časový formát ISO 8601:1988(E) rozšířené normy umožňuje
-specifikovat časový formát až na úroveň tisícin sekund. Né pro každou
+specifikovat časový formát až na úroveň tisícin sekund. Ne pro každou
 hodnotu je však vyžadována takováto přesnost. Proto lze formát upravit
 tak, že jsou odstraněny zpřesňující číslice.
 
