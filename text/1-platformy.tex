@@ -368,17 +368,22 @@ Speciální znaky pro zadávání dnů v týdnu jsou: 'MON', 'TUE', 'WED',
 \section{Webové mapové platformy}
 
 Mapových publikačních platforem existuje v dnešní době velké
+%% ML: jsou -> byly?
 množství. Mohou být přizpůsobeny účelu za kterým jsou vytvořeny, nebo
-konkrétním vstupním datům s kterými pracují. Né tedy všechny mají
+%% ML: Né zni divne, zkus tu vetu preformulovat.
+konkrétním vstupním datům se kterými pracují. Né tedy všechny mají
 integrovanou podporu pro práci s časoprostorovými daty. Tato
 skutečnost je zároveň způsobena tím, že časoprostorová data nejsou
 podporována všemi mapovými servery. Právě podpora na straně webového
 mapového serveru je při tvorbě mapové publikační platformy
+%% ML: neeee -> nikoliv
 klíčová. Jak se ale dozvíme dál v práci, né nutná.
  
 Tato kapitola se zabývá jednotlivými webovými mapovými servery a
+%% ML: Veta ``jednotlive...'' je kostrbata, nedava moc smysl, preformulovat
 jejich možnostem podpory časoprostorových dat. Jednotlivé podkapitoly
 jsou vždy věnovány jednomu webovému mapovému serveru, který bude
+%% ML: posledni veta, tez preformulovat
 představen a dále bude popsán způsob podpory časoprostorových dat. U
 některých mapových serverů je závěr každé podkapitoly je přidaná
 ukázka z webových mapových platforem využívající konkrétní mapový
@@ -389,6 +394,7 @@ server.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.4\textwidth]{../img/mapserver-logo.png}
+        %% popisek, zdroj
 	\label{fig:mapserver-logo}
 \end{figure}
 \bigskip
@@ -396,10 +402,13 @@ server.
 MapServer je platforma s otevřeným kódem, která byla vytvořena pro
 publikaci prostorových dat a interaktivních mapových aplikací. Byla
 vytvořena devadesátých letech v Minnesotské univerzitě. V té době se
+%% ML: mas nekde OSGeo vysvetleno?, tak alespon poznamka pod carou zde
 jednalo o jeden z prvních podporovaných projeků organizací OSGeo. Je
 nutno podotknout, že MapServer není a ani nebyl navržen jako
+%% ML: organizace? agenturou?
 stoprocentní GIS systém. Důvod jeho vzniku je dán potřebou organizací
 NASA, která hledala způsob jakým zprostředkovat satelitní snímky
+%% ML: je napsan
 veřejnosti. MapServer je psaný v jazyce C a podporuje všechny hlavní
 operační systémy jakou jsou Windows, Linux a Mac OS X
 \cite{mapserver_about}.
@@ -409,9 +418,12 @@ operační systémy jakou jsou Windows, Linux a Mac OS X
 \textbf{Podpora časových dat}
 
 Od verze 4.4 je v MapServeru přidána podpora, která dokáže
+%% odkaz na kapitolu o parametru time
 interpretovat WMS parametr TIME obsahující časovou hodnotu. MapServer
+%% ML: dotazu
 tuto hodnotu zpracuje a v requestu vrátí odpovídající mapový obraz.
 
+%% ML: urcite najdes lepsi slovo nez ``selektovat'' ;-)
 K tomu, aby bylo možné jednotlivé vrstvy selektovat pomocí atributu
 TIME, musí každá vrstva obsahovat následující metadata
 \cite{mapserver_about}:
@@ -419,7 +431,7 @@ TIME, musí každá vrstva obsahovat následující metadata
 \begin{itemize}
 \item\textit{wms-timeextent} - povinná hodnota obsahující interval
   časových hodnot, které vrstva obsahuje. Tento interval lze zjistit
-  pomocí operace. \textit{GetCapabilities}.
+  pomocí operace \textit{GetCapabilities}.
 \item\textit{wms-timeitem} - povinná hodnota obsahující název záznamu
   v databázi, ve kterém jsou časová data uložena.
 \item\textit{wms-timedefault} - nepovinná hodnota určující implicitní
@@ -463,9 +475,11 @@ formátů je možné pro každou vrstvu definovat \textit{wms-timeformat}
 "wms_timeformat" "YYYY-MM-DDTHH
 \end{verbatim}
 
+%% ML: dotazu, ta veta mi nedava moc smysl, zkus preformulovat
 Requestu s parametrem \textit{TIME} umožňuje přesně specifikovat
 časové hodnoty pro které se bude mapový obraz vytvářet. Je tak možné
-filtrovat vrstvu pro specifický datum, nebo interval. MapServer
+filtrovat vrstvu pro specifické datum nebo interval. MapServer
+%% ML: s hodnoty?
 podporuje následující syntax s hodnoty uvedenými ve formátu
 'YYYY-MM-DD':
 
@@ -483,6 +497,7 @@ podporuje následující syntax s hodnoty uvedenými ve formátu
 \noindent
 \textbf{Princip podpory časoprostorových dat}
 
+%% ML: request -> dotaz
 Princip fungování při requestu s parametrem \textit{TIME} je velice
 snadný. Po té co MapServer přijme request, převede parametr
 \textit{TIME} na parametr \textit{FILTER}. Tento parametr má na vstupu
@@ -492,6 +507,7 @@ hodnota časového parametru. V praxi vypadá filtr následovně:
 
 \bigskip
 \begin{itemize}
+%% ML: selektovani -> vyber
 	\item Pro selektování mapových prvků s konkrétní hodnotou
 atributu např. \textit{2004-10-12} ji převede pro parametr
 \textit{FILTER} na \textit{`[time-item]` eq `2004-10-12`}
@@ -503,6 +519,8 @@ hodnot např. \textit{2004-10-12/2004-10-13} jej převede pro parametr
 
 \bigskip Nutno podotknout, že pro definování časových hodnot používá
 mapový server zpětné uvozovky. Výše uvedená syntaxe platí pouze pro
+%% ML: OGR neni format... (!), cela ta veta patri spise do poznamky
+%% pod carou, kdyz uz
 vrstvy ve formátu Shapefile a OGR. Pokud tomu tak není, je ve filtru
 použito '=' namísto 'eq'.\cite{mapserver_about}.
 
@@ -521,7 +539,8 @@ důvodu nekonzistence rastrových dat, která byla pořizována mezi lety
 
 \begin{figure}[h!]  \centering
 \includegraphics[width=1\textwidth]{../img/gay-sands.png}
-	\caption{screenshot zobrazující webovou platformu Gay Stand
+        %% ML: screenshot nezni moc cesky, ukazka treba
+	\caption{Screenshot zobrazující webovou platformu Gay Stand
 Sands a její uživatelské rozhraní}
 	\label{fig:gay-sands}
 \end{figure}
