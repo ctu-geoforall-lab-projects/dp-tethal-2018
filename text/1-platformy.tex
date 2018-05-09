@@ -554,8 +554,9 @@ Sands a její uživatelské rozhraní}
 \end{figure} \bigskip
 
 Stejně jako u MapServeru se jedná o serverový program s otevřeným
-kódem. GeoServer je napsán v Jazyce Java a umožňuje, na základě
+kódem. GeoServer je napsán v jazyce Java a umožňuje, na základě
 otevřených standardů poskytovaných organizací OGC, sdílet a upravovat
+%% ML: opravdu vsech?, co je hlavni?
 geografická data ze všech hlavních datových zdrojů.
 
 GeoServer vznikl v roce 2001 v neziskovém technologickém inkubátoru
@@ -567,7 +568,8 @@ mohli být občané lépe zapojeni do vládních záležitostí, především
 
 \begin{figure}[h!]  \centering
 \includegraphics[width=0.6\textwidth]{../img/geoserver-layer-edit.png}
-	\caption{záložka konfigurace časové vrstvy na GeoServeru
+%% ML: popisky bezne zacinaji na velke pismeno
+	\caption{Záložka konfigurace časové vrstvy na GeoServeru
 \cite{geoserver-layer-edit}}
 	\label{fig:geoserver-layer-edit}
 \end{figure}
@@ -583,7 +585,10 @@ MapServeru. GeoServer podporuje v operaci \textit{GetMap} atribut
 vrstvu, která časová data obsahuje.
 
 Nejjednodušším způsobem nastavení vrstvy je využití webového rozhraní
-pro GeoServer viz. obrázek 3. V záložce \textit{Dimensions} je veškeré
+%% ML: nemel bys pouzivat cisla obrazku ``na pevno'', ale jako
+%% dymamicky odkaz, navic bude potom v PDF i proklik, to se mozna tyka
+%% i ostatnich obrazku (?)
+pro Geo\-Server viz. obrázek 3. V záložce \textit{Dimensions} je veškeré
 nutné nastavení. V případě nastavení časové vrstvy je potřeba nejprve
 zaškrtnout políčko \textit{Time Enabled}. Další nastavení je
 následující \cite{geoserver-layer-edit}:
@@ -613,6 +618,7 @@ hodnotu časového atributu
 		\item \textit{nearest to the reference value} - uloží
 hodnotu časového atributu, která je nejblíže dané referenční hodnotě
 (\textit{Reference value})
+%% ML: interpunkce
 		\item \textit{reference value} - uloží danou
 referenční hodnotu tak jak je nehledě na to jestli je její použití
 vhodné.
@@ -624,6 +630,7 @@ hodnoty sloužící při určení \textit{Default value}.
 \bigskip
 \noindent \textbf{Formáty časových dat a syntaxe}
 
+%% ML: opet request...
 \noindent Obecná syntaxe pro request s konkrétní hodnotou parametru
 \textit{TIME} vypadá následovně:
 
@@ -673,15 +680,19 @@ v minulosti od aktuálního časového okamžiku.}
 \bigskip
 \noindent \textbf{Webové mapové platformy}
 
+%% ML: URL bych mohli byt proklikavaci (\url{}), to se tyka i
+%% ostatnich odkazu
 %nejsem si jist jestli je na GeoServeru \textbf{MetEye}
+%% ML: nezapomen vyresit
 (http://www.bom.gov.au/australia/meteye) je webová mapová platforma
-zobrazující meterologické observace a předpovědí pro celý australský
+zobrazující meterologické observace a předpovědi pro celý australský
 kontinent. Jedná se o interaktivní mapovou platformu vytvořenou
-Australským úřadem pro metorologii (Australian Bureaou of Metorologi).
+Australským úřadem pro metorologii (Australian Bureaou of Metorology).
 
 Webové rozhraní obsahuje panel s tématickými mapy, pomocí kterých se
 dá mapový obsah modifikovat. Zde lze vybrat typ předpovědi jako
 například vodní srážky, teplotu, sílu a směr větru atd. Mapové okno
+%% ML: hrubku urcite najdes ;-)
 mimo standartních mapových prvků jako jsou legenda a grafické měřítko
 nabízí rovněž možnost zobrazení předpovědi počasí pro daný časový
 okamžik. Toho je docíleno pomoci velice pěkně zpracované časové osy v
@@ -691,11 +702,13 @@ horní části mapového okna. Zde lze data rovněž data po časových
 Rastrové vrstvy jsou filtrovány na základě parametru
 \textit{TIMESTAMP}, který je vždy shodný u všech dlaždic. Vzhledem k
 tomu, že pro jednotlivé předpovědi se mění pouze rastrové vrstvy, je
+%% ML: hezke ceske slovo, a kdyz uz tak cache...
 možné je na webovém serveru cashovat a distribuovat ve formě dlaždic.
 
 \begin{figure}[h!]  \centering
 \includegraphics[width=0.67\textwidth]{../img/meteye.png}
-	\caption{screenshot zobrazující webovou platformu MetEye}
+%% ML: screenshot -> ukazka, zdroj
+	\caption{Screenshot zobrazující webovou platformu MetEye}
 	\label{fig:gay-sands}
 \end{figure}
 
@@ -711,6 +724,7 @@ rozdělena na regiony. Ty jsou barevně zvýrazněny dle zastoupení
 rakoviny v populaci. Pro každé období jsou dále vyhotoveny celostátní
 statistiky, které jsou zobrazeny v grafech a tabulce okolo. Data jsou
 sbírána pro období jednoho až dvou let a pomoci jednoduchého
+%% ML: selektovat
 roletového menu je možné jednotlivě je selektovat, nebo spustit
 animaci. Zde pomocí panelu animace jde animaci spustit, kdy se
 jednotlivá období střídají s předem daným časovým krokem. Ten dále
@@ -718,6 +732,7 @@ nabízí přeskočení na následující období a ukončení animování.
 
 \begin{figure}[h!]  \centering
 \includegraphics[width=0.8\textwidth]{../img/pennsylvania-cancer-atlas.png}
+%% MK: ukazka, velke pismeno, vest zdroj
 	\caption{screenshot zobrazující webovou platformu Pennsylvania
 Cancer Atlas a její uživatelské rozhraní s možností animace dle
 časového období statistik}
@@ -732,24 +747,26 @@ Cancer Atlas a její uživatelské rozhraní s možností animace dle
 	\label{fig:arcgis-logo}
 \end{figure} \bigskip
 
-ArcGIS je platforma obsahující řadu aplikací které společně tvoří
+ArcGIS je platforma obsahující řadu aplikací, které společně tvoří
 geografický informační systém sloužící pro práci s prostorovými
 daty. Nejedná se tedy o webový mapový server jako takový. ArcGIS je
+%% ML: soukromy neni uplne vhodne slovo, treba proprietarni
 soukromý systém vytvořený firmou Esri (Environmental Systems Research
+%% ML: mam pocit, ze ESRI vznikla podobne jako GRASS, nekdy na zacatku osmdesatych let
 Institute). Ta již v devedesátých letech pracovala na GIS
 aplikacích. V roce 1999 byla vydána desktopová aplikace ArcMap 8.0
 (později přejmenovaná na ArcGIS Desktop a poté pouze na ArcGIS), která
 se od té doby stala nejpoužívanější komerčním softwarem na poli
 geografických informačních systémů \cite{arcgis_history}.
 
-Pod ArcGis mimo jiné patří aplikace pro webovou mapovou
-publikaci. Jedná se o \textbf{ArcGIS server}, \textbf{ArcGIS Online} a
+Pod ArcGIS mimo jiné patří aplikace pro webovou mapovou
+publikaci. Jedná se o \textbf{ArcGIS Server}, \textbf{ArcGIS Online} a
 \textbf{Portal for ArcGIS}. Součástí posledního jmenovaného systému je
-již zmíněný ArcGIS server, proto se mu v další části není potřeba dále
+již zmíněný ArcGIS Server, proto se mu v další části není potřeba dále
 věnovat.
 
 \newpage
-\subsection{ArcGIS server}
+\subsection{ArcGIS Server}
 
 Jedná o službu zahrnující mapování, geoprocessing, obrazové a síťové
 analýzy, 3D data a možnost tvorby geografických prvků
