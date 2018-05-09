@@ -768,6 +768,7 @@ věnovat.
 \newpage
 \subsection{ArcGIS Server}
 
+%% ML: spise nez o sluzbu se jedna o serverovou aplikaci/kompomenentu
 Jedná o službu zahrnující mapování, geoprocessing, obrazové a síťové
 analýzy, 3D data a možnost tvorby geografických prvků
 \cite{arcgis-publishing-service}. Funkcionalita ArcGIS serveru se liší
@@ -776,19 +777,22 @@ dle balíčků, které na základě ceny omezují jeho možnosti.
 \bigskip
 \noindent \textbf{Podpora časových dat}
  
-ArcGIS nabízí možnost pracování s vrstvy obsahující časová data. K
+ArcGIS nabízí možnost pracování s vrstvami obsahující časová data. K
 tomu je nutné jednotlivé vrstvy ještě před jejich publikací
 nastavit. V desktopové aplikaci k tomu slouží dialogové okno, které je
 možné nalézt v nastavení vrstev.
 
 \begin{figure}[h!]  \centering
 \includegraphics[width=0.8\textwidth]{../img/arcgis-layer-edit.png}
-	\caption{dialogové okno nastavení časové vrstvy v desktopové
+%% ML: zdroj
+	\caption{Dialogové okno nastavení časové vrstvy v desktopové
 aplikaci ArcGIS}
 	\label{fig:arcgis-time-settings}
 \end{figure}
 
+%% ML: ta prvni veta moc nedava smysl
 K možnosti publikace je nejprve zaškrtnout možnost \textit{Enable time
+%% ML: interpunkce
 on this layer} tím bude vrstva jasně identifikována jako časová. Dále
 je nutno specifikovat jakým způsobem jsou časové hodnoty v datech
 uloženy. Ty mohou být jako atributové pole pro vektorová data, nebo
@@ -826,18 +830,21 @@ hodnotu stejnou, nebo menší, než aktuálně zvolenou. Pokud taková data
 mají nastavený konec časového intervalu je tato hodnota ignorována.
 \end{itemize}
 
-Takto nastavené vrstvy lze publikovat na ArcGIS server a pomocí
+%% ML: na ArcGIS Server zni divne
+Takto nastavené vrstvy lze publikovat na ArcGIS Server a pomocí
+%% ML: servisu...
 webových mapových servisů vytvářet požadované mapové obrazy. K jejich
 finálnímu použití je však nutné mapový projekt publikovat na
 server. Proces publikace již žádné dodatečné nastavení pro vrstvy
 obsahující časová data neobsahuje, proto se mu tato kapitola věnovat
+%% ML: servisu
 nebude. V kostce s jedná o jednoduché nastavení servisu pomocí
 dialogového okna s možností náhledu projektu.
 
 \bigskip
 \noindent \textbf{Formáty časových dat a syntaxe}
 
-Jak již bylo řečeno časové hodnoty jsou podporovány ve třech datových
+Jak již bylo řečeno, časové hodnoty jsou podporovány ve třech datových
 typech. Datový typ podporující datum, textový řetězec a číselná
 hodnota. Pro nižší výpočetní náročnost je doporučeno datové typy
 podporující datum maximálně využívat. V případě textových řetězců je
@@ -846,7 +853,9 @@ formáty \cite{arcgiq-data-types}.  %moznost pridat formaty
 
 \subsection{ArcGIS Online}
 
+%% ML: vysvetlit do poznamky pod carou, co si predstavujes pod ``cloudem''
 ArcGIS online nabízí uživatelům publikování projektu přímo do cloudové
+%% ML: spolecnost je ESRI
 služby spravované společností ArcGIS. Jedná se o velice jednoduchý
 způsob publikace, kdy si není potřeba instalovat žádný software, nutné
 je pouze vytvořit účet. Nabízené jsou dva hlavní typy
@@ -866,7 +875,7 @@ dostupně přes jejich URL.
 
 \bigskip
 \noindent \textbf{Podpora časových dat} Stejně jako předchozí produkt
-\textit{ArcGIS server}, tak \textit{ArcGIS online} nabízí taktéž
+\textit{ArcGIS Server}, tak \textit{ArcGIS Online} nabízí taktéž
 podporu pro práci s časoprostorovými daty. Nastavení se však liší a
 vzhledem k již definovanému uživatelskému rozhraní jsou možnosti
 použití rovněž omezeny na předem dané nástroje.
@@ -878,18 +887,21 @@ podporující časové animace. Druhou podmínkou je označení konkrétní
 vrstvy jako \textit{time enabled} tedy jako vrstvu podporující časová
 data. Ověření podpory časových dat lze provést v \textit{map viewer} v
 detailu vrstvy. Pro označení vrstvy jako časové je nutné provést kroky
+%% linky by nemely byt ``na pevno'' ale dynamicke, \ref{} + \label{}
 popsané v podkapitole 2.4 (sekce Podpora časových dat). Pokud vrstva
 splňuje obě podmínky a je označena jako viditelná zobrazí se ve spodní
 části mapového prohlížeče nástroj pro správu časové vrstvy.
 
 \begin{figure}[h!]  \centering
 \includegraphics[width=0.8\textwidth]{../img/arcgis-online-time-slider.png}
-	\caption{nástroj pro správu časových vrstev}
+%% ML: zdroj
+	\caption{Nástroj pro správu časových vrstev}
 	\label{fig:arcgis-time-settings}
 \end{figure}
 
 %vice detalneji? moznost obrazku a popisu detailniho nastaveni
-casoveho nastroje Nástroj obsahuje časovou osu s posuvníky, tlačítka
+%casoveho nastroje
+Nástroj obsahuje časovou osu s posuvníky, tlačítka
 pro vytvoření animace a tlačítko časového nastavení \textit{time
 settings}. Po rozkliknutí tlačítka časového nastavení se zobrazí
 dialogové okno, které umožňuje konfiguraci časové osy. Nastavení
@@ -905,13 +917,17 @@ Nastavení v detailu vrstvy rovněž umožňuje časový nástroj pro vrstvu
 podporující časová data deaktivovat.
 
 \newpage
-\subsection{QGIS server}
+\subsection{QGIS Server}
 
+%% ML: daty?
+%% Prvni vetu rozdelit, druhou cast prepsat
 Jedná se o mapový webový server s otevřenými daty implementující
 pokročilé mapové prvky pro tvorbu tématických map. Zdrojový kód je
 napsaný v programovacím jazyce C++, jsou v něm však podporované
 zásuvné moduly psané jazykem Python, které umožňují rychlé a efektivní
 vývoj nových komponent serveru a jeho rozšíření. V QGIS serveru jsou
+%% ML: odkaz na kapitolu o WMS, vysvetlit dalsi standardy (poznamka pod carou?)
+%% ML: standardy
 implementovány standarty definované organizací OGC WMS 1.3, WFS 1.0.0
 a WCS 1. Jeho vývoj byl podporován projekty Evropské unie Orchestra a
 Sany a dále městem Uster ve Švýcarsku \cite{qgis-server}.
@@ -925,17 +941,22 @@ použitím QGIS serveru budou vypadat stejně jako v desktopovém QGIS.
 \bigskip
 \noindent \textbf{Podpora časových dat}
 
+%% ML: podporu nepodporuje...
 QGIS server oproti ostatním zmíněným systémům nijak podporu pro data s
 časovou složkou nepodporuje. Filtrace dat na základě parametru
 \textit{TIME} tedy není možná.
 
-Pro výše zmíněnou výhodu Qisquick platforma QGIS server používá. V
-Druhé části práce bude popsáno jakým způsobem je možnost práce s
+%% ML: vyhoda popsana na konci prechozi casti, to neni uplne zrejme,
+%% rozepis, aby to bylo jasnejsi...
+Pro výše zmíněnou výhodu Gisquick platforma QGIS server používá. V
+druhé části práce bude popsáno, jakým způsobem je možnost práce s
 časoprostorovými daty s použitím QGIS serveru implementována.
 
 \newpage
+%% ML: Zhodnoceni?
 \subsection{Souhrn} V předešlých kapitolách byly popsány jednotlivé
 principy a postupy práce s časoprostorovými daty pro rozdílné mapové
+%% ML: interpunkce...
 servery a mapové publikační platformy. Již na první pohled je zřejmé
 že i přes dílčí rozdíly jsou ve všech aplikacích použita podobná
 nastavení a pravidla.
@@ -943,6 +964,7 @@ nastavení a pravidla.
 \bigskip
 \noindent \textbf{MapServer}
 \begin{itemize}
+%% ML: standardy
 	\item software s otevřeným kódem užívající OGC standarty,
 volně dostupný pro každého uživatele
 	\item široká podpora časových formátů
@@ -955,18 +977,19 @@ hodnoty
 
 \textbf{GeoServer}
 \begin{itemize}
+%% ML: standardy
 	\item software s otevřeným kódem užívající OGC standarty,
 volně dostupný pro každého uživatele
 	\item možnost konfigurace časových vrstev v uživatelském
 rozhraní
-	\item mapové prvky můžou obsahovat časovou hodnotu, nebo
+	\item mapové prvky mohou obsahovat časovou hodnotu, nebo
 interval hodnot ve kterém jsou zobrazovány
 	\item možnost filtrace konkrétních hodnot i intervalů hodnot
 	\item velká nabídka způsobů definice hodnoty prvku v případě
 neexistující hodnoty
 \end{itemize}
 
-\textbf{ArcGIS server}
+\textbf{ArcGIS Server}
 \begin{itemize}
 	\item nutnost zakoupení licence pro daný software
 	\item široká podpora časových a datových formátů
@@ -978,7 +1001,7 @@ interval hodnot ve kterém jsou zobrazovány
 	\item možnost filtrace konkrétních hodnot i intervalů hodnot
 \end{itemize}
 
-\textbf{ArcGIS online}
+\textbf{ArcGIS Online}
 \begin{itemize}
 	\item nutnost zakoupení licence pro daný software
 	\item práce v cloudu, není nutná instalace software
@@ -986,7 +1009,7 @@ interval hodnot ve kterém jsou zobrazovány
 	\item konfigurace časových vrstev je možná v desktopové
 aplikaci
 	\item obrovská nabídka možností konfigurace časových vrstev
-	\item mapové prvky můžou obsahovat časovou hodnotu, nebo
+	\item mapové prvky mohou obsahovat časovou hodnotu, nebo
 interval hodnot ve kterém jsou zobrazovány
 	\item možnost filtrace konkrétních hodnot i intervalů hodnot
 	\item přímá integrace nástrojů pro práci s časoprostorovými
