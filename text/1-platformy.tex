@@ -1,19 +1,20 @@
 \newpage
-% ML: anglictina v nazvu casti (plati pro celou praci)
+%% ML: anglictina v nazvu casti (plati pro celou praci)
+%% DT: uz je nastavena cestina
 
 \part{Webové publikační mapové platformy}
 \newpage
 %% ML: nazev sekce prilis obecny
-\section{Principy platforem}
-%\label{sec:WPS}
+%% DT: doplneno
+\section{Principy mapových publikačních platforem}
 
-%moznost pridani ilustrativniho obrazku
 \subsection{Mapy a internet}
 
 %% ML: prvni veta, kterou jsem precetl, ma chybu v interpukci...
-Lidé vytvářejí mapy odjakživa, ale již dávno je dobám kdy bylo nutné
+Lidé vytvářejí mapy odjakživa, ale již dávno je dobám, kdy bylo nutné
 %% ML: mit -> vlastnit (urcite najdes lepsi vyraz)
-pro nahlédnutí mapy mít její fyzický otisk či originál. Problémem
+%% DT: uchovávat
+pro nahlédnutí mapy uchovávat její fyzický otisk či originál. Problémem
 takových map je jejich nákladná distribuce a omezené možnosti
 obsahu. Mnohem efektivnější způsobem jak distribuovat mapy pro
 veřejnost se v dnešní době stávají webové mapové platformy. Možná
@@ -23,10 +24,11 @@ dvě skupiny: statické a interaktivní.
 
 \textbf{Statické mapové platformy} nejsou z důvodu jejich úzkého
 zaměření dnes již tolik běžné, avšak tvorba jejich obsahu je oproti
-mapám interaktivním velice snadná. Publikované mapy se dají vytvořit
+mapám interaktivním velice snadná. V jednoduchosti se jedná pouze o mapový obraz vložený na webovém rozhraní mapové platformy, jehož obsah je pevný a neměnný. Publikované mapové obrazy se dají vytvořit
 %% ML: pomocí, "přímo" přebývá
 %% ML: "scan" nezní jako slovo zapadajici do ceske vety
-přímo pomoci specializovaných kartografických programů, nebo scanem
+%% DT: skenování je lepsi
+pomocí specializovaných kartografických programů, nebo skenováním
 již existujících map. Takto vytvořené podklady jsou na webu velice
 snadno distribuovatelné a kladou výrazně menší nároky na výpočetní
 techniku.
@@ -46,22 +48,25 @@ distribuce map pro takové platformy je o poznání složitější.
 \label{sssec:fungovani-platforem}
 
 %% ML: navrhuji vynechat ``hlavne'', chybi tam porovnani s necim
-V dnešní době se hlavně v očích uživatelů těší většímu zájmu právě
-interaktivní mapové platformy. Proto se jimi tato podkapitola bude
+%% DT: vetu jsem preformuloval
+V dnešní době se v očích uživatelů těší velkému zájmu oproti statickým mapovým platformám právě mapové platformy interaktivní. Proto se jimi tato podkapitola bude
 %% ML: zabyvat ?
-zajímat více podrobně.
+%% DT: zabývat
+zabývat více podrobně.
 
 %% ML: pozor na dlouhe vety, souveti na jeden odstavec. Prvni cast
 %% vety muze byt samostatna.
-Existuje velké množství interaktivních mapových platforem, jejich
+%% DT: opraveno
+Interaktivních mapových platforem existuje velké množství. Jejich
 základní princip fungování je však ve většině případů stejný a liší se
 pouze svými možnostmi, obsahem a využitím.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=1\textwidth]{../img/map-web-diagram.png}
-        %% ML: serverové části webové aplikace?
-	\caption{Diagram znázorňující interakci uživatele a částí webové aplikace uložené na serverech: \cite{web_mapping}}
+%% ML: serverové části webové aplikace?
+%% DT: vetu jsem preformuloval
+	\caption{Diagram znázorňující základní části interaktivních mapových platforem a jejich interakci s uživatelem: \cite{web_mapping}}
 	\label{fig:WPS_class_diagram}
 \end{figure}
 
@@ -74,7 +79,8 @@ využívající počítač, tablet, nebo mobilní telefon. Výsledná rychlost a
 požitek z webové aplikace dnes již není limitován tolik výpočetní
 rychlosti klienta, spíš jako rychlostí internetového
 %% ML: Vetsinu nutne komunikace
-připojení. Všechnu nutnou komunikaci přitom zastává webový prohlížeč,
+%% DT: Opraveno
+připojení. Většinu nutné komunikace přitom zastává webový prohlížeč,
 který je pomocí \textit{request URL} získává informace z hostujícího
 serveru, na kterém je webová aplikace reálně uložena.
 
@@ -82,34 +88,35 @@ serveru, na kterém je webová aplikace reálně uložena.
 komunikaci mezi mapovým serverem a uložištěm dat. Na webovém serveru
 je uložena aplikace a na vyžádání poskytuje obsah webové aplikace
 %% ML: text nech nekym jeste precist, mas tam hrubky(!), silna kava, viz nize
-klientovy.
+klientovi.
 
 \textit{Webový mapový server} jedná se o program, který na základně
 %% ML ta veta zni divne, zkus preformulovat
-požadavků poslaných od webového serveru a dat z uložiště vytvoří
-požadovaný mapový obraz a odešle jej zpět. Mapových serverů existuje
+%% DT: změněno 
+požadavků poslaných od webového webového klienta vytváří mapové kompozice. Data použitá mapovým serverem jsou v uložišti, do kterého má server přístup. Vytvořený mapový obraz je posléze odeslán zpět webovému klientovi. Mapových serverů existuje
 %% ML: pridej odkazy na kapitoly
-více. Těm nejvíce používaným se bude věnováno v dalších kapitolách.
+%% DT: doplněno
+více. Těm nejvíce používaným se bude věnováno v kapitole \ref{ssec:mapove-platformy}.
 
 \textit{Uložiště dat} zde jsou fyzicky uložena všechna data potřebná k
-vytvoření mapy, nebo její části. Jedná se o rastrová, či vektorová
+vytvoření mapové kompozice, nebo její části. Jedná se o rastrová, či vektorová
 %% ML: mapova -> geograficka ?
-mapová data ve vhodném formátu, který dokáže webový mapový server
+%% DT: geografická
+geografická data ve vhodném formátu, která dokáže webový mapový server
 zpracovat. Dále jsou zde uložena metadata, která jsou nutnou součástí
 %% ML: ta posledni data moc nedava smysl
-prostorových dat. Popisují data sloužící k vytvoření mapy a dále
-jejich původ, způsob použití a samotný obsah dat \cite{web_mapping}.
+%% DT: napsel jsem ji jinak
+prostorových dat. Metadata popisují geografická data v předem dané struktuře \cite{web_mapping}.
 
 Důležitou součástí každé webové mapové aplikace je samotná komunikace
 mezi jednotlivými jejími komponenty. V následujících podkapitolách
 bude brán zřetel převážně na komunikaci mezi webovým klientem a
-webovým mapovým serverem. Konkrétně na protokoly, které jsou používané
+webovým mapovým serverem. Konkrétně na metody, které jsou používané
 %% ML: dalsi hrubka ...
 %% ML: zkus posledni vetu preformulovat, v prvni vete mluvis o
 %% protokolech, v druhe pise ``Tyto standardy''
-pro získání mapového obrazu. Tyto standarty jsou poskytovány
-mezinárodní standardizační organizací \textit{Open Geospatial
-  Consortium (OGC)}.
+%% DT: preformulovano a doplneno
+pro získání mapového obrazu. Nejvíce používaná metoda, převážně v aplikacích s otevřeným kódem (viz. kapitoly \ref{sssec:mapserver}, \ref{sssec:geoserver}, \ref{sssec:qgis-server}), je použití protokolů poskytovaných mezinárodní standardizační organizací \textit{Open Geospatial Consortium (OGC)}.
 
 \subsection{Open Geospatial Consortium}
 \label{sssec:ogc}
@@ -123,11 +130,13 @@ zlepšení sdílení prostorových dat po celém světě \cite{oqc_web}.
 OGC specifikace jsou technické dokumenty detailně popisující rozhraní,
 nebo kódování. Tyto dokumenty jsou dále použity na straně vývojářů k
 %%% ML: vyvojari vetsinou nevlastni produkty :-)
-tvorbě jejich produktů. Hlavní myšlenka je taková, že dva nezávisle
+%% DT: slovo "jejich" odstraněno
+tvorbě produktů. Hlavní myšlenka je taková, že dva nezávisle
 %% ML: standart -> standard (opakuje se v textu pravidelne)
-vyvíjené programy používající OGC standarty by měly být vzájemně
+%% DT: opaveno
+vyvíjené programy používající OGC standardy by měly být vzájemně
 kompatibilní \cite{oqc_web}. Celkem se jedná o více než 50
-specifikací, více konkrétně se však budou popsány pouze následující:
+specifikací. Vzhledem ke k zaměření implementačního rámce této práce (viz. kapitoly \ref{sssec:initialization}, \ref{sssec:time-filtration}), budou konkrétněji popsány pouze následující:
 
 \newpage
 \begin{itemize}
@@ -368,6 +377,7 @@ Speciální znaky pro zadávání dnů v týdnu jsou: 'MON', 'TUE', 'WED',
 
 \newpage
 \section{Webové mapové platformy}
+\label{ssec:mapove-platformy}
 
 Mapových publikačních platforem existuje v dnešní době velké
 %% ML: jsou -> byly?
@@ -392,6 +402,7 @@ ukázka z webových mapových platforem využívající konkrétní mapový
 server.
 
 \subsection{MapServer}
+\label{sssec:mapserver}
 
 \begin{figure}[h!]
 	\centering
@@ -549,6 +560,7 @@ Sands a její uživatelské rozhraní}
 
 \newpage
 \subsection{GeoServer}
+\label{sssec:geoserver}
 
 \begin{figure}[h!]  \centering
 \includegraphics[width=0.4\textwidth]{../img/geoserver-logo.png}
