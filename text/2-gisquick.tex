@@ -482,12 +482,8 @@ možnost zobrazení minut, nebo hodin, v tom případě se hodinový
 ciferník nenabízí. Stejným způsobem není nabídnuta možnost
 filtrování za pomoci kalendáře v případě, že časový formát
 obsahuje jen hodiny, nebo minuty.
-\item\textit{animační tlačítko} - tlačítkem \textit{PLAY}
-je možné spustit animování aktivní časové vrstvy. Po jeho
-aktivaci je vždy po jedné sekundě zvyšována hodnota horní hranice
-intervalu časových hodnot a to o jeden krok posuvníku. Pokud je
-animace aktivována změní se tlačítko na \textit{STOP}. Tím je
-tak možné animování zastavit.
+\item\textit{animační tlačítko s přepínačem} - tlačítkem \textit{PLAY}
+je možné spustit animování aktivní časové vrstvy.  Ve chvíli, kdy je animace aktivována, změní se tlačítko na \textit{STOP}. Tím je možné animování zastavit. V implicitním stavu, kdy je spínač \textit{cumulative} vypnutý, jsou obě šoupátka posouvána současně. V případě jeho aktivace je vždy po jedné sekundě zvyšována hodnota horního šoupátka až do chvíle kdy dosáhne maxima posuvníku. V tom případě je zvyšována hodnota spodního šoupátka (viz. kapitola \ref{sssec:animation}).
 \end{itemize}
 
 \subsection{Princip časové filtrace}
@@ -762,6 +758,7 @@ způsoben jako u filtrace jednotlivé vrstvy.
 \end{figure}
 
 \subsection{Animace filtrace}
+\label{sssec:animation}
 
 Jak pro jednotlivé vrstvy, tak pro více vrstev najednou je možnost
 provádět filtraci mapových prvků automatizovaně a vytvářet tak
@@ -772,12 +769,11 @@ Jedná se o jednoduchou metodu \verb|animate|, která s prodlevou jedna
 sekunda mění hodnotu časového posuvníku. Tato metoda pouze kontroluje
 hodnotu proměnné \textit{animateStop}. Pokud je tato hodnota FALSE, je
 volána metoda \verb|newFrame|. Metoda \verb|newFrame| při každém svém
-zavolání zkontroluje hodnotu checkoboxu cumulative:
+zavolání zkontroluje hodnotu spínače \textit{cumulative}:
 \begin{itemize}
 \item\textit{cumulative = TRUE} - pokud je hodnota horního šoupátka
 menší než maximální hodnota časového posuvníku, je zvýšena
-o krok posuvníku. Pokud je vyšší, je zvýšena hodnota spodního
-šoupátka.
+o velikost kroku posuvníku. Pokud je hodnota horního šoupátka vyšší a rozdíl obou šoupátek je větší, než velikost kroku posuvníku, je zvýšena hodnota spodního šoupátka.
 \item\textit{cumulative = FALSE} - pokud je hodnota horního šoupátka
 menší než maximální hodnota časového posuvníku, jsou zvýšeny
 společně obě hodnoty šoupátek o krok časového posuvníku.

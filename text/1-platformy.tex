@@ -157,51 +157,58 @@ specifikací. Vzhledem ke k zaměření implementačního rámce této práce (v
 
 %% ML: ten preklad mas odkud, zni priserne, vubec bych ho radeji
 %% neuvadel, kdyz uz tak webova mapova sluzba
-WMS, v českém překladu webový mapový servis, na základě geografických
+%% DT: preklad odstranen
+WMS je mapová služba, která na základě poskytnutých
 %% ML: s tim terminem ``mapa'' opatrne, kartografove by Ti to omlatili
 %% o hlavu, tak alespon mapova kompozice.
 %% ML: georeferencovana neni uplne korektni, georeference je soucasti
 %% dotazu (bbox), vysledny obrazek uz referencovany neni, klient ho
 %% ale umi korektne umistit, zna bbox
 %% ML: standarta vetsinou visi nad hradem, knebo trenky ;-)
-informací vytváří georeferencované mapy. Mezinárodní standart dále
-definuje \uv{mapu} jako digitální vyobrazení geografických informací,
+%% DT: georeferencovana mapa nahrazena mapovou kompozici
+parametrů vytváří požadovanou mapovou kompozici. Mezinárodní standard dále
+definuje \uv{mapový obraz} jako digitální vyobrazení geografických informací,
 %% ML: preformulovat, produkt -> kompozici?
-které je vhodné pro počítačové obrazovky a displeje. V případě mapy
+které je vhodné pro počítačové obrazovky a displeje. V případě mapové kompozice
 %% ML: s terminem ``mapa'' bych setril, tak snad mapova kompozice?
 %% ML: mapa obsahuje kartografickou omacku, tohle je pouze obrazova
 %% kompozice geografickych dat, nic vic
-jako takové se tedy nejedná o data, ale o jejich produkt. Mapy
+%% DT: mapa opravena na mapovou kompozici
+jako takové se tedy nejedná o data, ale o jejich produkt. Mapové kompozice 
 %% ML: jsou poskytovány mapovych serverem v beznych obrazovych formatech...
-vytvořené na základě WMS specifikace mohou být v obecných formátech
+%% DT: opraveno
+jsou poskytovány mapovým serverem v běžných obrazových formátech, jako
 např. PNG, GIF, nebo JPEG. Méně často se také jedná o vektorovou
 grafiku ve formátech SVG, nebo WebCGM \cite{oqc_wms}.
 
 Popisovaný standart definuje několik operací, každou s odlišným
 %% ML: vraci vs. davaji
-výstupem. Tyto operace vrací dávají uživateli buďto informace o
+%% DT: opraveno
+výstupem. Tyto operace vrací vrací uživateli buďto informace o
 %% ML: myslis automobilovy servis? ;-) sluzbe!
-samotném servisu, poskytují mapu, nebo informace o zobrazovaných
+samotné službě, poskytují mapu, nebo informace o zobrazovaných
 mapových prvcích.
 
 \begin{itemize}
 
 %% ML: obecne poskytuje metadata
 \item\textit{GetCapabilities} - operace vrací dokument ve formátu XML,
-  který obsahuje veškeré informace nutné k vytvoření \textit{GetMap}
-  požadavku. Jedná se tedy o detaily samotného servisu jako
+  který obsahuje popis dat.
   %% ML: souradnice -> rozsah v podporovanych souradnicovych systemech?
-  takového. Pomocí GetCapabilities lze zjistit počet vrstev, jejich
-  souřadnice v referenčním systému atd.
+  %% DT: ok
+  Pomocí GetCapabilities lze zjistit počet vrstev, jejich
+  rozsah v podporovaných souřadnicových systémech atd.
 	
 \item\textit{GetMap} - jedná se o nejdůležitější operaci, protože
   %% ML: lepsi nez mapa
-  jejím výsledkem je samotný geolokalizovaný mapový obraz. K jeho
+  jejím výsledkem je samotný mapový obraz. K jeho
   získání je potřeba poskytnout sadu parametrů, na základě kterých je
   %% ML: v?
-  v mapovém serveru vytvořen. Těmto parametrům bude věnována další
+  %% DT: mapovým
+  mapovým serverem vytvořen. Těmto parametrům bude věnována následující
   %% ML: jaka
-  podkapitola.
+  %% DT: doplnena reference
+  kapitola \ref{sssec:wms-param}.
 	
 \item\textit{GetFeatureInfo} - operace vrací informace o prvcích
   zobrazených na mapě.
@@ -212,6 +219,7 @@ mapových prvcích.
 \end{itemize}
 
 \subsection{Parametry WMS}
+\label{sssec:wms-param}
 
 Parametry obecně slouží ke specifikaci úkonu, který od mapového
 serveru požadujeme. Jedná se tedy o vstupní informace na základě
@@ -223,7 +231,7 @@ parametrů se liší dle operace (requestu), kterou provádíme.
 %% ML: mel bys uvest proc tak detailne rozepisujes parametry pro
 %% GetMap
 Níže uvedené parametry se vztahují pouze k operaci
-\textbf{\textit{GetMap}}. U operací jako \textit{GetCapabilities},
+\textbf{\textit{GetMap}}. Jsou zde uvedeny pouze nejdůležitější parametry a dále ty parametry, které se týkají implementační části práce (viz. kapitola \ref{sssec:time-filtration}). U operací jako \textit{GetCapabilities},
 nebo \textit{GetFeatureInfo} může bý popsaný význam parametrů odlišný,
 nebo není možné parametr použít vůbec.
 
@@ -232,57 +240,40 @@ nebo není možné parametr použít vůbec.
 	
 \item\textit{REQUEST} - výběr provedené operace (v případě požadavku o
  %% ML: mapu...
-  mapu se jako request parametr použije "GetMap").
+ %% DT: kompozice
+  mapovou kompozici se jako \textit{REQUEST} parametr použije "GetMap").
 
 %% ML: list -> seznam 
-\item\textit{LAYERS} - list oddělený čárkami obsahující názvy vrstev,
+%% DT: seznam
+\item\textit{LAYERS} - seznam oddělený čárkami obsahující názvy vrstev,
   které budou použity pro tvorbu mapy
-
-%% ML: seznam (dale v textu!), dokonce ten hruby anglikanismus i
-%% sklonujes...
-\item\textit{STYLES} - list oddělený čárkami, který definuje jakým
-  stylem se budou jednotlivé vrstvy vykreslovat. List stylů proto musí
-  korespondovat s listem vrstev. Pro implicitní hodnoty je možné
-  použít "STYLES=".
 	
 \item\textit{SRS} - zkratka SRS v překladu znamená "geodetický
   referenční systém". Tímto parametrem je tedy určeno v jakém
   geodetickém referenčním systému jsou poskytnuté parametry
-  např. BBOX. Rovněž se jedná o určení referenčního systému pro
-  výsledný mapový obraz.
+  např. BBOX.
 
 %% ML: veta neda moc smysl, jinak Ti v textu casto chybi interpunkce
-\item\textit{BBOX} - jedná se o souřadnice výřezu pro který generuje
-  výsledný mapový obraz. Pro definování výřezu je třeba zadat
+%% DT: preformulovano, nechám si to nekým opravit at s tim neni problem
+\item\textit{BBOX} - jedná se o souřadnice výřezu, pro který je mapový obraz generován. Pro definování výřezu je třeba zadat
   %% ML: Pole -> Seznam
-  souřadnice levého spodního a pravého horního rohu. Pole souřadnic
-  tedy parametr vypadá následovně "minX,minY,maxX,maxY".
+  %% DT: seznam
+  souřadnice levého spodního a pravého horního rohu. Seznam souřadnic
+  tedy parametr vypadá následovně "minX, minY, maxX, maxY".
 	
 \item\textit{FORMAT} - nastavení formátu výstupního souboru (mapového
-  obrazu). Nejčastěji používané jsou formáty GIF, PNG, JPEG, které
-  mohou být jednoduše zobrazeny na webových prohlížečích. Je však
-  %% ML: nezapomen rozepsat zkratky v ``seznamu zkratek'', idealni by
-  %% mely byt v pdf prokliky, ale to uz ted neres
-  možnost nastavit formát také jako SVG, nebo WebCMG.
+  obrazu).
 	
 \item\textit{WIDTH} - celočíselná hodnota udávající šířku výsledné
   %% ML: mapa
-  mapy v pixelech. Jinak řečeno se jedná o vzdálenost v pixelech mezi
+  %% DT: mapová kompozice
+  mapové kompozice v pixelech. Jinak řečeno se jedná o vzdálenost v pixelech 
   %% osa X
-  body zadanými parametrem \textit{BBOX} tj. vzdálenost minx a maxx.
-	
-\item\textit{HEIGHT} - hodnota odpovídající parametru \textit{WIDTH} s
-  tím rozdílem, že se jedná o vzdálenost miny a maxy. Pokud je poměr
-  stran \textit{WIDTH}/\textit{HEIGHT} odlišný od poměru stran
-  \textit{BBOX} je výsledný rozměr v pixelech přizpůsoben poměru stran
-  \textit{BBOX}.
-	
-\item\textit{TRANSPARENT} - udává zda-li je mapové pozadí průhledné,
-  nebo ne.
+  osy X danou body \textit{BBOX} tj. vzdálenost minX a maxX. Osa Y odpovídá parametru \textit{HEIGHT}
+
 \end{itemize}
 
-Mezi další méně používané parametry patří např. \textit{EXCEPTIONS},
-\textit{TIME}, \textit{ELEVATION}, \textit{BGCOLOR} \cite{oqc_wms}.
+Mezi další méně používané parametry patří např. \textit{EXCEPTIONS}, \textit{STYLES}, \textit{FORMAT}, \textit{ELEVATION}, \textit{BGCOLOR}, \textit{TRANSPARENT}, \textit{TIME} (jeho použití se liší viz. kapitoly \ref{sssec:mapserver}, \ref{sssec:geoserver}) \cite{oqc_wms}.
 
 Výše uvedené parametry lze rozdělit na dvě části a to povinné a
 nepovinné viz. tabulka:
@@ -313,15 +304,15 @@ nepovinné viz. tabulka:
 \end{table}
 
 \subsection{Parametr TIME}
+\label{sssec:time}
 
-S ohledem na téma této práce je vhodné přiblížit si parametr
+S ohledem na téma této práce a kapitoly \ref{sssec:mapserver}, \ref{sssec:geoserver} je vhodné přiblížit si parametr
 \textit{TIME} více podrobně a popsat způsob jeho použití a možnosti,
 které nabízí.
 
 Dle OGC je formát parametru \textit{TIME} dán normou ISO 8601:1988(E),
 která rozšiřuje normu ISO 8601. Oproti té jsou přidány další
 specifikace\cite{oqc_wms}:
-%http://cite.opengeospatial.org/OGCTestData/wms/1.1.1/spec/wms1.1.1.html#basic_elements.params.time
 \begin{itemize}
 \item Syntax pro datové kolekce. Jejich začátek, konec a periodické
   opakování.
@@ -381,25 +372,24 @@ Speciální znaky pro zadávání dnů v týdnu jsou: 'MON', 'TUE', 'WED',
 
 Mapových publikačních platforem existuje v dnešní době velké
 %% ML: jsou -> byly?
-množství. Mohou být přizpůsobeny účelu za kterým jsou vytvořeny, nebo
+%% DT: byly
+množství. Mohou být přizpůsobeny účelu za kterým byly vytvořeny, nebo
 %% ML: Né zni divne, zkus tu vetu preformulovat.
-konkrétním vstupním datům se kterými pracují. Né tedy všechny mají
-integrovanou podporu pro práci s časoprostorovými daty. Tato
+%% DT: opraveno
+konkrétním vstupním datům se kterými pracují. Podpora pro práci s časoprostorovými daty tedy není integrovaná ve všech. Tato
 skutečnost je zároveň způsobena tím, že časoprostorová data nejsou
 podporována všemi mapovými servery. Právě podpora na straně webového
 mapového serveru je při tvorbě mapové publikační platformy
 %% ML: neeee -> nikoliv
-klíčová. Jak se ale dozvíme dál v práci, né nutná.
+%% DT: nikoliv
+klíčová. Jak se ale dozvíme dál v práci, nikoliv nutná.
  
-Tato kapitola se zabývá jednotlivými webovými mapovými servery a
 %% ML: Veta ``jednotlive...'' je kostrbata, nedava moc smysl, preformulovat
-jejich možnostem podpory časoprostorových dat. Jednotlivé podkapitoly
-jsou vždy věnovány jednomu webovému mapovému serveru, který bude
+%% DT: spojil jsem dve vety do jedne, protoze se duplikovaly
+Tato kapitola je věnována konkrétním webovým mapovým serverům, které jsou
 %% ML: posledni veta, tez preformulovat
-představen a dále bude popsán způsob podpory časoprostorových dat. U
-některých mapových serverů je závěr každé podkapitoly je přidaná
-ukázka z webových mapových platforem využívající konkrétní mapový
-server.
+%% DT: preformulovano
+představeny a dále je popsán jejich způsob podpory časoprostorových dat. Na závěr některých podkapitol je dále přidána ukázka webové mapové platformy využívající daný mapový server.
 
 \subsection{MapServer}
 \label{sssec:mapserver}
@@ -408,6 +398,7 @@ server.
 	\centering
 	\includegraphics[width=0.4\textwidth]{../img/mapserver-logo.png}
         %% popisek, zdroj
+    \caption{Logo MapServer: \cite{mapserver_about}}
 	\label{fig:mapserver-logo}
 \end{figure}
 \bigskip
@@ -416,13 +407,16 @@ MapServer je platforma s otevřeným kódem, která byla vytvořena pro
 publikaci prostorových dat a interaktivních mapových aplikací. Byla
 vytvořena devadesátých letech v Minnesotské univerzitě. V té době se
 %% ML: mas nekde OSGeo vysvetleno?, tak alespon poznamka pod carou zde
-jednalo o jeden z prvních podporovaných projeků organizací OSGeo. Je
+%% DT: doplneno
+jednalo o jeden z prvních podporovaných projeků organizací OSGeo\footnote{\textit{OSGeo} je nevládní nezisková organizace s cílem  podporovat a prosazovat společný vývoj otevřených geoinformačních technologií a dat \cite{osgeo}}. Je
 nutno podotknout, že MapServer není a ani nebyl navržen jako
 %% ML: organizace? agenturou?
-stoprocentní GIS systém. Důvod jeho vzniku je dán potřebou organizací
+%% DT: agenturou
+stoprocentní GIS systém. Důvod jeho vzniku je dán potřebou agenturou
 NASA, která hledala způsob jakým zprostředkovat satelitní snímky
 %% ML: je napsan
-veřejnosti. MapServer je psaný v jazyce C a podporuje všechny hlavní
+%% DT: opraveno
+veřejnosti. MapServer je napsán v jazyce C a podporuje všechny hlavní
 operační systémy jakou jsou Windows, Linux a Mac OS X
 \cite{mapserver_about}.
 
@@ -432,12 +426,15 @@ operační systémy jakou jsou Windows, Linux a Mac OS X
 
 Od verze 4.4 je v MapServeru přidána podpora, která dokáže
 %% odkaz na kapitolu o parametru time
-interpretovat WMS parametr TIME obsahující časovou hodnotu. MapServer
+%% DT: doplneno
+interpretovat WMS parametr TIME (viz. kapitola \ref{sssec:time}) obsahující časovou hodnotu. MapServer
 %% ML: dotazu
-tuto hodnotu zpracuje a v requestu vrátí odpovídající mapový obraz.
+%% DT: opraveno
+tuto hodnotu zpracuje a v dotazu vrátí odpovídající mapový obraz.
 
 %% ML: urcite najdes lepsi slovo nez ``selektovat'' ;-)
-K tomu, aby bylo možné jednotlivé vrstvy selektovat pomocí atributu
+%% DT: vybírat mapové prvky
+K tomu, aby bylo možné vybírat mapové prvky jednotlivých vrstev pomocí atributu
 TIME, musí každá vrstva obsahovat následující metadata
 \cite{mapserver_about}:
 
@@ -478,7 +475,6 @@ END
 \noindent
 \textbf{Formáty časových dat a syntaxe}
 
-% moznost pridat tabulku podporovanych formatu
 Výhodou použití MapServeru je jeho podpora dalších časových formátů,
 které nejsou v normě ISO 8601:1988(E) používané pro operaci
 \textit{WMS TIME} definovány. Ke specifikování validních časových
@@ -489,12 +485,13 @@ formátů je možné pro každou vrstvu definovat \textit{wms-timeformat}
 \end{verbatim}
 
 %% ML: dotazu, ta veta mi nedava moc smysl, zkus preformulovat
-Requestu s parametrem \textit{TIME} umožňuje přesně specifikovat
-časové hodnoty pro které se bude mapový obraz vytvářet. Je tak možné
-filtrovat vrstvu pro specifické datum nebo interval. MapServer
+%% DT: preformulovano
+Dotaz s parametrem \textit{TIME} umožňuje přesně specifikovat
+mapové prvky, které bude vytvořený mapový obraz obsahovat. Tímto způsobem je možné vybírat mapové prvky vrstvy pro specifické datum, nebo časový interval. MapServer
 %% ML: s hodnoty?
-podporuje následující syntax s hodnoty uvedenými ve formátu
-'YYYY-MM-DD':
+%% DT: zmenena formulace vety
+podporuje následující syntax (časové hodnoty jsou uvedeny ve formátu
+'YYYY-MM-DD'):
 
 \begin{itemize}
 \item TIME=2004-10-12 \textit{pro jednu konkrétní hodnotu atributu.}
@@ -511,7 +508,8 @@ podporuje následující syntax s hodnoty uvedenými ve formátu
 \textbf{Princip podpory časoprostorových dat}
 
 %% ML: request -> dotaz
-Princip fungování při requestu s parametrem \textit{TIME} je velice
+%% DT: opraveno
+Princip fungování při dotazu s parametrem \textit{TIME} je velice
 snadný. Po té co MapServer přijme request, převede parametr
 \textit{TIME} na parametr \textit{FILTER}. Tento parametr má na vstupu
 název atributu obsahující časová data, který je uložený v metadatech
@@ -521,7 +519,8 @@ hodnota časového parametru. V praxi vypadá filtr následovně:
 \bigskip
 \begin{itemize}
 %% ML: selektovani -> vyber
-	\item Pro selektování mapových prvků s konkrétní hodnotou
+%% DT: výber
+	\item Pro výběr mapových prvků s konkrétní hodnotou
 atributu např. \textit{2004-10-12} ji převede pro parametr
 \textit{FILTER} na \textit{`[time-item]` eq `2004-10-12`}
 	\item Pro selektování mapových prvků s konkrétním intervalem
@@ -530,18 +529,15 @@ hodnot např. \textit{2004-10-12/2004-10-13} jej převede pro parametr
 (`[time-item]` le `2004-10-13`)}
 \end{itemize}
 
-\bigskip Nutno podotknout, že pro definování časových hodnot používá
-mapový server zpětné uvozovky. Výše uvedená syntaxe platí pouze pro
 %% ML: OGR neni format... (!), cela ta veta patri spise do poznamky
 %% pod carou, kdyz uz
-vrstvy ve formátu Shapefile a OGR. Pokud tomu tak není, je ve filtru
-použito '=' namísto 'eq'.\cite{mapserver_about}.
+%% DT: poznamka odstranena, v kontextu prace neni dulezita
 
 \bigskip
 \noindent \textbf{Webové mapové platformy}
 
 Webová mapová platforma zobrazující vývoj písčité pláže \textbf{Gay
-Stand Sands} (http://spatial.mtri.org/stampsands/) využívá možnost
+Stand Sands} (\url{http://spatial.mtri.org/stampsands/}) využívá možnost
 filtrování časových dat. Její zvláštností je však, že k tomu není
 použit parametr \textit{TIME}. Jelikož se jedná o malé množství
 časových epoch, jsou rozděleny do jednotlivých vrstev s pojmenováním
@@ -553,7 +549,8 @@ důvodu nekonzistence rastrových dat, která byla pořizována mezi lety
 \begin{figure}[h!]  \centering
 \includegraphics[width=1\textwidth]{../img/gay-sands.png}
         %% ML: screenshot nezni moc cesky, ukazka treba
-	\caption{Screenshot zobrazující webovou platformu Gay Stand
+        %% DT: ukazka
+	\caption{Ukázka zobrazující webovou platformu Gay Stand
 Sands a její uživatelské rozhraní}
 	\label{fig:gay-sands}
 \end{figure}
@@ -564,14 +561,17 @@ Sands a její uživatelské rozhraní}
 
 \begin{figure}[h!]  \centering
 \includegraphics[width=0.4\textwidth]{../img/geoserver-logo.png}
+	\caption{Logo GeoServer 
+	\cite{geoserver-layer-edit}}
 	\label{fig:geoserver-logo}
 \end{figure} \bigskip
 
 Stejně jako u MapServeru se jedná o serverový program s otevřeným
 kódem. GeoServer je napsán v jazyce Java a umožňuje, na základě
-otevřených standardů poskytovaných organizací OGC, sdílet a upravovat
+otevřených standardů poskytovaných organizací OGC (viz. kapitola \ref{sssec:ogc}), sdílet a upravovat
 %% ML: opravdu vsech?, co je hlavni?
-geografická data ze všech hlavních datových zdrojů.
+%% DT: zaver vety odstranen
+geografická data..
 
 GeoServer vznikl v roce 2001 v neziskovém technologickém inkubátoru
 \textit{The Open Planning Project} ve městě New York. V té době bylo
@@ -582,7 +582,8 @@ mohli být občané lépe zapojeni do vládních záležitostí, především
 
 \begin{figure}[h!]  \centering
 \includegraphics[width=0.6\textwidth]{../img/geoserver-layer-edit.png}
-%% ML: popisky bezne zacinaji na velke pismeno
+%% ML: popisky bezne zacinaji na velke pismeno\\
+%% DT: vsude opraveno
 	\caption{Záložka konfigurace časové vrstvy na GeoServeru
 \cite{geoserver-layer-edit}}
 	\label{fig:geoserver-layer-edit}
@@ -602,7 +603,8 @@ Nejjednodušším způsobem nastavení vrstvy je využití webového rozhraní
 %% ML: nemel bys pouzivat cisla obrazku ``na pevno'', ale jako
 %% dymamicky odkaz, navic bude potom v PDF i proklik, to se mozna tyka
 %% i ostatnich obrazku (?)
-pro Geo\-Server viz. obrázek 3. V záložce \textit{Dimensions} je veškeré
+%% DT: vsude dodelano
+pro Geo\-Server viz. obrázek \ref{fig:geoserver-layer-edit}. V záložce \textit{Dimensions} je veškeré
 nutné nastavení. V případě nastavení časové vrstvy je potřeba nejprve
 zaškrtnout políčko \textit{Time Enabled}. Další nastavení je
 následující \cite{geoserver-layer-edit}:
@@ -633,9 +635,9 @@ hodnotu časového atributu
 hodnotu časového atributu, která je nejblíže dané referenční hodnotě
 (\textit{Reference value})
 %% ML: interpunkce
+%% DT: opraveno
 		\item \textit{reference value} - uloží danou
-referenční hodnotu tak jak je nehledě na to jestli je její použití
-vhodné.
+referenční hodnotu tak, jak je. Není brán ohled na skutečnost, zda-li je její použití vhodné.
 	\end{itemize}
 	\item \textit{Reference value} - pole pro zvolení referenční
 hodnoty sloužící při určení \textit{Default value}.
@@ -645,7 +647,8 @@ hodnoty sloužící při určení \textit{Default value}.
 \noindent \textbf{Formáty časových dat a syntaxe}
 
 %% ML: opet request...
-\noindent Obecná syntaxe pro request s konkrétní hodnotou parametru
+%% DT: opraveno
+\noindent Obecná syntaxe pro dotaz s konkrétní hodnotou parametru
 \textit{TIME} vypadá následovně:
 
 \begin{verbatim} TIME=<timestring>
@@ -696,9 +699,10 @@ v minulosti od aktuálního časového okamžiku.}
 
 %% ML: URL bych mohli byt proklikavaci (\url{}), to se tyka i
 %% ostatnich odkazu
+%% DT: opraveno vsude 
 %nejsem si jist jestli je na GeoServeru \textbf{MetEye}
 %% ML: nezapomen vyresit
-(http://www.bom.gov.au/australia/meteye) je webová mapová platforma
+(\url{http://www.bom.gov.au/australia/meteye}) je webová mapová platforma
 zobrazující meterologické observace a předpovědi pro celý australský
 kontinent. Jedná se o interaktivní mapovou platformu vytvořenou
 Australským úřadem pro metorologii (Australian Bureaou of Metorology).
@@ -707,7 +711,8 @@ Webové rozhraní obsahuje panel s tématickými mapy, pomocí kterých se
 dá mapový obsah modifikovat. Zde lze vybrat typ předpovědi jako
 například vodní srážky, teplotu, sílu a směr větru atd. Mapové okno
 %% ML: hrubku urcite najdes ;-)
-mimo standartních mapových prvků jako jsou legenda a grafické měřítko
+%% DT: opravil jsem ji podle pravidla trenek na hrade
+mimo standardních mapových prvků jako jsou legenda a grafické měřítko
 nabízí rovněž možnost zobrazení předpovědi počasí pro daný časový
 okamžik. Toho je docíleno pomoci velice pěkně zpracované časové osy v
 horní části mapového okna. Zde lze data rovněž data po časových
@@ -717,17 +722,20 @@ Rastrové vrstvy jsou filtrovány na základě parametru
 \textit{TIMESTAMP}, který je vždy shodný u všech dlaždic. Vzhledem k
 tomu, že pro jednotlivé předpovědi se mění pouze rastrové vrstvy, je
 %% ML: hezke ceske slovo, a kdyz uz tak cache...
-možné je na webovém serveru cashovat a distribuovat ve formě dlaždic.
+%% DT: nahrazeno mezipameti 
+možné je na webovém serveru ukládat do mezipaměti a distribuovat ve formě dlaždic.
 
 \begin{figure}[h!]  \centering
 \includegraphics[width=0.67\textwidth]{../img/meteye.png}
 %% ML: screenshot -> ukazka, zdroj
-	\caption{Screenshot zobrazující webovou platformu MetEye}
+%% ML: doplneno
+	\caption{Ukázka zobrazující webovou platformu MetEye}
+	\cite{met-eye}
 	\label{fig:met-eye}
 \end{figure}
 
 \textbf{Pennsylvania Cancer Atlas}
-(https://www.geovista.psu.edu/grants/CDC/) je webová platforma
+(\url{https://www.geovista.psu.edu/grants/CDC/}) je webová platforma
 zobrazující výskyt rakoviny prostaty a tlustého střeva ve státě
 Pensylvánie na severovýchodě USA. V tomto případě se jedná o webovou
 mapovou aplikaci využívající software Adobe Flash Player, který se
@@ -747,9 +755,10 @@ nabízí přeskočení na následující období a ukončení animování.
 \begin{figure}[h!]  \centering
 \includegraphics[width=0.8\textwidth]{../img/pennsylvania-cancer-atlas.png}
 %% MK: ukazka, velke pismeno, vest zdroj
-	\caption{screenshot zobrazující webovou platformu Pennsylvania
+	\caption{Ukázka zobrazující webovou platformu Pennsylvania
 Cancer Atlas a její uživatelské rozhraní s možností animace dle
 časového období statistik}
+	\cite{cancer-atlas}
 	\label{fig:cancer-atlas}
 \end{figure}
  
@@ -758,6 +767,8 @@ Cancer Atlas a její uživatelské rozhraní s možností animace dle
 
 \begin{figure}[h!]  \centering
 \includegraphics[width=0.4\textwidth]{../img/arcgis-logo.jpg}
+	\caption{Logo ArcGIS}
+	\cite{arcgis-logo}
 	\label{fig:arcgis-logo}
 \end{figure} \bigskip
 
@@ -765,13 +776,12 @@ ArcGIS je platforma obsahující řadu aplikací, které společně tvoří
 geografický informační systém sloužící pro práci s prostorovými
 daty. Nejedná se tedy o webový mapový server jako takový. ArcGIS je
 %% ML: soukromy neni uplne vhodne slovo, treba proprietarni
-soukromý systém vytvořený firmou Esri (Environmental Systems Research
+%% DT: proprietarni
+proprietární systém vytvořený firmou Esri (Environmental Systems Research
 %% ML: mam pocit, ze ESRI vznikla podobne jako GRASS, nekdy na zacatku osmdesatych let
-Institute). Ta již v devedesátých letech pracovala na GIS
-aplikacích. V roce 1999 byla vydána desktopová aplikace ArcMap 8.0
-(později přejmenovaná na ArcGIS Desktop a poté pouze na ArcGIS), která
-se od té doby stala nejpoužívanější komerčním softwarem na poli
-geografických informačních systémů \cite{arcgis_history}.
+%% DT: cele jsem to preformuloval. Mam za to ye Esri vyikla takto brzy, ale ArcGIS jako takovy az pozdeji
+Institute), která vznikla již v roce 1969. Nejznámějším produktem této společnosti je desktopová aplikace ArcGIS, která
+se od doby svého vydání stala nejpoužívanější komerčním softwarem na poli geografických informačních systémů \cite{arcgis-wiki}.
 
 Pod ArcGIS mimo jiné patří aplikace pro webovou mapovou
 publikaci. Jedná se o \textbf{ArcGIS Server}, \textbf{ArcGIS Online} a
@@ -797,7 +807,7 @@ možné nalézt v nastavení vrstev.
 
 \begin{figure}[h!]  \centering
 \includegraphics[width=0.8\textwidth]{../img/arcgis-layer-edit.png}
-	\caption{dialogové okno nastavení časové vrstvy v desktopové
+	\caption{Dialogové okno nastavení časové vrstvy v desktopové
 aplikaci ArcGIS}
 	\label{fig:arcgis-time-settings}
 \end{figure}
@@ -856,7 +866,7 @@ typech. Datový typ podporující datum, textový řetězec a číselná
 hodnota. Pro nižší výpočetní náročnost je doporučeno datové typy
 podporující datum maximálně využívat. V případě textových řetězců je
 podporováno 13 formátů a v případě číselných hodnot se jedná o 4
-formáty \cite{arcgiq-data-types}.  %moznost pridat formaty
+formáty \cite{arcgiq-data-types}.
 
 \subsection{ArcGIS Online}
 
@@ -898,7 +908,7 @@ splňuje obě podmínky a je označena jako viditelná zobrazí se ve spodní
 
 \begin{figure}[h!]  \centering
 \includegraphics[width=0.8\textwidth]{../img/arcgis-online-time-slider.png}
-	\caption{nástroj pro správu časových vrstev}
+	\caption{Nástroj pro správu časových vrstev}
 	\label{fig:arcgis-time-slider}
 \end{figure}
 
