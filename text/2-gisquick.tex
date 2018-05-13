@@ -187,10 +187,12 @@ spadají OpenLayers pod organizaci OSGeo.
 \newpage
 \section{Implementace nástroje pro Gisquick plugin}
 
+%% ML: vystupy? mozna soubory vytvarene Gisquick pluginem?
 V kapitole \ref{sssec:gisquick-komponenty} jsou zmíněny výstupy z Gisquick
 pluginu. Jedná se o složku obsahující projekt ve formátu .qgs, data
 použita v projektu a metadatový textový soubor. Hlavním cílem úprav
 Gisquick pluginu bylo vytvoření jednoduchého uživatelského rozhraní,
+%% ML: umoznuje nesedi, bude umoznovat anebo umoznujici
 které umožňuje definovat všechny potřebné parametry sloužící ve
 webovém klientu k inicializaci nástroje pro práci s časovými daty. Tyto
 parametry jsou během publikace pro jednotlivé vrstvy nastavené a dále
@@ -209,10 +211,14 @@ vepsané do metadatového souboru.
 Obrázek \ref{fig:gisquick-plugin-layers} zobrazuje dialogové okno publikace
 projektu pomocí Gisquick pluginu. V prvním kroku publikace, v záložce
 vrstvy \textit{Layers} je pro vektorové vrstvy přidáno nové nastavení. V
-Případě rastrových, jako je například v obrázku zvolená vrstva dmt,
+%% ML: napis proc, rastrova data jsou nad ramec zadani prace
+vřípadě rastrových vrstev, jako je například v obrázku zvolená vrstva dmt,
 možnost nastavení časových vrstev není možná.
 
+%% ML: vsechny/kazde zni divne
 Ve sloupci \textit{Time Attribute} jsou v roletovém menu vypsány
+%% ML: co to znamena? pro nastaveni (prazdny retezec), zkus prepsat,
+%% at je to jasnejsi
 všechny atributy každé vrstvy. Implicitní hodnota je prázdný textový
 řetězec. Zde je nutné pro každou časovou vrstvu vybrat atribut, který
 obsahuje časové hodnoty (dále jen časový atribut).
@@ -221,11 +227,13 @@ Sloupec \textit{Date Mask} obsahuje roletové menu s časovými formáty,
 které určují jakým způsobem budou časová data na webovém klientu
 zobrazena. Díky tomuto nastavení je možné, nehledě na formát časového
 atributu, nastavit kterýkoli nabízený časový formát. V tomto formátu
+%% ML: klientovi, zkus ten odstavec jeste jednou projit a procistit
 budou zobrazeny časové hodnoty na webovém klientovy. V případě volby
 formátu je nutné znát původní data. Přejde se tím situacím kdy
 uživatel zvolí formát zobrazující pouze roky, zatímco původní data
 budou v rozpětí jednoho dne.
 
+%% ML: rozdelit souveti?
 Jestli jsou časové vrstvy dobře nastaveny, a výpočet proběhl korektně,
 se lze v předposledním kroku publikace přesvědčit v souhrnu publikovaného
 projektu (obrázek \ref{fig:publishing-summary}).
@@ -233,7 +241,7 @@ projektu (obrázek \ref{fig:publishing-summary}).
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.9\textwidth]{../img/project-publishing-time-summary.png}
-\caption{Souhrnu publikovaného projektu v Gisquick pluginu}
+\caption{Souhrn publikovaného projektu v Gisquick pluginu}
 \label{fig:publishing-summary}
 \end{figure}
 
