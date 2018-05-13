@@ -483,15 +483,24 @@ ciferník nenabízí. Stejným způsobem není nabídnuta možnost
 filtrování za pomoci kalendáře v případě, že časový formát
 obsahuje jen hodiny, nebo minuty.
 \item\textit{animační tlačítko s přepínačem} - tlačítkem \textit{PLAY}
-je možné spustit animování aktivní časové vrstvy.  Ve chvíli, kdy je animace aktivována, změní se tlačítko na \textit{STOP}. Tím je možné animování zastavit. V implicitním stavu, kdy je spínač \textit{cumulative} vypnutý, jsou obě šoupátka posouvána současně. V případě jeho aktivace je vždy po jedné sekundě zvyšována hodnota horního šoupátka až do chvíle kdy dosáhne maxima posuvníku. V tom případě je zvyšována hodnota spodního šoupátka (viz. kapitola \ref{sssec:animation}).
+je možné spustit animování aktivní časové vrstvy.  Ve chvíli, kdy je
+animace aktivována, změní se tlačítko na \textit{STOP}. Tím je možné
+animování zastavit. V implicitním stavu, kdy je
+spínač \textit{cumulative} vypnutý, jsou obě šoupátka posouvána
+současně. V případě jeho aktivace je vždy po jedné sekundě zvyšována
+hodnota horního šoupátka až do chvíle kdy dosáhne maxima posuvníku. V
+tom případě je zvyšována hodnota spodního šoupátka
+(viz. kapitola \ref{sssec:animation}).
 \end{itemize}
 
 \subsection{Princip časové filtrace}
 \label{sssec:time-filtration}
 
-Jak bylo zmíněno v kapitole \ref{sssec:qgis-server}, QGIS server nepodporuje ve specifikaci WMS operace \textit{GetMap} parametr \textit{TIME}. Z toho důvodu je nutné
-použít obdobnou metodu, kterou používá MapServer, a to nahrazení
-parametru \textit{TIME} parametrem \textit{FILTER}.
+Jak bylo zmíněno v kapitole \ref{sssec:qgis-server}, QGIS server
+nepodporuje ve specifikaci WMS operace \textit{GetMap}
+parametr \textit{TIME}. Z toho důvodu je nutné použít obdobnou metodu,
+kterou používá MapServer, a to nahrazení parametru \textit{TIME}
+parametrem \textit{FILTER}.
 
 \noindent
 Parametr \textit{FILTER} lze použít v operaci \textit{GetMap} následovně
@@ -537,20 +546,24 @@ vytvořený.
 \label{sssec:initialization}
 
 Pokud není volba \textit{Use cache} při publikování projektu vypnutá
-(viz. obrázek \ref{fig:gisquick-plugin-layers}), používá Gisquick webový
-klient pro zobrazování mapových vrstev předem vytvořených mapových
-dlaždic uložených v mezipaměti serveru (viz. specifikace WMTS kapitoly \ref{sssec:ogc}). Pro možnosti filtrace vrstev
-na základě jejich časové hodnoty parametru však tento způsob nelze
+(viz. obrázek \ref{fig:gisquick-plugin-layers}), používá Gisquick
+webový klient pro zobrazování mapových vrstev předem vytvořených
+mapových dlaždic uložených v mezipaměti serveru (viz. specifikace WMTS
+kapitoly \ref{sssec:ogc}). Pro možnosti filtrace vrstev na základě
+jejich časové hodnoty parametru však tento způsob nelze
 aplikovat. Bylo by totiž nutné vytvořit mapové dlaždice pro všechny
-možné časové intervaly a kombinace vrstev. Z toho důvodu je při aktivaci
-nástroje pro práci s časoprostorovými daty použit \textit{Lifecycle Hook
-Created}. Jedná se o funkci, která se spustí jakmile je Vue komponent
-inicializován. V ní je původní instance třídy \textit{ImageLayer}
-uložena do proměnné \textit{originalLayer} a skryta. Následně je
-vytvořena instance nová, která obsahuje stejné mapové vrstvy jako
-původní. Ta je poté nastavena jako aktivní. V případě, že mapový obraz má být aktualizován, je nutné vždy specifikací WMS (viz. kapitola \ref{sssec:ogc}) znovu generovat jeho obsah. Pokud je nástroj vypnut
-je použita původní instance a webový klient je tedy opět v původním
-nastavení.
+možné časové intervaly a kombinace vrstev. Z toho důvodu je při
+aktivaci nástroje pro práci s časoprostorovými daty
+použit \textit{Lifecycle Hook Created}. Jedná se o funkci, která se
+spustí jakmile je Vue komponent inicializován. V ní je původní
+instance třídy \textit{ImageLayer} uložena do
+proměnné \textit{originalLayer} a skryta. Následně je vytvořena
+instance nová, která obsahuje stejné mapové vrstvy jako původní. Ta je
+poté nastavena jako aktivní. V případě, že mapový obraz má být
+aktualizován, je nutné vždy specifikací WMS
+(viz. kapitola \ref{sssec:ogc}) znovu generovat jeho obsah. Pokud je
+nástroj vypnut je použita původní instance a webový klient je tedy
+opět v původním nastavení.
 
 \subsection{Filtrace jedné časové vrstvy}
 \label{sssec:one-layer-filtration}
@@ -772,8 +785,10 @@ volána metoda \verb|newFrame|. Metoda \verb|newFrame| při každém svém
 zavolání zkontroluje hodnotu spínače \textit{cumulative}:
 \begin{itemize}
 \item\textit{cumulative = TRUE} - pokud je hodnota horního šoupátka
-menší než maximální hodnota časového posuvníku, je zvýšena
-o velikost kroku posuvníku. Pokud je hodnota horního šoupátka vyšší a rozdíl obou šoupátek je větší, než velikost kroku posuvníku, je zvýšena hodnota spodního šoupátka.
+menší než maximální hodnota časového posuvníku, je zvýšena o velikost
+kroku posuvníku. Pokud je hodnota horního šoupátka vyšší a rozdíl obou
+šoupátek je větší, než velikost kroku posuvníku, je zvýšena hodnota
+spodního šoupátka.
 \item\textit{cumulative = FALSE} - pokud je hodnota horního šoupátka
 menší než maximální hodnota časového posuvníku, jsou zvýšeny
 společně obě hodnoty šoupátek o krok časového posuvníku.
