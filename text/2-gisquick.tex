@@ -781,8 +781,7 @@ společně obě hodnoty šoupátek o krok časového posuvníku.
 Po zvýšení hodnot je zavolána metoda \verb|getNewUrl| (viz. kapitola
 \ref{sssec:one-layer-filtration}), která aktualizuje mapový obsah podle
 nově nastavených filtrovaných hodnot. Nakonec v případě, že hodnota
-\textit{animateStop = FALSE}, zavolá rekurzivně sama sebe s časovou
-prodlevou jedna sekunda.
+\textit{animateStop = FALSE}, zavolá metoda \verb|newFrame| rekurzivně sama sebe s časovou prodlevou jedna sekunda.
 
 \begin{figure}[h!]
 \centering
