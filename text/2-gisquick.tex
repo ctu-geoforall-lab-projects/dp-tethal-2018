@@ -2,14 +2,18 @@
 \part{Platforma Gisquick}
 \newpage
 
+%% ML: vyhni se sklonovani, napr. Predstaveni platformy Gisquick
 \section{Úvod do Gisquick}
 
+%% ML: daty->zdrojovym kodem (nebo co jsi mel na mysli?)
 Gisquick je webová mapová publikační platforma s otevřenými daty. Jejím
 účelem je snadné a rychlé publikování projektů vytvořených v programu
 QGIS, které je možné posléze prohlížet na webovém rozhraní platformy
-Quisqick.
+Gisquick.
+%% ML: vyhni se zavorce, vetu prepis, je divna
 Celá platforma se skládá z několika komponentů (jejich obecné fungování
 je popsáno v kapitole \ref{sssec:fungovani-platforem} ). Komponenty jsou
+%% ML: jsou popsany v nasledujici kapitole.
 následující.
 
 \subsection{Komponenty}
@@ -17,6 +21,7 @@ následující.
 
 
 \begin{itemize}
+%% ML: prvni veta je nejasna, jaky projekt? prepsat
 \item\textit{Gisquick plugin} - jedná se o zásuvný modul pro
 program QGIS, pomocí kterého je možné existující projekt
 publikovat. Publikace je nutná pro pozdější použití projektu
@@ -25,7 +30,10 @@ uživatel projekt nastavit tak, aby zobrazovaný předmět zájmu
 přesně odpovídal jeho požadavkům (možnost selekce jednotlivých
 vrstev, nastavení maximálního a minimálního měřítka,
 atd.). Gisquick plugin pracuje zcela odděleně od ostatních
+%% ML: komponent
 komponentů a jeho výstupem je složka obsahující všechny použité
+%% ML: ulozeny -> upraveny (?) Vstupem je take QGIS projekt. Mluvis
+%% najednou o formatu, klidne bych se drzel ``QGIS projekt''
 vrstvy, uložený projekt ve formátu .qgs a metadatový soubor. Ten
 obsahuje nastavení provedené během procesu publikace a dále popis
 projektu. Metadatový soubor je použit pro potřeby webového klienta.
@@ -34,6 +42,8 @@ dotazy z webového klienta ve formě OGC standardů (viz. kapitola
 \ref{sssec:ogc}). Následně odpovídá například ve formě mapových
 obrazů. Na straně webového serveru je použit aplikační rámec Django,
 který je stejně jako Gisquick plugin psaný v jazyce Python.
+%% ML: prvni veta moc nedava smysl, prepis
+%% ML: muzes uvest odkaz na kapitolu v casti I
 \item\textit{QGIS server} - jedná se o webový mapový server
 na základě kterého jsou vytvářeny mapové obrazy. Použití
 QGIS serveru je dáno skutečností, že veškeré mapové prvky
@@ -42,7 +52,10 @@ v QGIS desktopové aplikaci. Díky tomu si může být uživatel
 jistý tím, že publikovaný projekt bude věrně odpovídat jeho
 původnímu projektu.
 \item\textit{webový a mobilní klient} - klient uživateli nabízí
+%% ML: cele?
 uživatelské rozhraní celé aplikace, ve kterém se může
+%% ML: interagovat -> cestina
+%% ML: orientovat? zkus prepsat cela veta zni divne
 orientovat a pomocí kterého interaguje s webovým serverem a tak
 mění zobrazovaný obsah. Právě této části spolu s Gisquick
 pluginem byla je v této práci věnována největší pozornost.
@@ -50,6 +63,7 @@ pluginem byla je v této práci věnována největší pozornost.
 
 \subsection{Uživatelské rozhraní}
 
+%% ML: rozdelit na dve podkapitoly: UI weboveho klienta a zasuvneho modulu
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.9\textwidth]{../img/gisquick_ui.png}
@@ -85,10 +99,11 @@ pomocí jednoduchého dialogového okna jsou nabízeny možnosti nastavení
 pro export vrstev. Jeho první část je rozdělena na tři záložky a
 stavovou řádku, ve které se jsou vypisována chybová hlášení. V
 první záložce \textit{Base layer} je možno nastavit podkladové vrstvy
-jako například Open Street Map, nebo Binq mapy. V další záložce
-\textit{Layers} je možno nastavit které vrstvy budou publikované. Při
+jako například OpenStreetMap, nebo Bing mapy. V další záložce
+\textit{Layers} je možno nastavit, které vrstvy budou publikované. Při
 implementaci podpory pro časoprostorová data bylo nastavení v této
-záložce rozšířeny o další možnosti. Tomuto rozšíření se bude
+%% ML: uved konkretni odkaz na kapitolu
+záložce rozšířeno o další možnosti. Tomuto rozšíření se bude
 práce věnovat detailněji v dalších částech. V poslední záložce je
 obecné nastavení projektu. Další okno slouží k nastavení \textit{topics}
 nebo-li tématicky orientovaných vrstev \cite{gisquick-manual}. Předposlední
@@ -109,11 +124,13 @@ vytvoří. Ty je posléze nutné nahrát na Gisquick publikační server.
 \noindent
 \textbf{Vue.js} - jedná se o moderní aplikační rámec s otevřeným kódem
 napsaný v programovacím jazyce JavaScript, jehož první verze byla vydaná
+%% ML: Veta zacinajici na ``Jeho hlavni pouziti ...'' nezni moc pekne...
 začátkem roku 2014 Evanem You \cite{vue-history}. Jeho hlavní použití je
 vývoj uživatelského rozhraní aplikací, tedy na straně webového klienta
 (viz. kapitola \ref{sssec:fungovani-platforem}). Uživatelské rozhraní
 je za pomoci Vue.js rozděleno na několik  komponent, kdy každá obsahuje
 vlastní JavaScript, HTML a CSS skripty. Jednotlivé komponenty dělají kód
+%% ML: prehodit slova: vzdy jsou
 přehlednější a aplikace výkonově méně náročnější. Protože vždy
 jsou použity jenom ty komponenty, které koncový uživatel v danou chvíli
 potřebuje. Mezi další výhody Vue.js patří mimo práce s komponenty
@@ -144,12 +161,12 @@ kódem umožňující zapouzdření (izolaci) jednotlivých aplikací do
 kontejnerů. Vytvořený kontejner se nazývá \textit{Docker image}. Obecné
 pravidlo je použití pouze jedné aplikace pro jeden Docker kontejner. Docker
 image mohou být posléze spuštěny na jakémkoli hardwaru s operačním
-systémem Linux, nebo Windows, na který je Docker program nainstalovaný. Tato
-skutečnost má obrovskou výhodu pro nasazení aplikací do produkčních
-serverů, jejich sdílení s dalšími uživateli, nebo vytváření
+systémem Linux nebo MS Windows, na který je Docker program nainstalovaný. Tato
+skutečnost má obrovskou výhodu pro nasazení aplikací na produkčních
+serverech, jejich sdílení s dalšími uživateli, nebo vytváření
 clusterů složených z dílčích aplikací. Po spuštění aplikace v
 Docker kontejneru není vytvořen nový virtuální stroj, ale aplikace
-v kontejnerech využívají hostující operační systém. Výhod tohoto
+v kontejnerech využívají hostující operační systém. Výhoda tohoto
 řešení spočívá v minimalizaci velikosti kontejneru.
 
 Gisquick pro své komponenty (mimo Gisquick pluginu) v produkční
@@ -170,10 +187,12 @@ spadají OpenLayers pod organizaci OSGeo.
 \newpage
 \section{Implementace nástroje pro Gisquick plugin}
 
+%% ML: vystupy? mozna soubory vytvarene Gisquick pluginem?
 V kapitole \ref{sssec:gisquick-komponenty} jsou zmíněny výstupy z Gisquick
 pluginu. Jedná se o složku obsahující projekt ve formátu .qgs, data
 použita v projektu a metadatový textový soubor. Hlavním cílem úprav
 Gisquick pluginu bylo vytvoření jednoduchého uživatelského rozhraní,
+%% ML: umoznuje nesedi, bude umoznovat anebo umoznujici
 které umožňuje definovat všechny potřebné parametry sloužící ve
 webovém klientu k inicializaci nástroje pro práci s časovými daty. Tyto
 parametry jsou během publikace pro jednotlivé vrstvy nastavené a dále
@@ -192,10 +211,14 @@ vepsané do metadatového souboru.
 Obrázek \ref{fig:gisquick-plugin-layers} zobrazuje dialogové okno publikace
 projektu pomocí Gisquick pluginu. V prvním kroku publikace, v záložce
 vrstvy \textit{Layers} je pro vektorové vrstvy přidáno nové nastavení. V
-Případě rastrových, jako je například v obrázku zvolená vrstva dmt,
+%% ML: napis proc, rastrova data jsou nad ramec zadani prace
+vřípadě rastrových vrstev, jako je například v obrázku zvolená vrstva dmt,
 možnost nastavení časových vrstev není možná.
 
+%% ML: vsechny/kazde zni divne
 Ve sloupci \textit{Time Attribute} jsou v roletovém menu vypsány
+%% ML: co to znamena? pro nastaveni (prazdny retezec), zkus prepsat,
+%% at je to jasnejsi
 všechny atributy každé vrstvy. Implicitní hodnota je prázdný textový
 řetězec. Zde je nutné pro každou časovou vrstvu vybrat atribut, který
 obsahuje časové hodnoty (dále jen časový atribut).
@@ -204,11 +227,13 @@ Sloupec \textit{Date Mask} obsahuje roletové menu s časovými formáty,
 které určují jakým způsobem budou časová data na webovém klientu
 zobrazena. Díky tomuto nastavení je možné, nehledě na formát časového
 atributu, nastavit kterýkoli nabízený časový formát. V tomto formátu
+%% ML: klientovi, zkus ten odstavec jeste jednou projit a procistit
 budou zobrazeny časové hodnoty na webovém klientovy. V případě volby
 formátu je nutné znát původní data. Přejde se tím situacím kdy
 uživatel zvolí formát zobrazující pouze roky, zatímco původní data
 budou v rozpětí jednoho dne.
 
+%% ML: rozdelit souveti?
 Jestli jsou časové vrstvy dobře nastaveny, a výpočet proběhl korektně,
 se lze v předposledním kroku publikace přesvědčit v souhrnu publikovaného
 projektu (obrázek \ref{fig:publishing-summary}).
@@ -216,7 +241,7 @@ projektu (obrázek \ref{fig:publishing-summary}).
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.9\textwidth]{../img/project-publishing-time-summary.png}
-\caption{Souhrnu publikovaného projektu v Gisquick pluginu}
+\caption{Souhrn publikovaného projektu v Gisquick pluginu}
 \label{fig:publishing-summary}
 \end{figure}
 
@@ -483,15 +508,24 @@ ciferník nenabízí. Stejným způsobem není nabídnuta možnost
 filtrování za pomoci kalendáře v případě, že časový formát
 obsahuje jen hodiny, nebo minuty.
 \item\textit{animační tlačítko s přepínačem} - tlačítkem \textit{PLAY}
-je možné spustit animování aktivní časové vrstvy.  Ve chvíli, kdy je animace aktivována, změní se tlačítko na \textit{STOP}. Tím je možné animování zastavit. V implicitním stavu, kdy je spínač \textit{cumulative} vypnutý, jsou obě šoupátka posouvána současně. V případě jeho aktivace je vždy po jedné sekundě zvyšována hodnota horního šoupátka až do chvíle kdy dosáhne maxima posuvníku. V tom případě je zvyšována hodnota spodního šoupátka (viz. kapitola \ref{sssec:animation}).
+je možné spustit animování aktivní časové vrstvy.  Ve chvíli, kdy je
+animace aktivována, změní se tlačítko na \textit{STOP}. Tím je možné
+animování zastavit. V implicitním stavu, kdy je
+spínač \textit{cumulative} vypnutý, jsou obě šoupátka posouvána
+současně. V případě jeho aktivace je vždy po jedné sekundě zvyšována
+hodnota horního šoupátka až do chvíle kdy dosáhne maxima posuvníku. V
+tom případě je zvyšována hodnota spodního šoupátka
+(viz. kapitola \ref{sssec:animation}).
 \end{itemize}
 
 \subsection{Princip časové filtrace}
 \label{sssec:time-filtration}
 
-Jak bylo zmíněno v kapitole \ref{sssec:qgis-server}, QGIS server nepodporuje ve specifikaci WMS operace \textit{GetMap} parametr \textit{TIME}. Z toho důvodu je nutné
-použít obdobnou metodu, kterou používá MapServer, a to nahrazení
-parametru \textit{TIME} parametrem \textit{FILTER}.
+Jak bylo zmíněno v kapitole \ref{sssec:qgis-server}, QGIS server
+nepodporuje ve specifikaci WMS operace \textit{GetMap}
+parametr \textit{TIME}. Z toho důvodu je nutné použít obdobnou metodu,
+kterou používá MapServer, a to nahrazení parametru \textit{TIME}
+parametrem \textit{FILTER}.
 
 \noindent
 Parametr \textit{FILTER} lze použít v operaci \textit{GetMap} následovně
@@ -537,20 +571,24 @@ vytvořený.
 \label{sssec:initialization}
 
 Pokud není volba \textit{Use cache} při publikování projektu vypnutá
-(viz. obrázek \ref{fig:gisquick-plugin-layers}), používá Gisquick webový
-klient pro zobrazování mapových vrstev předem vytvořených mapových
-dlaždic uložených v mezipaměti serveru (viz. specifikace WMTS kapitoly \ref{sssec:ogc}). Pro možnosti filtrace vrstev
-na základě jejich časové hodnoty parametru však tento způsob nelze
+(viz. obrázek \ref{fig:gisquick-plugin-layers}), používá Gisquick
+webový klient pro zobrazování mapových vrstev předem vytvořených
+mapových dlaždic uložených v mezipaměti serveru (viz. specifikace WMTS
+kapitoly \ref{sssec:ogc}). Pro možnosti filtrace vrstev na základě
+jejich časové hodnoty parametru však tento způsob nelze
 aplikovat. Bylo by totiž nutné vytvořit mapové dlaždice pro všechny
-možné časové intervaly a kombinace vrstev. Z toho důvodu je při aktivaci
-nástroje pro práci s časoprostorovými daty použit \textit{Lifecycle Hook
-Created}. Jedná se o funkci, která se spustí jakmile je Vue komponent
-inicializován. V ní je původní instance třídy \textit{ImageLayer}
-uložena do proměnné \textit{originalLayer} a skryta. Následně je
-vytvořena instance nová, která obsahuje stejné mapové vrstvy jako
-původní. Ta je poté nastavena jako aktivní. V případě, že mapový obraz má být aktualizován, je nutné vždy specifikací WMS (viz. kapitola \ref{sssec:ogc}) znovu generovat jeho obsah. Pokud je nástroj vypnut
-je použita původní instance a webový klient je tedy opět v původním
-nastavení.
+možné časové intervaly a kombinace vrstev. Z toho důvodu je při
+aktivaci nástroje pro práci s časoprostorovými daty
+použit \textit{Lifecycle Hook Created}. Jedná se o funkci, která se
+spustí jakmile je Vue komponent inicializován. V ní je původní
+instance třídy \textit{ImageLayer} uložena do
+proměnné \textit{originalLayer} a skryta. Následně je vytvořena
+instance nová, která obsahuje stejné mapové vrstvy jako původní. Ta je
+poté nastavena jako aktivní. V případě, že mapový obraz má být
+aktualizován, je nutné vždy specifikací WMS
+(viz. kapitola \ref{sssec:ogc}) znovu generovat jeho obsah. Pokud je
+nástroj vypnut je použita původní instance a webový klient je tedy
+opět v původním nastavení.
 
 \subsection{Filtrace jedné časové vrstvy}
 \label{sssec:one-layer-filtration}
@@ -772,8 +810,10 @@ volána metoda \verb|newFrame|. Metoda \verb|newFrame| při každém svém
 zavolání zkontroluje hodnotu spínače \textit{cumulative}:
 \begin{itemize}
 \item\textit{cumulative = TRUE} - pokud je hodnota horního šoupátka
-menší než maximální hodnota časového posuvníku, je zvýšena
-o velikost kroku posuvníku. Pokud je hodnota horního šoupátka vyšší a rozdíl obou šoupátek je větší, než velikost kroku posuvníku, je zvýšena hodnota spodního šoupátka.
+menší než maximální hodnota časového posuvníku, je zvýšena o velikost
+kroku posuvníku. Pokud je hodnota horního šoupátka vyšší a rozdíl obou
+šoupátek je větší, než velikost kroku posuvníku, je zvýšena hodnota
+spodního šoupátka.
 \item\textit{cumulative = FALSE} - pokud je hodnota horního šoupátka
 menší než maximální hodnota časového posuvníku, jsou zvýšeny
 společně obě hodnoty šoupátek o krok časového posuvníku.
