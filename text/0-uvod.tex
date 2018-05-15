@@ -1,19 +1,66 @@
-\necislovana{Úvod} Časoprostorová data jsou pro mnoho lidí velice obecný pojem, pod kterým si často nedovedou nic konkrétního představit. Takto označovaná data jsou v dnešní době již běžně používána ve velké řadě oborů od archeologie, geodézie, geologie, stavebního inženýrství, územního plánování až po armádní účely, zemědělství a meterologii. Nejedná se tedy v žádném případě o specializovaný termín používaný pouze v jednom vědním oboru. 
+\necislovana{Úvod}
 
-Práci s časoprostorovými daty lze rozdělit na dvě skupiny. Na jedné jsou odborníci, kteří časoprostorová data sbírají, provádějí analýzy, vyhodnocují je pomoci specializovaných programů a vytvářejí nad nimi tématické mapy. Na druhé straně je poté široká veřejnost, která používá pouze finální produkt jejich práce. 
+Časoprostorová data jsou pro mnoho lidí velice obecný pojem, pod
+kterým si často nedovedou nic konkrétního představit. Takto označovaná
+data jsou v dnešní době již běžně používána ve velké řadě oborů od
+archeologie, geodézie, geologie, stavebního inženýrství, územního
+plánování až po armádní účely, zemědělství a meterologii. Nejedná se
+tedy v žádném případě o specializovaný termín používaný pouze v jednom
+vědním oboru.
 
-V dřívější době byla možnost publikace těchto dat jen velice omezena. To se v dnešní době s rozšířením internetu a nástupem elektronicky publikovaných map pomoci publikačních platforem rapidně změnilo. Právě Publikační platformy vyplňují mezeru mezi odborníky a širokou veřejností, kdy dávají téměř každému možnost prezentace dat v ucelené formě. 
+Práci s časoprostorovými daty lze rozdělit na dvě skupiny. Na jedné
+jsou odborníci, kteří časoprostorová data sbírají, provádějí analýzy,
+vyhodnocují je pomoci specializovaných programů a vytvářejí nad nimi
+tématické mapy. Na druhé straně je poté široká veřejnost, která
+používá pouze finální produkt jejich práce.
+
+V dřívější době byla možnost publikace těchto dat jen velice
+omezena. To se v dnešní době s rozšířením internetu a nástupem
+elektronicky publikovaných map pomoci publikačních platforem rapidně
+změnilo. Právě Publikační platformy vyplňují mezeru mezi odborníky a
+širokou veřejností, kdy dávají téměř každému možnost prezentace dat v
+ucelené formě.
 
 
-Spojení publikační platformy a časoprostorových dat je potom dalším krokem, který možnost prezentace dat ještě umocní. Pomocí vhodně vytvořených nástrojů pro filtrování dat na základě jejich časové osy se dají vytvářet simulace zobrazující průběh určitého vlivu v čase na určitém místě. Tímto způsobem se dá například jednoduchým způsobem simulovat vývoj požárů, migrace zvěře, nebo expanze měst. Pro uživatele lepšího časového vjemu lze rovněž dosáhnout, vytvořením názorné animace, kdy se zobrazovaný stav mění s předem nastaveným časovým krokem. 
+Spojení publikační platformy a časoprostorových dat je potom dalším
+krokem, který možnost prezentace dat ještě umocní. Pomocí vhodně
+vytvořených nástrojů pro filtrování dat na základě jejich časové osy
+se dají vytvářet simulace zobrazující průběh určitého vlivu v čase na
+určitém místě. Tímto způsobem se dá například jednoduchým způsobem
+simulovat vývoj požárů, migrace zvěře, nebo expanze měst. Pro
+uživatele lepšího časového vjemu lze rovněž dosáhnout, vytvořením
+názorné animace, kdy se zobrazovaný stav mění s předem nastaveným
+časovým krokem.
 
-Jednou z takových publikačních platforem je právě Gisquick. V tomto případě se navíc jedná o interaktivní platformu, kde může uživatel nejenom na data nahlížet, ale také měnit způsob jejich vizualizace. Ke stávajícím datům se rovněž dají přidat podkladové vrstvy, které uživateli zlepší celkový pohled na zobrazovanou situaci. Výhodou při publikaci časoprostorových dat na platformě Gisquick je také jejich univerzálnost. Nezáleží tedy, zdali jsou data s odstupem minut či roků. Díky jednoduchému nastavení lze nástroj přizpůsobit téměř jakémukoli časovému intervalu. Velká benevolence je rovněž ve vstupním formátu časového řetězce.  
+Jednou z takových publikačních platforem je právě Gisquick. V tomto
+případě se navíc jedná o interaktivní platformu, kde může uživatel
+nejenom na data nahlížet, ale také měnit způsob jejich vizualizace. Ke
+stávajícím datům se rovněž dají přidat podkladové vrstvy, které
+uživateli zlepší celkový pohled na zobrazovanou situaci. Výhodou při
+publikaci časoprostorových dat na platformě Gisquick je také jejich
+univerzálnost. Nezáleží tedy, zdali jsou data s odstupem minut či
+roků. Díky jednoduchému nastavení lze nástroj přizpůsobit téměř
+jakémukoli časovému intervalu. Velká benevolence je rovněž ve vstupním
+formátu časového řetězce.
 
 \bigskip
-Na platformu Gisquick resp. její rozšíření o podporu pro časoprostorová data se zaměřuje obsah této práce. Hlavní téma je zaměřeno na implementaci rozhraní pro podporu zobrazování vektorových dat obsahujících časovou složku. V práci je podrobně popsán nástroj pro práci s časoprostorovými daty, jeho jednotlivé části a jeho implementace na platformě Gisquick.
+Na platformu Gisquick resp. její rozšíření o podporu pro
+časoprostorová data se zaměřuje obsah této práce. Hlavní téma je
+zaměřeno na implementaci rozhraní pro podporu zobrazování vektorových
+dat obsahujících časovou složku. V práci je podrobně popsán nástroj
+pro práci s časoprostorovými daty, jeho jednotlivé části a jeho
+implementace na platformě Gisquick.
 
-Součástí implementace je také část zaměřena na rozšíření zásuvného modulu pro program QGIS. Do něj bylo vloženo nutné uživatelské rozhraní umožňující uživateli zvolit pro jednotlivé vrstvy jejich časový atribut tj. atribut obsahující časovou hodnotu. V této závěrečné části je popsán samotný plugin, jeho funkce v publikaci projektu a postup, kterým je jeho bylo uživatelské rozhraní doplněno. 
+Součástí implementace je také část zaměřena na rozšíření zásuvného
+modulu pro program QGIS. Do něj bylo vloženo nutné uživatelské
+rozhraní umožňující uživateli zvolit pro jednotlivé vrstvy jejich
+časový atribut tj. atribut obsahující časovou hodnotu. V této
+závěrečné části je popsán samotný plugin, jeho funkce v publikaci
+projektu a postup, kterým je jeho bylo uživatelské rozhraní doplněno.
 
-S rozšířením platformy také úzce souvisí výzkum možných metod práce s časoprostorovými daty použitelných pro platformu Gisquick. Rešerše již aplikovaných metod na webových mapových serverech a aplikacích je obsažena v první části práce. 
+S rozšířením platformy také úzce souvisí výzkum možných metod práce s
+časoprostorovými daty použitelných pro platformu Gisquick. Rešerše již
+aplikovaných metod na webových mapových serverech a aplikacích je
+obsažena v první části práce.
 %Je zde rovněž rozebrán způsob práce s časoprostorovými daty pro webové platformy obecně a stručný popis jejich základního fungování.
 
