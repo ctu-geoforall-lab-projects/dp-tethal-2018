@@ -253,18 +253,25 @@ projektu (obrázek \ref{fig:publishing-summary}).
 
 Poté co uživatel v záložce \textit{Layers} nastaví všechny požadované
 parametry může svou volbu potvrdit tlačítkem \textit{Next}, které
+%% ML: vypocet ceho, vysvetlit (mas to vysvetleno dale v textu), tady
+%% by stacilo jednim slovem
 spustí výpočet a zobrazí další krok publikace.
 
 Do výpočetního procesu se dostanou pouze ty vrstvy, které splňují dvě
+%% ML: prazdny -> neni zadan 
 podmínky. Jejich časový atribut musí existovat a nesmí být prázdným
+%% ML: Rastry nejsou soucasti zadani, ta veta je zavadejici.
 textovým řetězcem. Tyto podmínky eliminují výpočet nad rastrovými
 vrstvy. Dále zajistí to, že do výpočtu se dostanou pouze ty vrstvy,
 které mají nastavený časový atribut. Tyto vrstvy jsou dále v textu
+%% ML: spis casoprostorove
 označovány jako časové.
 
+%% ML: totozne?
 Výpočet probíhá pro jednotlivé vrstvy splňující vstupní podmínky
 totožně. Pro každou časovou vrstvu je volána metoda \verb|get_time_info|.
 
+%% ML: 2x ve vete metoda
 V prvním kroku metody \verb|get_time_info| je metodou
 \verb|validate_time_attribute| vytvořena validační maska. Jedná se o pole,
 které svou velikostí odpovídá počtu mapových prvků \textit{Features}
@@ -291,6 +298,7 @@ může validační maska vypadat následovně:
 ]
 \end{verbatim}
 
+%% ML: preteceni textu
 Během vytváření validační masky jsou rovnou data kontrolována metodou
 \verb|validate|. Díky tomu je možné zjistit jaká data maska obsahuje,
 aniž by bylo nutné její jednotlivé prvky procházet. Po její vytvoření
@@ -300,6 +308,7 @@ jsou možné pouze tři scénáře popsané níže a zobrazené v obrázku
 %!!!!!!!!!!!!!!!!!!!
 %specialni znak
 
+%% ML: itemize -> enumerate ?
 \begin{itemize}
 \item\textit{Data nejsou validní} - znamená, že ani jedna
 hodnota v zadaném časovém atributu nemá validní časový
@@ -311,16 +320,20 @@ neobsahuje speciální znak, který by jeho použití pro následnou
 filtraci mapových prvků v původní podobě znemožnil použít.
 \begin{itemize}
 \item\textit{Obsahuje speciální znak} - zde se pokračuje
-způsobem stejným jako v případě \textit{Data jsou
+%% ML: davej si pozor na predlozky na konci radky, tady doplneno ~,
+%% zkrontroluj to dale v textu
+způsobem stejným jako v~případě \textit{Data jsou
 	validní, ale obsahují více časových formátů} popsaném
 níže. Například při použití data v textovém formátu
-'YYYY-MM-DDTHH:mm:SS', kdy je použit znak 'T' oddělující
+'YYYY-MM-DDTHH\newline:mm:SS', kdy je použit znak 'T' oddělující
 datum a čas, nelze textový řetězec v parametru
+%% ML: za viz se nepise carka, zkontroluj dale v textu
 \textit{FILTER} (viz. kapitola \ref{sssec:time-filtration})
 použít.
 \item\textit{Neobsahuje speciální znak} - časové hodnoty
 jsou metodou \\* \verb|get_min_max_mask| za pomocí formátu,
 zjištěného časového z validační masky, převedeny do
+%% ML: vysvetlit unix time - poznamka pod carou
 časového formátu \textit{UNIX TIME}. Z těchto hodnot
 jsou poté zjištěny jejich maximální a minimální
 hodnoty. Ty jsou součástí návratové hodnoty metody
@@ -358,6 +371,7 @@ jsou jeho hodnoty pouze přepsány.
 
 Posledním krokem je poté pouze export zjištěných hodnot do metadatového
 souboru. Každé časové vrstvě je vypsán časový formát pro zobrazení
+%% ML: na ?
 časových hodnot na webovém klientu. Dále název časového atributu,
 minimální a maximální hodnota časového atributu ve formátu \textit{UNIX
 TIME} a další parametry, které budou popsány a vysvětleny dále. V
@@ -369,10 +383,13 @@ s hodnoty ve formátu \textit{UNIX TIME}, je vypsán jeho název.
 \label{sssec:metadata}
 
 Metadatový soubor (viz. kapitola \ref{sssec:gisquick-komponenty}, část
+%% ML: vznika
 \textit{Gisquick plugin}) je textový soubor, který vniká publikací
 projektu Gisquick pluginem. Obsahuje množství informací, které jsou
+%% ML na strane
 nutné pro správnou konfiguraci straně webového klienta.
 
+%% ML: jdou -> jsou
 Pokud jsou vrstvy při publikaci označeny jako časové a jejich data jdou
 validní, jsou do nich vepsány následující hodnoty:
 
@@ -449,10 +466,13 @@ zobrazeny nejsou:
 
 \newpage
 \section{Implementace nástroje do webového klienta}
+
+%% ML: prvni vetu prespis, nezni cesky
 Webový klient obsahuje hlavní část implementace rozšíření pro podporu
 časoprostorových dat. Jedná se o jednoduchý nástroj, který umožňuje
 filtrovat mapové prvky jednotlivých časových vrstev na základě jejich
 časového atributu. Časový interval je možné nastavit pomoci posuvníku,
+%% ML: na?
 nebo přímo pomocí kalendáře a hodinového ciferníku. Nástroj na
 webovém klientu umožňuje dále vytvářet jednoduché animace. Uživatel
 má možnost zmíněnou filtraci mapových prvků provádět pro jednotlivé
@@ -464,8 +484,9 @@ vrstvy, nebo pro více vrstev současně.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=1\textwidth]{../img/gisquick-time-tool.png}
+%% ML: zdroj
 \caption{Webové rozhraní Gisquick platformy s aktivovaným nástrojem
-pro páci s časoprostorovými daty}
+pro práci s časoprostorovými daty}
 \label{fig:gisquick-client}
 \end{figure}
 
@@ -480,14 +501,15 @@ případě aktivace nástroje je toto pole jediný prvek, který
 je uživateli zobrazen. Jako první krok je nejprve nutné vybrat
 časovou vrstvu, která bude použita. Toho lze docílit pomocí
 zmíněného roletového menu, které obsahuje všechny časové
-vrstvy. Dále je zde možnost "All visible layers", která uživateli
+%% ML: pro uvozovky pouzivej \uv{}
+vrstvy. Dále je zde možnost \uv{All visible layers}, která uživateli
 umožňuje výběr všech viditelných časových vrstev.
 \item\textit{jméno časového atributu} - tento prvek neumožňuje
 uživateli jakoukoli interakci s nástrojem a má tedy čistě
 informativní charakter. Je zde vypsán název časového atributu
 vybrané vrstvy. Jeho existence je přínosná především v
 případě, kdy projekt obsahuje více časových vrstev s odlišným
-časovým parametrem. Při výběru možnosti "All visible layers" je
+časovým parametrem. Při výběru možnosti \uv{All visible layers} je
 možné použít pouze vrstvy se stejným parametrem. Uživatel je tedy
 tomto případě informován pro jaký parametr jsou vrstvy vybrány.
 \item\textit{dvojitý časový posuvník} - jedná se posuvník
@@ -583,8 +605,10 @@ aplikovat. Bylo by totiž nutné vytvořit mapové dlaždice pro všechny
 možné časové intervaly a kombinace vrstev. Z toho důvodu je při
 aktivaci nástroje pro práci s časoprostorovými daty
 použit \textit{Lifecycle Hook Created}. Jedná se o funkci, která se
+%% ML: komponenta?
 spustí jakmile je Vue komponent inicializován. V ní je původní
 instance třídy \textit{ImageLayer} uložena do
+%% ML: a skryta??
 proměnné \textit{originalLayer} a skryta. Následně je vytvořena
 instance nová, která obsahuje stejné mapové vrstvy jako původní. Ta je
 poté nastavena jako aktivní. V případě, že mapový obraz má být
@@ -606,6 +630,7 @@ je popsán dále.
 \bigskip
 \noindent \textbf{Inicializace}
 
+%% ML: je nutna? I tak zkus prepsat
 Nejprve nutná inicializace časového posuvníku. Na něm jsou závislé
 další uživatelské prvky jako například \textit{časové štítky}
 (viz. kapitola \ref{sssec:gisquick-client-ui}). Jeho minimální a maximální
@@ -633,6 +658,7 @@ datetime\textunderscore mask} zvoleného během publikace projektu
 \noindent \textbf{Filtrace}
 %\ref{appendix}
 Způsob, jakým je aktualizována mapa na základě změny časových hodnot je
+%% ML: kde je dokumentace?
 popsána v dokumentaci časového nástroje. Zde je popsán princip, kterým je
 mapový obraz dle stávajícího nastavení časového nástroje aktualizován.
 
@@ -658,6 +684,7 @@ TIME} (viz. kapitola \ref{sssec:plugin-functionality}). Parametr
 \ref{sssec:metadata}) obsahuje informaci o jeho vytvoření.
 \begin{itemize}
 \item\textit{unix = TRUE} - znamená to, že filtrace není
+%% ML: hodnotami
 provedena nad hodnoty původního časového atributu, ale
 pomocného atributu. Pro tuto kofiguraci je textový řetězec
 sestaven pouze z parametrů poskytovaných metadatovým
@@ -676,10 +703,12 @@ atributu je součástí metadatového souboru jako
 Na konci tohoto kroku jsou poté spojeny dohromady obsahy parametru
 \textit{FILTER} z ostatních časových vrstev a nově vytvořený.
 \item\textit{nastavení filtrované vrstvy} - tento krok je nezbytný
+%% ML: interpunkce
 z několika důvodů. Je nutné uložit hodnoty časového posuvníku
 v případě že vrstva bude v budoucnu filtrována znovu. Dále je
 nutné uložit použitý obsah parametru \textit{FILTER}, který
 je použit při filtrování ostatních časových vrstev. Jako
+%% ML: ta veta zni divne
 poslední věc je změněn název vrstvy tak, aby obsahoval její
 jméno spolu s časovou hodnotou. Tímto způsobem uživatel ihned
 ví, které vrstvy byly již filtrovány.
@@ -798,6 +827,7 @@ způsoben jako u filtrace jednotlivé vrstvy.
 \label{fig:multiple-chart}
 \end{figure}
 
+%% ML: nazev kapitoly zni divne, zkus preformulovat
 \subsection{Animace filtrace}
 \label{sssec:animation}
 
