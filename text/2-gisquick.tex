@@ -3,18 +3,21 @@
 \newpage
 
 %% ML: vyhni se sklonovani, napr. Predstaveni platformy Gisquick
-\section{Úvod do Gisquick}
+%% DT : opraveno
+\section{Představení platformy Gisquick}
 
 %% ML: daty->zdrojovym kodem (nebo co jsi mel na mysli?)
-Gisquick je webová mapová publikační platforma s otevřenými daty. Jejím
+%% DT : zdrojový kód
+Gisquick je webová mapová publikační platforma s otevřeným zdrojovým kódem. Jejím
 účelem je snadné a rychlé publikování projektů vytvořených v programu
 QGIS, které je možné posléze prohlížet na webovém rozhraní platformy
 Gisquick.
 %% ML: vyhni se zavorce, vetu prepis, je divna
-Celá platforma se skládá z několika komponentů (jejich obecné fungování
-je popsáno v kapitole \ref{sssec:fungovani-platforem} ). Komponenty jsou
+%% DT: prepsano
+Celá platforma se skládá z několika komponentů. Jejich obecnému popisu je věnována kapitola \ref{sssec:fungovani-platforem}. Komponenty platformy Gisquick jsou představeny
 %% ML: jsou popsany v nasledujici kapitole.
-následující.
+%% DT: preformuovano
+v následující kapitole \ref{sssec:gisquick-komponenty}.
 
 \subsection{Komponenty}
 \label{sssec:gisquick-komponenty}
@@ -22,19 +25,20 @@ následující.
 
 \begin{itemize}
 %% ML: prvni veta je nejasna, jaky projekt? prepsat
+%% DT: prepsano
 \item\textit{Gisquick plugin} - jedná se o zásuvný modul pro
-program QGIS, pomocí kterého je možné existující projekt
-publikovat. Publikace je nutná pro pozdější použití projektu
-na platformě Gisquick. Během samotné publikace si může každý
+program QGIS. Pomocí Gisquick pluginu je možné publikovat projekt vytvořený v programu QGIS. Publikace je nutná pro pozdější použití projektu na platformě Gisquick. Během samotné publikace si může každý
 uživatel projekt nastavit tak, aby zobrazovaný předmět zájmu
 přesně odpovídal jeho požadavkům (možnost selekce jednotlivých
 vrstev, nastavení maximálního a minimálního měřítka,
 atd.). Gisquick plugin pracuje zcela odděleně od ostatních
 %% ML: komponent
-komponentů a jeho výstupem je složka obsahující všechny použité
+%% DT: opraveno
+komponent a jeho výstupem je složka obsahující všechny použité
 %% ML: ulozeny -> upraveny (?) Vstupem je take QGIS projekt. Mluvis
 %% najednou o formatu, klidne bych se drzel ``QGIS projekt''
-vrstvy, uložený projekt ve formátu .qgs a metadatový soubor. Ten
+%% DT: opraveno na "upravený QGIS projekt"
+vrstvy, upravený QGIS projekt a metadatový soubor. Ten
 obsahuje nastavení provedené během procesu publikace a dále popis
 projektu. Metadatový soubor je použit pro potřeby webového klienta.
 \item\textit{webový server} - webový server zpracovává
@@ -44,8 +48,7 @@ obrazů. Na straně webového serveru je použit aplikační rámec Django,
 který je stejně jako Gisquick plugin psaný v jazyce Python.
 %% ML: prvni veta moc nedava smysl, prepis
 %% ML: muzes uvest odkaz na kapitolu v casti I
-\item\textit{QGIS server} - jedná se o webový mapový server
-na základě kterého jsou vytvářeny mapové obrazy. Použití
+\item\textit{QGIS server} - jedná se o webový mapový server. Jeho obecný princip je zmíněný v kapitole \ref{sssec:fungovani-platforem}. Použití
 QGIS serveru je dáno skutečností, že veškeré mapové prvky
 zde vytvořené korespondují svým vzhledem s prvky vytvořenými
 v QGIS desktopové aplikaci. Díky tomu si může být uživatel

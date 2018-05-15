@@ -1,0 +1,33 @@
+\select@language {english}
+\select@language {czech}
+\select@language {english}
+\select@language {czech}
+\contentsline {figure}{\numberline {1}{\ignorespaces Diagram zn\IeC {\'a}zor\IeC {\v n}uj\IeC {\'\i }c\IeC {\'\i } z\IeC {\'a}kladn\IeC {\'\i } \IeC {\v c}\IeC {\'a}sti interaktivn\IeC {\'\i }ch mapov\IeC {\'y}ch platforem a jejich interakci s u\IeC {\v z}ivatelem: \cite {web_mapping}}}{13}{figure.1}
+\contentsline {figure}{\numberline {2}{\ignorespaces Logo MapServer: \cite {mapserver_about}}}{20}{figure.2}
+\contentsline {figure}{\numberline {3}{\ignorespaces Uk\IeC {\'a}zka zobrazuj\IeC {\'\i }c\IeC {\'\i } webovou platformu Gay Stand Sands a jej\IeC {\'\i } u\IeC {\v z}ivatelsk\IeC {\'e} rozhran\IeC {\'\i }}}{23}{figure.3}
+\contentsline {figure}{\numberline {4}{\ignorespaces Logo GeoServer \cite {geoserver-layer-edit}}}{24}{figure.4}
+\contentsline {figure}{\numberline {5}{\ignorespaces Z\IeC {\'a}lo\IeC {\v z}ka konfigurace \IeC {\v c}asov\IeC {\'e} vrstvy na GeoServeru \cite {geoserver-layer-edit}}}{25}{figure.5}
+\contentsline {figure}{\numberline {6}{\ignorespaces Uk\IeC {\'a}zka zobrazuj\IeC {\'\i }c\IeC {\'\i } webovou platformu MetEye}}{28}{figure.6}
+\contentsline {figure}{\numberline {7}{\ignorespaces Uk\IeC {\'a}zka zobrazuj\IeC {\'\i }c\IeC {\'\i } webovou platformu Pennsylvania Cancer Atlas a jej\IeC {\'\i } u\IeC {\v z}ivatelsk\IeC {\'e} rozhran\IeC {\'\i } s mo\IeC {\v z}nost\IeC {\'\i } animace dle \IeC {\v c}asov\IeC {\'e}ho obdob\IeC {\'\i } statistik}}{29}{figure.7}
+\contentsline {figure}{\numberline {8}{\ignorespaces Logo ArcGIS}}{29}{figure.8}
+\contentsline {figure}{\numberline {9}{\ignorespaces Dialogov\IeC {\'e} okno nastaven\IeC {\'\i } \IeC {\v c}asov\IeC {\'e} vrstvy v desktopov\IeC {\'e} aplikaci ArcGIS}}{31}{figure.9}
+\contentsline {figure}{\numberline {10}{\ignorespaces N\IeC {\'a}stroj pro spr\IeC {\'a}vu \IeC {\v c}asov\IeC {\'y}ch vrstev}}{34}{figure.10}
+\contentsline {figure}{\numberline {11}{\ignorespaces Uk\IeC {\'a}zka u\IeC {\v z}ivatelsk\IeC {\'e}ho rozhran\IeC {\'\i } platformy Gisquick\cite {gisquick-prague}}}{40}{figure.11}
+\contentsline {figure}{\numberline {12}{\ignorespaces Uk\IeC {\'a}zka u\IeC {\v z}ivatelsk\IeC {\'e}ho rozhran\IeC {\'\i } Gisquick pluginu pro QGIS}}{41}{figure.12}
+\contentsline {figure}{\numberline {13}{\ignorespaces Loga n\IeC {\'\i }\IeC {\v z}e popsan\IeC {\'y}ch softwar\IeC {\r u}}}{42}{figure.13}
+\contentsline {figure}{\numberline {14}{\ignorespaces Nastaven\IeC {\'\i } vrstev v Gisquick pluginu}}{44}{figure.14}
+\contentsline {figure}{\numberline {15}{\ignorespaces Souhrn publikovan\IeC {\'e}ho projektu v Gisquick pluginu}}{45}{figure.15}
+\contentsline {figure}{\numberline {16}{\ignorespaces V\IeC {\'y}vojov\IeC {\'y} diagram publikace \IeC {\v c}asov\IeC {\'e} vrstvy}}{48}{figure.16}
+\contentsline {figure}{\numberline {17}{\ignorespaces Webov\IeC {\'e} rozhran\IeC {\'\i } Gisquick platformy s aktivovan\IeC {\'y}m n\IeC {\'a}strojem pro p\IeC {\'a}ci s \IeC {\v c}asoprostorov\IeC {\'y}mi daty}}{52}{figure.17}
+\contentsline {figure}{\numberline {18}{\ignorespaces V\IeC {\'y}vojov\IeC {\'y} diagram filtrace v\IeC {\'\i }ce \IeC {\v c}asov\IeC {\'y}ch vrstev najednou}}{57}{figure.18}
+\contentsline {figure}{\numberline {19}{\ignorespaces V\IeC {\'y}vojov\IeC {\'y} diagram filtrace v\IeC {\'\i }ce \IeC {\v c}asov\IeC {\'y}ch vrstev najednou}}{60}{figure.19}
+\contentsline {figure}{\numberline {20}{\ignorespaces V\IeC {\'y}vojov\IeC {\'y} diagram metody animate}}{61}{figure.20}
+\contentsline {figure}{\numberline {21}{\ignorespaces Time layers options in publication wizard}}{70}{figure.21}
+\contentsline {figure}{\numberline {22}{\ignorespaces Time layers publication summary}}{71}{figure.22}
+\contentsline {figure}{\numberline {23}{\ignorespaces Tool menu}}{71}{figure.23}
+\contentsline {figure}{\numberline {24}{\ignorespaces Dropdown menu containing time layers}}{72}{figure.24}
+\contentsline {figure}{\numberline {25}{\ignorespaces Dropdown menu containing time attributes}}{72}{figure.25}
+\contentsline {figure}{\numberline {26}{\ignorespaces Initialized time filtering tool}}{73}{figure.26}
+\contentsline {figure}{\numberline {27}{\ignorespaces Double range slider}}{74}{figure.27}
+\contentsline {figure}{\numberline {28}{\ignorespaces Date time picker}}{74}{figure.28}
+\contentsline {figure}{\numberline {29}{\ignorespaces Time animation stop button}}{75}{figure.29}
