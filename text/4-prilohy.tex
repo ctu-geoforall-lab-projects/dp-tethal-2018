@@ -6,6 +6,7 @@
 \appendix
 
 \newpage
+%% ML: priloha bude jedna (zip), volil bych jednotne cislo
 \section{Struktura elektronických příloh}
 \label{struktura_příloh}
 
@@ -30,13 +31,15 @@
 \put(150, 130){zdrojový kód programu LaTeX}
 \put( 16, 120){\line(0, 1){10}}
 \put( 16, 120){\line(1, 0){10} { david-tethal-dp-2018.pdf}}
-\put(150, 120){text diplmové práce}
+\put(150, 120){text diplomové práce ve formátu PDF}
 \put(  1, 100){\line(0, 1){50}} 
 \put(  1, 100){\line(1, 0){10} {\textbf{ zadani}}} 
 \put( 16, 90){\line(0, 1){8}}
 \put( 16, 90){\line(1, 0){10} { zadanidp.pdf}} 
 \put(150, 90){zadání diplomové práce}
-\put(  1, 70){\line(0, 1){50}} 
+\put(  1, 70){\line(0, 1){50}}
+%% ML: v nazvu souboru/adresaru bych se vyvaroval diakritiky, klidne
+%% nech anglicky nazev, jako je ted v gitu
 \put(  1, 70){\line(1, 0){10} {\textbf{ vzorový-projekt}}} 
 \put(150, 70){vzorový QGIS projekt}
 
@@ -46,8 +49,16 @@
 \section{Uživatelský manuál}
 \label{uzivatelsky_manual}
 
-Uživatelský manuál se skládá ze dvou částí. První obsahuje postup pro instalaci a spuštění platformy Gisquick na lokálním zařízení. Druhá část obsahuje uživatelské rozhraní zásuvného modulu pro platformu QGIS a dále Gisquick webového klienta. Uživatelské rozhraní je popsáno pouze pro části, které obsahují rozhraní pro práci s časoprostorovými daty.
-Vzhledem k mezinárodnímu použití platformy Gisquick je grafické uživatelské rozhraní psáno v anglickém jazyce.
+Uživatelský manuál se skládá ze dvou částí. První obsahuje postup pro
+instalaci a spuštění platformy Gisquick na lokálním zařízení. Druhá
+%% ML: obsahuje popis / popisuje?
+část obsahuje uživatelské rozhraní zásuvného modulu pro platformu QGIS
+a dále Gisquick webového klienta. Uživatelské rozhraní je popsáno
+pouze pro části, které obsahují rozhraní pro práci s časoprostorovými
+%% ML: lokalizovano v anglickem jazyce a take text uzivatelskeho
+%% manual je napsan v anglickem jazyce
+daty.  Vzhledem k mezinárodnímu použití platformy Gisquick je grafické
+uživatelské rozhraní psáno v anglickém jazyce.
 
 \subsection{Instalace}
 \label{manual_instalace}
@@ -62,20 +73,23 @@ contain attribute with time value may be used.
 
 This section contains user manual describing process of time layers 
 publication in Gisquick plugin for QGIS together with functions of time
+%% ML: client
 filtering tool in Gisquick klient.  
 
 \bigskip
 \noindent \textbf{Publication process}
 
-There is small settings in order to keep 
-publication process simple and easy to handle for any user. Time layer 
-may be set up in the first page of the publication wizard in the tab \textit{Layers}.
-Dropdown menu \textbf{Time Attribute} defines which layer attribute contains
-time values. In case this column is left blank layer won't be listed in 
-the time filter tool. Second option is \textbf{Date Mask}. Time values may 
-have different formats in different countries. No matter how original 
-time format looks like, date mask offers a possibility to customize 
-displayed date format in Gisquick client.
+%% ML: small settings, prepsat
+There is small settings in order to keep publication process simple
+and easy to handle for any user. Time layer may be set up in the first
+page of the publication wizard in the tab \textit{Layers}.  Dropdown
+menu \textbf{Time Attribute} defines which layer attribute contains
+%% ML: In case that ? nebo lepe...
+time values. In case this column is left blank layer won't be listed
+in the time filter tool. Second option is \textbf{Date Mask}. Time
+values may have different formats in different countries. No matter
+how original time format looks like, date mask offers a possibility to
+customize displayed date format in Gisquick client.
 
 \begin{figure}[h!]
 	\centering
