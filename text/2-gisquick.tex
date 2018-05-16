@@ -48,23 +48,26 @@ obrazů. Na straně webového serveru je použit aplikační rámec Django,
 který je stejně jako Gisquick plugin psaný v jazyce Python.
 %% ML: prvni veta moc nedava smysl, prepis
 %% ML: muzes uvest odkaz na kapitolu v casti I
+%% DT: opraveno, doplneno
 \item\textit{QGIS server} - jedná se o webový mapový server. Jeho obecný princip je zmíněný v kapitole \ref{sssec:fungovani-platforem}. Použití
 QGIS serveru je dáno skutečností, že veškeré mapové prvky
 zde vytvořené korespondují svým vzhledem s prvky vytvořenými
 v QGIS desktopové aplikaci. Díky tomu si může být uživatel
 jistý tím, že publikovaný projekt bude věrně odpovídat jeho
 původnímu projektu.
-\item\textit{webový a mobilní klient} - klient uživateli nabízí
+\item\textit{webový a mobilní klient} - webový klient nabízí uživateli
 %% ML: cele?
-uživatelské rozhraní celé aplikace, ve kterém se může
+%% DT: odstraneno
 %% ML: interagovat -> cestina
 %% ML: orientovat? zkus prepsat cela veta zni divne
-orientovat a pomocí kterého interaguje s webovým serverem a tak
-mění zobrazovaný obsah. Právě této části spolu s Gisquick
+%% DT: preformulovano
+rozhraní aplikace, pomocí kterého může interagovat s webovým 
+serverem a tak
+měnit zobrazovaný obsah mapového okna. Právě této části spolu s Gisquick
 pluginem byla je v této práci věnována největší pozornost.
 \end{itemize}
 
-\subsection{Uživatelské rozhraní}
+\subsection{Uživatelské rozhraní webového klienta}
 
 %% ML: rozdelit na dve podkapitoly: UI weboveho klienta a zasuvneho modulu
 \begin{figure}[h!]
@@ -89,14 +92,16 @@ nástroj sloužící k zjišťování souřadnic, měření vzdáleností
 a ploch. Hlavní část je věnována interaktivní mapové kompozici. Ta
 poskytuje možnost změny velikosti a polohy výřezu zobrazovaného území.
 
+\newpage
+\subsection{Uživatelské rozhraní zásuvného modulu}
+
 \begin{figure}[h!]
-\centering
-\includegraphics[width=0.7\textwidth]{../img/gisquick_plugin.png}
-\caption{Ukázka uživatelského rozhraní Gisquick pluginu pro QGIS}
-\label{fig:gisquick-plugin}
+	\centering
+	\includegraphics[width=0.7\textwidth]{../img/gisquick_plugin.png}
+	\caption{Ukázka uživatelského rozhraní Gisquick pluginu pro QGIS}
+	\label{fig:gisquick-plugin}
 \end{figure}
 
-\newpage
 Gisquick plugin pro QGIS rovněž disponuje uživatelským rozhraním, kde
 pomocí jednoduchého dialogového okna jsou nabízeny možnosti nastavení
 pro export vrstev. Jeho první část je rozdělena na tři záložky a
@@ -106,8 +111,9 @@ jako například OpenStreetMap, nebo Bing mapy. V další záložce
 \textit{Layers} je možno nastavit, které vrstvy budou publikované. Při
 implementaci podpory pro časoprostorová data bylo nastavení v této
 %% ML: uved konkretni odkaz na kapitolu
+%% DT: doplneno
 záložce rozšířeno o další možnosti. Tomuto rozšíření se bude
-práce věnovat detailněji v dalších částech. V poslední záložce je
+práce věnovat detailněji v dalších částech (viz. kapitola \ref{ssec:plugin-implementace}). V poslední záložce je
 obecné nastavení projektu. Další okno slouží k nastavení \textit{topics}
 nebo-li tématicky orientovaných vrstev \cite{gisquick-manual}. Předposlední
 stránka obsahuje pouze souhrn publikovaného projektu. Poslední zobrazuje
@@ -128,14 +134,16 @@ vytvoří. Ty je posléze nutné nahrát na Gisquick publikační server.
 \textbf{Vue.js} - jedná se o moderní aplikační rámec s otevřeným kódem
 napsaný v programovacím jazyce JavaScript, jehož první verze byla vydaná
 %% ML: Veta zacinajici na ``Jeho hlavni pouziti ...'' nezni moc pekne...
-začátkem roku 2014 Evanem You \cite{vue-history}. Jeho hlavní použití je
-vývoj uživatelského rozhraní aplikací, tedy na straně webového klienta
+%% DT: preformulovano 
+začátkem roku 2014 Evanem You \cite{vue-history}. Vue.js je využíváno především
+na vývoj uživatelského rozhraní aplikací, tedy na straně webového klienta
 (viz. kapitola \ref{sssec:fungovani-platforem}). Uživatelské rozhraní
 je za pomoci Vue.js rozděleno na několik  komponent, kdy každá obsahuje
 vlastní JavaScript, HTML a CSS skripty. Jednotlivé komponenty dělají kód
 %% ML: prehodit slova: vzdy jsou
-přehlednější a aplikace výkonově méně náročnější. Protože vždy
-jsou použity jenom ty komponenty, které koncový uživatel v danou chvíli
+%% DT: opraveno
+přehlednější a aplikace výkonově méně náročnější. Protože jsou vždy
+použity jenom ty komponenty, které koncový uživatel v danou chvíli
 potřebuje. Mezi další výhody Vue.js patří mimo práce s komponenty
 jeho reaktivita, a úpravu objektového modulu dokumentu (DOM).
 
@@ -189,14 +197,18 @@ spadají OpenLayers pod organizaci OSGeo.
 
 \newpage
 \section{Implementace nástroje pro Gisquick plugin}
+\label{ssec:plugin-implementace}
 
 %% ML: vystupy? mozna soubory vytvarene Gisquick pluginem?
-V kapitole \ref{sssec:gisquick-komponenty} jsou zmíněny výstupy z Gisquick
-pluginu. Jedná se o složku obsahující projekt ve formátu .qgs, data
+%% DT: doplneno
+V kapitole \ref{sssec:gisquick-komponenty} jsou zmíněny soubory vytvářené
+Gisquick pluginen. 
+Jedná se o složku obsahující projekt ve formátu .qgs, data
 použita v projektu a metadatový textový soubor. Hlavním cílem úprav
 Gisquick pluginu bylo vytvoření jednoduchého uživatelského rozhraní,
 %% ML: umoznuje nesedi, bude umoznovat anebo umoznujici
-které umožňuje definovat všechny potřebné parametry sloužící ve
+%% DT: umoznujici
+umožňující definovat všechny potřebné parametry sloužící ve
 webovém klientu k inicializaci nástroje pro práci s časovými daty. Tyto
 parametry jsou během publikace pro jednotlivé vrstvy nastavené a dále
 vepsané do metadatového souboru.
@@ -215,64 +227,76 @@ Obrázek \ref{fig:gisquick-plugin-layers} zobrazuje dialogové okno publikace
 projektu pomocí Gisquick pluginu. V prvním kroku publikace, v záložce
 vrstvy \textit{Layers} je pro vektorové vrstvy přidáno nové nastavení. V
 %% ML: napis proc, rastrova data jsou nad ramec zadani prace
-vřípadě rastrových vrstev, jako je například v obrázku zvolená vrstva dmt,
-možnost nastavení časových vrstev není možná.
+%% DT: doplneno
+případě rastrových vrstev, jako je například v obrázku zvolená vrstva dmt,
+možnost nastavení časových vrstev není možná. Rastrová data jsou nad rámec 
+zadání práce a jejich podpora tedy není implementována.
 
 %% ML: vsechny/kazde zni divne
-Ve sloupci \textit{Time Attribute} jsou v roletovém menu vypsány
+%% DT: opraveno
 %% ML: co to znamena? pro nastaveni (prazdny retezec), zkus prepsat,
 %% at je to jasnejsi
-všechny atributy každé vrstvy. Implicitní hodnota je prázdný textový
-řetězec. Zde je nutné pro každou časovou vrstvu vybrat atribut, který
-obsahuje časové hodnoty (dále jen časový atribut).
+%% DT:preformulovano
+Ve sloupci \textit{Time Attribute} jsou v roletovém menu vypsány
+atributy jednotlivých vrstev. Implicitně není zvolený žádný atribut. 
+V roletovém menu je nutné pro každou časovou vrstvu vybrat ten 
+atribut, který obsahuje časové hodnoty (dále jen časový atribut).
 
 Sloupec \textit{Date Mask} obsahuje roletové menu s časovými formáty,
 které určují jakým způsobem budou časová data na webovém klientu
 zobrazena. Díky tomuto nastavení je možné, nehledě na formát časového
-atributu, nastavit kterýkoli nabízený časový formát. V tomto formátu
+atributu, nastavit kterýkoliv nabízený časový formát. V tomto formátu
 %% ML: klientovi, zkus ten odstavec jeste jednou projit a procistit
-budou zobrazeny časové hodnoty na webovém klientovy. V případě volby
-formátu je nutné znát původní data. Přejde se tím situacím kdy
+%% DT: opraveno
+budou zobrazeny časové hodnoty na webovém klientu. V případě volby
+formátu je nutné znát původní data. Přejde se tím situacím, kdy
 uživatel zvolí formát zobrazující pouze roky, zatímco původní data
 budou v rozpětí jednoho dne.
 
 %% ML: rozdelit souveti?
-Jestli jsou časové vrstvy dobře nastaveny, a výpočet proběhl korektně,
-se lze v předposledním kroku publikace přesvědčit v souhrnu publikovaného
-projektu (obrázek \ref{fig:publishing-summary}).
+%% DT: preformulovano
+V předposledním kroku publikace se lze přesvědčit, zad-li výpočet 
+proběhl korektně. Souhrn publikovaného projektu (obrázek 
+\ref{fig:summary}) obsahuje v odrážce \textit{Time layer data} nově 
+vypočítané parametry.
 
 \begin{figure}[h!]
-\centering
-\includegraphics[width=0.9\textwidth]{../img/project-publishing-time-summary.png}
-\caption{Souhrn publikovaného projektu v Gisquick pluginu}
-\label{fig:publishing-summary}
+	\centering
+	\includegraphics[width=0.8\textwidth]{../img/project-publishing-time-summary.png}
+	\caption{Souhrn publikovaného projektu v Gisquick pluginu}
+	\label{fig:summary}
 \end{figure}
 
 \subsection{Funkcionalita}
 \label{sssec:plugin-functionality}
 
 Poté co uživatel v záložce \textit{Layers} nastaví všechny požadované
-parametry může svou volbu potvrdit tlačítkem \textit{Next}, které
+parametry může svou volbu potvrdit tlačítkem \textit{Next}. V tu chvíli se
 %% ML: vypocet ceho, vysvetlit (mas to vysvetleno dale v textu), tady
 %% by stacilo jednim slovem
-spustí výpočet a zobrazí další krok publikace.
+%% DT: prepsano
+spustí validace hodnot časového atributu a výpočet pomocných parametrů. 
 
 Do výpočetního procesu se dostanou pouze ty vrstvy, které splňují dvě
-%% ML: prazdny -> neni zadan 
-podmínky. Jejich časový atribut musí existovat a nesmí být prázdným
+%% ML: prazdny -> neni zadan
+%% DT: oraveno 
+podmínky. Jejich časový atribut musí existovat a musí být zadán. 
 %% ML: Rastry nejsou soucasti zadani, ta veta je zavadejici.
-textovým řetězcem. Tyto podmínky eliminují výpočet nad rastrovými
-vrstvy. Dále zajistí to, že do výpočtu se dostanou pouze ty vrstvy,
-které mají nastavený časový atribut. Tyto vrstvy jsou dále v textu
+%% DT: preformulovano
+Zmíněné podmínky zajistí, že do výpočtu se dostanou pouze ty vektorové vrstvy,
+které mají nastavený časový atribut. Dále v textu jsou tyto vrstvy
 %% ML: spis casoprostorove
+%% DT: 
 označovány jako časové.
 
 %% ML: totozne?
-Výpočet probíhá pro jednotlivé vrstvy splňující vstupní podmínky
-totožně. Pro každou časovou vrstvu je volána metoda \verb|get_time_info|.
+%% DT: odstraneno
+Výpočet probíhá pro jednotlivé vrstvy splňující vstupní podmínky.
+Pro každou časovou vrstvu je volána metoda \verb|get_time_info|.
 
 %% ML: 2x ve vete metoda
-V prvním kroku metody \verb|get_time_info| je metodou
+%% DT: opraveno
+V prvním kroku výpočtu je metodou
 \verb|validate_time_attribute| vytvořena validační maska. Jedná se o pole,
 které svou velikostí odpovídá počtu mapových prvků \textit{Features}
 časové vrstvy. Každý prvek validační masky může nabývat různých
@@ -299,8 +323,9 @@ může validační maska vypadat následovně:
 \end{verbatim}
 
 %% ML: preteceni textu
+%% DT: opraveno
 Během vytváření validační masky jsou rovnou data kontrolována metodou
-\verb|validate|. Díky tomu je možné zjistit jaká data maska obsahuje,
+\\* \verb|validate|. Díky tomu je možné zjistit jaká data maska obsahuje,
 aniž by bylo nutné její jednotlivé prvky procházet. Po její vytvoření
 jsou možné pouze tři scénáře popsané níže a zobrazené v obrázku
 \ref{fig:plugin-chart}.
@@ -309,7 +334,8 @@ jsou možné pouze tři scénáře popsané níže a zobrazené v obrázku
 %specialni znak
 
 %% ML: itemize -> enumerate ?
-\begin{itemize}
+%% DT: enumerate je lepsi
+\begin{enumerate}
 \item\textit{Data nejsou validní} - znamená, že ani jedna
 hodnota v zadaném časovém atributu nemá validní časový
 formát. Validační maska v tomto případě obsahuje pouze hodnoty
@@ -318,23 +344,26 @@ formát. Validační maska v tomto případě obsahuje pouze hodnoty
 formát} - v tomto případě je zjištěno, zda-li časový formát
 neobsahuje speciální znak, který by jeho použití pro následnou
 filtraci mapových prvků v původní podobě znemožnil použít.
-\begin{itemize}
+\begin{enumerate}
 \item\textit{Obsahuje speciální znak} - zde se pokračuje
 %% ML: davej si pozor na predlozky na konci radky, tady doplneno ~,
 %% zkrontroluj to dale v textu
-způsobem stejným jako v~případě \textit{Data jsou
+%% DT: zkontrolovano
+způsobem stejným jako v případě \textit{Data jsou
 	validní, ale obsahují více časových formátů} popsaném
 níže. Například při použití data v textovém formátu
 'YYYY-MM-DDTHH\newline:mm:SS', kdy je použit znak 'T' oddělující
 datum a čas, nelze textový řetězec v parametru
 %% ML: za viz se nepise carka, zkontroluj dale v textu
+%% DT: zkontrolovano, opraveno
 \textit{FILTER} (viz. kapitola \ref{sssec:time-filtration})
 použít.
 \item\textit{Neobsahuje speciální znak} - časové hodnoty
 jsou metodou \\* \verb|get_min_max_mask| za pomocí formátu,
 zjištěného časového z validační masky, převedeny do
 %% ML: vysvetlit unix time - poznamka pod carou
-časového formátu \textit{UNIX TIME}. Z těchto hodnot
+%% DT: doplneno
+časového formátu \textit{UNIX TIME}\footnote{\textit{UNIX Time} je systém pro identifikaci časového okamžiku. Jedná se o počet sekund, které uplynuly od 1. ledna 1970}. Z těchto hodnot
 jsou poté zjištěny jejich maximální a minimální
 hodnoty. Ty jsou součástí návratové hodnoty metody
 \verb|get_min_max_mask|.
@@ -343,7 +372,7 @@ použita metoda \verb|most_common|, která vybere nejvíce
 zastoupený prvek v poli. Pro získání požadované hodnoty
 je tedy nutné nejprve metodou \verb|remove_values_from_list|
 odstranit záznamy obsahující hodnoty \textit{-1}.
-\end{itemize}
+\end{enumerate}
 \item\textit{Data jsou validní, ale obsahují více časových
 formátů} - jedná se tedy o validní nekonzistentní data. Pro tento
 případ slouží metoda \\* \verb|create_unix_time_attribute|, která
@@ -360,19 +389,20 @@ není validní je pole prázdné. Z nově vytvořeného atributu
 jsou dále určeny minimální a maximální hodnoty časového
 atributu. V případě, že nový atribut již jednou vytvořen byl,
 jsou jeho hodnoty pouze přepsány.
-\end{itemize}
+\end{enumerate}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.8\textwidth]{../img/getTimeInfo.png}
-\caption{Vývojový diagram publikace časové vrstvy}
+\caption{Vývojový diagram publikace časové vrstvy \cite{flow-chart}}
 \label{fig:plugin-chart}
 \end{figure}
 
 Posledním krokem je poté pouze export zjištěných hodnot do metadatového
 souboru. Každé časové vrstvě je vypsán časový formát pro zobrazení
 %% ML: na ?
-časových hodnot na webovém klientu. Dále název časového atributu,
+%% DT: preformulovano
+časových hodnot v prostředí webového klienta. Dále název časového atributu,
 minimální a maximální hodnota časového atributu ve formátu \textit{UNIX
 TIME} a další parametry, které budou popsány a vysvětleny dále. V
 případě, že data jsou validní a obsahují pouze jeden časový formát
@@ -384,13 +414,16 @@ s hodnoty ve formátu \textit{UNIX TIME}, je vypsán jeho název.
 
 Metadatový soubor (viz. kapitola \ref{sssec:gisquick-komponenty}, část
 %% ML: vznika
-\textit{Gisquick plugin}) je textový soubor, který vniká publikací
-projektu Gisquick pluginem. Obsahuje množství informací, které jsou
+%% DT: vytvoren
+\textit{Gisquick plugin}) je textový soubor, který je vytvořen během publikace
+projektu Gisquick zásuvným modulem. Obsahuje množství informací, které jsou
 %% ML na strane
-nutné pro správnou konfiguraci straně webového klienta.
+%% DT: doplneno - na
+nutné pro správnou konfiguraci na straně webového klienta.
 
 %% ML: jdou -> jsou
-Pokud jsou vrstvy při publikaci označeny jako časové a jejich data jdou
+%% DT: opraveno
+Pokud jsou vrstvy při publikaci označeny jako časové a jejich data jsou
 validní, jsou do nich vepsány následující hodnoty:
 
 \begin{itemize}
@@ -468,25 +501,27 @@ zobrazeny nejsou:
 \section{Implementace nástroje do webového klienta}
 
 %% ML: prvni vetu prespis, nezni cesky
-Webový klient obsahuje hlavní část implementace rozšíření pro podporu
-časoprostorových dat. Jedná se o jednoduchý nástroj, který umožňuje
+%% DT: preformuovano
+Webový klient obsahuje převážnou část implementace nástroje pro zobrazování časoprostorových dat. Jedná se o jednoduchý nástroj, který umožňuje
 filtrovat mapové prvky jednotlivých časových vrstev na základě jejich
 časového atributu. Časový interval je možné nastavit pomoci posuvníku,
 %% ML: na?
-nebo přímo pomocí kalendáře a hodinového ciferníku. Nástroj na
-webovém klientu umožňuje dále vytvářet jednoduché animace. Uživatel
+%% DT: preformuovano
+nebo přímo pomocí kalendáře doplněného o hodinový ciferník. Nástroj dále 
+umožňuje vytvářet jednoduché animace. Uživatel
 má možnost zmíněnou filtraci mapových prvků provádět pro jednotlivé
 vrstvy, nebo pro více vrstev současně.
 
 \subsection{Uživatelské rozhraní}
 \label{sssec:gisquick-client-ui}
 
+%% ML: zdroj
+%% DT: autor
 \begin{figure}[h!]
 \centering
 \includegraphics[width=1\textwidth]{../img/gisquick-time-tool.png}
-%% ML: zdroj
 \caption{Webové rozhraní Gisquick platformy s aktivovaným nástrojem
-pro práci s časoprostorovými daty}
+pro práci s časoprostorovými daty (zdroj: autor)}
 \label{fig:gisquick-client}
 \end{figure}
 
@@ -502,6 +537,7 @@ je uživateli zobrazen. Jako první krok je nejprve nutné vybrat
 časovou vrstvu, která bude použita. Toho lze docílit pomocí
 zmíněného roletového menu, které obsahuje všechny časové
 %% ML: pro uvozovky pouzivej \uv{}
+%% DT: ok
 vrstvy. Dále je zde možnost \uv{All visible layers}, která uživateli
 umožňuje výběr všech viditelných časových vrstev.
 \item\textit{jméno časového atributu} - tento prvek neumožňuje
@@ -606,10 +642,12 @@ možné časové intervaly a kombinace vrstev. Z toho důvodu je při
 aktivaci nástroje pro práci s časoprostorovými daty
 použit \textit{Lifecycle Hook Created}. Jedná se o funkci, která se
 %% ML: komponenta?
-spustí jakmile je Vue komponent inicializován. V ní je původní
+%% DT: opraveno
+spustí jakmile je Vue komponenta inicializována. V ní je původní
 instance třídy \textit{ImageLayer} uložena do
 %% ML: a skryta??
-proměnné \textit{originalLayer} a skryta. Následně je vytvořena
+%% DT: odstraneno
+proměnné \textit{originalLayer}. Následně je vytvořena
 instance nová, která obsahuje stejné mapové vrstvy jako původní. Ta je
 poté nastavena jako aktivní. V případě, že mapový obraz má být
 aktualizován, je nutné vždy specifikací WMS
@@ -631,7 +669,8 @@ je popsán dále.
 \noindent \textbf{Inicializace}
 
 %% ML: je nutna? I tak zkus prepsat
-Nejprve nutná inicializace časového posuvníku. Na něm jsou závislé
+%% DT: prepsano
+Nejprve je inicializován časový posuvník. Na něm jsou závislé
 další uživatelské prvky jako například \textit{časové štítky}
 (viz. kapitola \ref{sssec:gisquick-client-ui}). Jeho minimální a maximální
 hodnota je získána z metadatového parametru \textit{time\textunderscore
@@ -659,7 +698,8 @@ datetime\textunderscore mask} zvoleného během publikace projektu
 %\ref{appendix}
 Způsob, jakým je aktualizována mapa na základě změny časových hodnot je
 %% ML: kde je dokumentace?
-popsána v dokumentaci časového nástroje. Zde je popsán princip, kterým je
+%% DT: dokumentace jeste nebyla vytvorena. Doplneno o referenci
+popsána v dokumentaci časového nástroje \ref{sssec:manual-gui}. Zde je popsán princip, kterým je
 mapový obraz dle stávajícího nastavení časového nástroje aktualizován.
 
 Při spuštění časové filtrace je v metodě \verb|updateSingleLayer|
@@ -685,7 +725,8 @@ TIME} (viz. kapitola \ref{sssec:plugin-functionality}). Parametr
 \begin{itemize}
 \item\textit{unix = TRUE} - znamená to, že filtrace není
 %% ML: hodnotami
-provedena nad hodnoty původního časového atributu, ale
+%% DT: opraveno
+provedena nad hodnotami původního časového atributu, ale
 pomocného atributu. Pro tuto kofiguraci je textový řetězec
 sestaven pouze z parametrů poskytovaných metadatovým
 souborem. Pro časovou hodnotu je přímo použita hodnota
@@ -704,13 +745,15 @@ Na konci tohoto kroku jsou poté spojeny dohromady obsahy parametru
 \textit{FILTER} z ostatních časových vrstev a nově vytvořený.
 \item\textit{nastavení filtrované vrstvy} - tento krok je nezbytný
 %% ML: interpunkce
+%% DT: opraveno
 z několika důvodů. Je nutné uložit hodnoty časového posuvníku
-v případě že vrstva bude v budoucnu filtrována znovu. Dále je
+v případě, že vrstva bude v budoucnu filtrována znovu. Dále je
 nutné uložit použitý obsah parametru \textit{FILTER}, který
-je použit při filtrování ostatních časových vrstev. Jako
+je použit při filtrování ostatních časových vrstev. nakonec
 %% ML: ta veta zni divne
-poslední věc je změněn název vrstvy tak, aby obsahoval její
-jméno spolu s časovou hodnotou. Tímto způsobem uživatel ihned
+%% DT: preformulovano
+je změněn název vrstvy. Ten obsahuje její původní název doplněný o
+mezní hodnoty časového intervalu. Tímto způsobem uživatel ihned
 ví, které vrstvy byly již filtrovány.
 \item\textit{provedení operace GetMap} - v posledním kroku je
 metodou \verb|updateParams| poslán požadavek na server obsahující
@@ -723,7 +766,8 @@ obraz nahrazen.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.5\textwidth]{../img/getSingleLayer.png}
-\caption{Vývojový diagram filtrace více časových vrstev najednou}
+\caption{Vývojový diagram filtrace více časových vrstev najednou
+	\cite{flow-chart}}
 \label{fig:single-chart}
 \end{figure}
 
@@ -823,12 +867,13 @@ způsoben jako u filtrace jednotlivé vrstvy.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.9\textwidth]{../img/getMultipleLayers.png}
-\caption{Vývojový diagram filtrace více časových vrstev najednou}
+\caption{Vývojový diagram filtrace více časových vrstev najednou \cite{flow-chart}}
 \label{fig:multiple-chart}
 \end{figure}
 
 %% ML: nazev kapitoly zni divne, zkus preformulovat
-\subsection{Animace filtrace}
+%% DT: preformulovano
+\subsection{Tvorba animace}
 \label{sssec:animation}
 
 Jak pro jednotlivé vrstvy, tak pro více vrstev najednou je možnost

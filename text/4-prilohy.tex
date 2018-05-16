@@ -61,11 +61,37 @@ daty.  Vzhledem k mezinárodnímu použití platformy Gisquick je grafické
 uživatelské rozhraní psáno v anglickém jazyce.
 
 \subsection{Instalace}
-\label{manual_instalace}
+\label{sssec:manual-instalace}
+
+Zatímco pro webový server je vytvořen Docker kontejner a je tedy možné spustit jej pomocí Docker aplikace. Webový klient vyžaduje odlišný přístup zahrnující instalaci externích knihoven.
+
+\bigskip
+\noindent
+\textbf{Webový server}
+
+\noindent
+Pro spuštění webového serveru na lokálním zařízení je nutná instalace Docker aplikace. Konfigurační soubor pro webový server \textit{docker-compose-dev.yml} se nachází ve složce ./docker větve vue-client v repozitáři dp-tethal-2018-gisquick \newline \url{https://github.com/ctu-geoforall-lab-projects/dp-tethal-2018-gisquick/tree/vue-client/docker}.
+Před samotným spuštěním kontejneru je nejprve nutné vytvořit adresářovou strukturu, obsahující publikovaný projekt.
+Příkazem \newline \verb|$ mkdir -p _data/publish _data/media _data/data | \newline \verb|_data/etc/letsencrypt/live| \cite{gisquick-manual}. 
+
+\noindent
+Složku s publikovaným projektem je dále nutné nahrát do složky ./docker/\textunderscore data/publish. Dále je možné spustit samotný Docker kontejner ze složky ./docker
+příkazem \newline \verb|docker-compose -f docker-compose-dev.yml up|
+
+\noindent
+Pro vytvoření nového uživatele je nutné postupovat podle kroků popsaných v oficiální dokumentaci platformy Gisquick \url{http://gisquick.readthedocs.io/en/latest/administrator-manual/user-management.html}
+
+\bigskip
+\noindent
+\textbf{Webový klient}
+
+\noindent
+Pro spuštění webového serveru na lokálním zařízení je nutná instalace aplikace Node.js minimální verze 4.0.0 a dále manažer knihoven npm minimální verze 3.0.0. Ve složce ./clients/vue-js je nutné spustit příkaz \newline \verb|npm install| \newline který nainstaluje všechny nutné externí knihovny a pro samotné spuštění klienta příkaz \newline \verb|npm run dev| \newline který spustí aplikaci na URL \verb|http://localhost:8080|
+
 
 \newpage
 \subsection{Grafické uživatelské rozhraní}
-\label{manual_gui}
+\label{sssec:manual-gui}
 
 Time support for Gisquick platform allows users to easily filter 
 map content based on its spatio-temporal value. Any vector layer that 
