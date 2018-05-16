@@ -330,9 +330,6 @@ aniž by bylo nutné její jednotlivé prvky procházet. Po její vytvoření
 jsou možné pouze tři scénáře popsané níže a zobrazené v obrázku
 \ref{fig:plugin-chart}.
 
-%!!!!!!!!!!!!!!!!!!!
-%specialni znak
-
 %% ML: itemize -> enumerate ?
 %% DT: enumerate je lepsi
 \begin{enumerate}
@@ -341,29 +338,37 @@ hodnota v zadaném časovém atributu nemá validní časový
 formát. Validační maska v tomto případě obsahuje pouze hodnoty
 \textit{-1}. Výpočet je tedy ukončen.
 \item\textit{Data jsou validní a obsahují pouze jeden časový
-formát} - v tomto případě je zjištěno, zda-li časový formát
-neobsahuje speciální znak, který by jeho použití pro následnou
-filtraci mapových prvků v původní podobě znemožnil použít.
-\begin{enumerate}
-\item\textit{Obsahuje speciální znak} - zde se pokračuje
-%% ML: davej si pozor na predlozky na konci radky, tady doplneno ~,
-%% zkrontroluj to dale v textu
-%% DT: zkontrolovano
-způsobem stejným jako v případě \textit{Data jsou
-	validní, ale obsahují více časových formátů} popsaném
-níže. Například při použití data v textovém formátu
-'YYYY-MM-DDTHH\newline:mm:SS', kdy je použit znak 'T' oddělující
+formát} - v tomto případě je zjištěno, zda-li je hodnota v časovém formátu 
+vhodném pro následnou filtraci mapových prvků. Vhodný časový formát nesmí 
+obsahovat speciální znak a dále musí být pouze ve formátu 
+začínajícím rokem, nebo hodinou např. \uv{YYYY-MM-DD}, nebo \uv{HH-mm}. 
+Vhodný časový formát dále nesní obsahovat speciální znak. 
+Například při použití data v textovém formátu
+\uv{YYYY-MM-DDTHH:mm:SS}, kdy je použit znak 'T' oddělující
 datum a čas, nelze textový řetězec v parametru
 %% ML: za viz se nepise carka, zkontroluj dale v textu
 %% DT: zkontrolovano, opraveno
 \textit{FILTER} (viz. kapitola \ref{sssec:time-filtration})
 použít.
-\item\textit{Neobsahuje speciální znak} - časové hodnoty
+V proměnné \verb|datetime_mask_array| je u každého 
+podporovaného formátu explicitně definováno, jestli je jeho použití pro 
+parametr \textit{FILTER} vhodné, nebo ne.
+\begin{enumerate}
+\item\textit{Formát není vhodný} - zde se pokračuje
+%% ML: davej si pozor na predlozky na konci radky, tady doplneno ~,
+%% zkrontroluj to dale v textu
+%% DT: zkontrolovano
+způsobem stejným jako v případě \textit{Data jsou
+validní, ale obsahují více časových formátů} popsaném
+níže. 
+\item\textit{Formát je vhodný} - časové hodnoty
 jsou metodou \\* \verb|get_min_max_mask| za pomocí formátu,
 zjištěného časového z validační masky, převedeny do
 %% ML: vysvetlit unix time - poznamka pod carou
 %% DT: doplneno
-časového formátu \textit{UNIX TIME}\footnote{\textit{UNIX Time} je systém pro identifikaci časového okamžiku. Jedná se o počet sekund, které uplynuly od 1. ledna 1970}. Z těchto hodnot
+časového formátu \textit{UNIX TIME}\footnote{\textit{UNIX Time} 
+je systém pro identifikaci časového okamžiku. Jedná se o počet 
+sekund, které uplynuly od 1. ledna 1970}. Z těchto hodnot
 jsou poté zjištěny jejich maximální a minimální
 hodnoty. Ty jsou součástí návratové hodnoty metody
 \verb|get_min_max_mask|.
@@ -408,6 +413,47 @@ TIME} a další parametry, které budou popsány a vysvětleny dále. V
 případě, že data jsou validní a obsahují pouze jeden časový formát
 je vypsán tento formát. Pokud tomu tak není a je použit pomocný atribut
 s hodnoty ve formátu \textit{UNIX TIME}, je vypsán jeho název.
+
+\bigskip
+\noindent
+\textbf{Alternativní řešení}
+
+Výše popsané aplikované řešení je vhodné především v případech, kdy časový
+atribut obsahuje nekonzistentní časové formáty. Tento postup však není 
+příznivý pro velké množství dat, které by validační a výpočetní proces 
+během publikace značně zpomalilo. Alternativou je použití méně benevolentní 
+validace, která spoléhá na fakt, že vstupní data obsahují pouze jeden časový 
+formát. V takovém případě by byl navíc výpočet rozdělen do dvou částí. 
+
+První část výpočtu by byla spuštěna po zvolení časového atributu. Validace by 
+v tomto kroku byla prováděna pouze pro první prvek. Možnosti by byly následující:
+
+\begin{itemize}
+	\item\textit{Prvek je validní} - v tomto případě by byl na základě proměnné
+	\\* \verb|datetime_mask_array| zjištěn jeho časový formát. Pro danou časovou 
+	vrstvu by v dialogovém okně bylo zobrazeno, zda-li je nutné v dalším 
+	kroku vytvářet pomocný atribut, nebo ne.
+	\item\textit{Prvek není validní} - data jsou v tomto případě všechna 
+	požadována za nevalidní. Uživatel by byl na tuto zkutečnost upozorněn.
+\end{itemize}
+
+Další krok výpočtu by byl spuštěn tlačítkem \textit{Next} (viz. obrázek 
+\ref{fig:gisquick-plugin-layers}). Na základě časového formátu zjištěného
+v předchozím kroku by byly validovány všechny ostatní hodnoty časového 
+formátu. Další postup by záležel na nutnosti vytvářet pomocný atribut:
+
+\begin{itemize}
+	\item\textit{atribut je potřeba vytvořit} - validní hodnoty časového 
+	atributu by byly převedeny do formátu \textit{UNIX Time} a uloženy do 
+	pomocného atributu.
+	\item\textit{atribut není potřeba vytvářet} - v tom případě by musely 
+	všechny hodnoty mít časový formát prvního prvku, nebo by musely 
+	obsahovat hodnotu \textit{NULL}. Pouze v takovém případě by byla 
+	vrstva označena jako časová.
+\end{itemize}.
+
+Po dokončení výpočtu by byl uživatel informován, jestli výpočet proběhl
+korektně a kolik záznamů bylo zpracováno.	
 
 \subsection{Metadatový soubor}
 \label{sssec:metadata}
