@@ -5,8 +5,9 @@ Hlavní cíle této práce byly dva. První spočíval v rešerši možných
 metod pro řešení podpory časoprostorových dat pro webové mapové
 publikační platformy obecně. Druhý cíl práce spočíval v implementování
 %% ML: na -> pro?
-nástroje pro podporu zobrazování vektorových dat na publikační
-platformu Gisquick. Jednalo se především o úpravy na straně Gisquick
+%% DT: v 
+nástroje pro podporu zobrazování vektorových dat v publikační
+platformě Gisquick. Jednalo se především o úpravy na straně Gisquick
 webového klienta a dále zásuvného modulu pro QGIS.
 
 Zásuvný modul byl doplněn o jednoduché uživatelské rozhraní umožňující
@@ -43,6 +44,33 @@ náročnějšího výpočtu dovoluje uživatelům použití dat s nekonzistentn�
 stránku nástroje, která vzhledem k jeho možným budoucím změnám nebyla
 brána jako důležitá.
 
+\newpage
+Pro potřeby vývoje rozšíření platformy Gisquick byly vytvořeny dva repozitáře. 
+Repozitář \textbf{dp-tethal-2018-gisquick}
+obsahující mimo jiné webového klienta ve větvi \textit{vue-client}, dostupný z 
+\newline 
+\url{https://github.com/ctu-geoforall-lab-projects/dp-tethal-2018-gisquick}. 
+Dále repozitář \textbf{dp-tethal-2018-gisquick-qgis-plugin} obsahující zásuvný 
+modul pro program QGIS ve větvi \textit{master}, dostupný z  
+\newline 
+\url{https://github.com/ctu-geoforall-lab-projects} 
+\newline 
+\url{/dp-tethal-2018-gisquick-qgis-plugin}.
+\newline
+Oba vycházejí z původního repozitáře platformy Gisquick. Konkrétně 
+repozitáře \textbf{gisquick} dostupného z
+\newline
+\url{https://github.com/gislab-npo/gisquick}
+\newline
+a \textbf{gisquick-qgis-plugin} dostupného z
+\newline
+\url{https://github.com/gislab-npo/gisquick-qgis-plugin}.
+\newline
+Rozdíly mezi původními a vývojovými repozitáři jsou uvedeny v 
+souborech klient.diff resp. plugin.diff v elektronické příloze 
+(viz. příloha \ref{ssec:struktura-příloh}).
+
 %% ML: uved odkaz na git repozitar prace s odkazem na diff, v teto
 %% souvislosti uved take repositare Gisquicku proti kterym je diff
 %% relevantni
+%% DT: doplněno

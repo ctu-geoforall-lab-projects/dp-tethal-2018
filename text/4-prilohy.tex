@@ -7,8 +7,9 @@
 
 \newpage
 %% ML: priloha bude jedna (zip), volil bych jednotne cislo
-\section{Struktura elektronických příloh}
-\label{struktura_příloh}
+%% DT: zmeneno
+\section{Struktura elektronické přílohy}
+\label{ssec:struktura-příloh}
 
 \setlength{\unitlength}{.5mm}
 \begin{picture}(250, 220)
@@ -40,7 +41,8 @@
 \put(  1, 70){\line(0, 1){50}}
 %% ML: v nazvu souboru/adresaru bych se vyvaroval diakritiky, klidne
 %% nech anglicky nazev, jako je ted v gitu
-\put(  1, 70){\line(1, 0){10} {\textbf{ vzorový-projekt}}} 
+%% DT: ponchan puvodni nazev
+\put(  1, 70){\line(1, 0){10} {\textbf{ sample-project}}} 
 \put(150, 70){vzorový QGIS projekt}
 
 \end{picture}
@@ -52,13 +54,15 @@
 Uživatelský manuál se skládá ze dvou částí. První obsahuje postup pro
 instalaci a spuštění platformy Gisquick na lokálním zařízení. Druhá
 %% ML: obsahuje popis / popisuje?
-část obsahuje uživatelské rozhraní zásuvného modulu pro platformu QGIS
-a dále Gisquick webového klienta. Uživatelské rozhraní je popsáno
+%% DT: popis
+část obsahuje popis uživatelského rozhraní zásuvného modulu pro platformu QGIS
+a dále Gisquick webového klienta. Uživatelský manuál je vytvořen
 pouze pro části, které obsahují rozhraní pro práci s časoprostorovými
 %% ML: lokalizovano v anglickem jazyce a take text uzivatelskeho
 %% manual je napsan v anglickem jazyce
-daty.  Vzhledem k mezinárodnímu použití platformy Gisquick je grafické
-uživatelské rozhraní psáno v anglickém jazyce.
+daty. Vzhledem k mezinárodnímu použití platformy Gisquick je text
+uživatelského rozhraní, stejně jako instalační manuál, napsán 
+v anglickém jazyce.
 
 \subsection{Instalace}
 \label{sssec:manual-instalace}
@@ -100,18 +104,20 @@ contain attribute with time value may be used.
 This section contains user manual describing process of time layers 
 publication in Gisquick plugin for QGIS together with functions of time
 %% ML: client
-filtering tool in Gisquick klient.  
+filtering tool in Gisquick client.  
 
 \bigskip
 \noindent \textbf{Publication process}
 
 %% ML: small settings, prepsat
-There is small settings in order to keep publication process simple
-and easy to handle for any user. Time layer may be set up in the first
+%% DT: simple
+There is simple settings in order to keep publication process easy to 
+handle for any user. Time layer may be set up in the first
 page of the publication wizard in the tab \textit{Layers}.  Dropdown
 menu \textbf{Time Attribute} defines which layer attribute contains
 %% ML: In case that ? nebo lepe...
-time values. In case this column is left blank layer won't be listed
+%% DT: in cae that
+time values. In case that this column is left blank, layer won't be listed
 in the time filter tool. Second option is \textbf{Date Mask}. Time
 values may have different formats in different countries. No matter
 how original time format looks like, date mask offers a possibility to
