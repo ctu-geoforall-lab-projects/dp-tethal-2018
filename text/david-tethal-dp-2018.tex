@@ -88,16 +88,16 @@ bottom=35mm]
 \selectlanguage{czech}
 \begin{abstract}
 \bigskip
-Cílem této diplomové práce je navrhnutí a vytvoření nástroje rozšiřujícího platformu Gisquick o podporu práce s časoprostorovými daty. Nástroj nabídne uživateli přehledné uživatelské rozhraní, které umožní možnost filtrace vektorových vrstev na základě jejich časových dat. Nad daty bude rovněž možnost tvorby jednoduché animace dle vybraného časového kroku.
+Cílem této diplomové práce je navrhnutí a vytvoření nástroje rozšiřujícího mapové publikační platformu Gisquick o podporu práce s časoprostorovými daty. Nástroj nabídne uživateli přehledné uživatelské rozhraní, které umožní selekci mapových prvků vektorových vrstev na základě jejich časových hodnot. Selekci  bude zároveň možné provádět automatizovaně a vytvářet tak jednoduché animace.
 
-Práce dále zahrnuje rešerši fungování webových publikačních platforem a nastínění jejich metod řešení pro práci s časoprostorovými daty. Na základě rešerše byla zvolena optimální metoda, která byla posléze vhodně aplikované na již stávající platformu.
+První část práce zahrnuje rešerši fungování webových publikačních platforem a mapových serverů. Detail je především kladen na popis jejich principu podpory časoprostorových dat. Na základě rešerše byla zvolena optimální metoda, která byla posléze vhodně aplikované na platformu Gisquick.
 
-Další část práce se zabývá implementací nalezeného řešení na straně Gisquick klienta. Nástroj byl vyvíjen v programovacím jazyce JavaScript s použitím frameworku Vue.js, do kterého je v tuto chvíli webový klient přepisován. Spolu s úpravy klienta bylo dále nutné zahrnout novou funkcionalitu do zásuvného modulu Gisquick plugin pro QGIS, sloužícího k publikaci předem vytvořených projektů. V pluginu je možné jednotlivé vrstvy před publikací nastavit a identifikovat jejich atribut obsahující časovou složku.
+Druhá část se zabývá implementací nalezeného řešení v platformě Gisquick. Nástroj na straně webového klienta byl vyvíjen v programovacím jazyce JavaScript s použitím frameworku Vue.js, do kterého je v tuto chvíli stávající webový klient přepisován. Spolu s úpravy webového klienta bylo dále nutné zahrnout novou funkcionalitu do zásuvného modulu pro QGIS, sloužícího k publikaci předem vytvořených projektů. V zásuvném modulu je možné pro jednotlivé vrstvy identifikovat jejich atribut obsahující časové hodnoty.
 
 \bigskip
 \bigskip
 \keywords{Klíčová slova}
-OGC WMS, časoprostorová data, QGIS, JavaScript, Python, Vue.js, plugin.
+časoprostorová data, selekce mapových prvků, webový klient, QGIS, JavaScript, Python, Vue.js, plugin.
 \end{abstract}
 
 
@@ -106,14 +106,17 @@ OGC WMS, časoprostorová data, QGIS, JavaScript, Python, Vue.js, plugin.
 \selectlanguage{english}
 \begin{abstract}
 	\bigskip
-Main goal of my thesis was design and implementation of new tool into Gisquick platform, that is focused on handling with spatio-temporal data. Gisquick platform provides fast and easy QGIS project publication. New tool will enable users to work easily with layers containing time attribute, filter its content and make simple animations.
+Main goal of my thesis was design and implementation of new tool into map publication platform Gisquick. This tool is focused on handling with spatio-temporal data. It provides simple user interface that enables vector layers feature filtration based on their time values. Selection 
+may be done also automatically in order to make simple animations.
 
-First part was focused on web map platforms. This chapter contains brief description of procces that produce requested map for user. Second part of the first chapter describes existing solutions for spatio-temporal data handling that may be used for web map platforms in general. 
+First part of thesis is focused on web map platforms research and web mapping servers. Mainly on description of its spatio-temporal data support. Optimal solution was later applied on Gisquick platform filtering tool.
+
+Second chapter describes implementation of optimal solution on Gisquick platform. Filtering tool in the web client was developed in JavaScript programing language using Vue.js framework. Whole web client is being migrated into this framework at the moment. Another changed were done in Gisquick QGIS plugin. It allows set time layers during the publication process when attribute containing time values has to be identified for each time layer.
 	
 	\bigskip
 	\bigskip
-	\keywords{Klíčová slova}
-	klicova slova
+	\keywords{Keywords}
+	spatio-temporal data, map feature filtration, web client, QGIS, plugin, JavaScript, Vue.js
 \end{abstract}
 
 
@@ -143,7 +146,7 @@ V Praze .................
 
 \odsaditodzhora
 \noindent {\bf Poděkování}
-text poděkování
+Tímto bych chtěl poděkovat vedoucímu práce Ing. Martinu Landovi, PhD., za jeho ochotnou podporu, která mi velkou měrou dopomohla k dokončení této práce. Dále děkuji Marcelu Dancákovi za jeho užitečné rady týkající se platformy Gisquick. Na závěr bych chtěl stejnou měrou poděkovat své rodině, která při mne po celou dobu mého studia stála.
 \newpage
 \tableofcontents
 

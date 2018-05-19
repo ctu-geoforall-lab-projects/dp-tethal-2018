@@ -10,7 +10,7 @@
 %% DT : zdrojový kód
 Gisquick je webová mapová publikační platforma s otevřeným zdrojovým kódem. Jejím
 účelem je snadné a rychlé publikování projektů vytvořených v programu
-QGIS, které je možné posléze prohlížet na webovém rozhraní platformy
+QGIS, tak aby bylo možné je posléze prohlížet na webovém rozhraní platformy
 Gisquick.
 %% ML: vyhni se zavorce, vetu prepis, je divna
 %% DT: prepsano
@@ -64,7 +64,7 @@ původnímu projektu.
 rozhraní aplikace, pomocí kterého může interagovat s webovým 
 serverem a tak
 měnit zobrazovaný obsah mapového okna. Právě této části spolu s Gisquick
-pluginem byla je v této práci věnována největší pozornost.
+pluginem je v této práci věnována největší pozornost.
 \end{itemize}
 
 \subsection{Uživatelské rozhraní webového klienta}
@@ -81,15 +81,15 @@ Gisquick\cite{gisquick-prague}}
 Obrázek výše zachycuje webové uživatelské rozhraní platformy
 Gisquick. Jedná se o sadu velice jednoduchých a intuitivních nástrojů
 sloužících pro snadnou orientaci v publikovaném projektu, filtraci
-jednotlivých částí a provádění jednoduchých operací. Například
+jednotlivých částí a provádění jednoduchých operací, například
 měření vzdáleností na mapě.
 
-Uživatel má být schopný rychlé a intuitivní orientace jak v projektu,
-tak v samotné webové aplikaci. K tomu slouží postranní menu se správou
+Uživatel má být schopný rychlé a intuitivní orientace jak v projektu i 
+samotné webové aplikaci. K tomu slouží postranní menu se správou
 vrstev spolu s menu nástrojů, které je v obrázku \ref{fig:gisquick-prague}
-rozbaleno. V horní postranního menu části je právě aktivovaný
+rozbaleno. V horní části postranního menu je právě aktivovaný
 nástroj sloužící k zjišťování souřadnic, měření vzdáleností
-a ploch. Hlavní část je věnována interaktivní mapové kompozici. Ta
+a ploch. Hlavní část uživatelského rozhraní je věnována interaktivní mapové kompozici. Ta
 poskytuje možnost změny velikosti a polohy výřezu zobrazovaného území.
 
 \newpage
@@ -102,13 +102,13 @@ poskytuje možnost změny velikosti a polohy výřezu zobrazovaného území.
 	\label{fig:gisquick-plugin}
 \end{figure}
 
-Gisquick plugin pro QGIS rovněž disponuje uživatelským rozhraním, kde
-pomocí jednoduchého dialogového okna jsou nabízeny možnosti nastavení
+Gisquick plugin pro QGIS rovněž disponuje uživatelským rozhraním, kde jsou
+pomocí jednoduchého dialogového okna nabízeny možnosti nastavení
 pro export vrstev. Jeho první část je rozdělena na tři záložky a
 stavovou řádku, ve které se jsou vypisována chybová hlášení. V
-první záložce \textit{Base layer} je možno nastavit podkladové vrstvy
-jako například OpenStreetMap, nebo Bing mapy. V další záložce
-\textit{Layers} je možno nastavit, které vrstvy budou publikované. Při
+první záložce \textit{Base layer} je možno nastavit podkladové vrstvy,
+jako například OpenStreetMap nebo Bing mapy. V další záložce
+\textit{Layers} je možné nastavit, které vrstvy budou publikované. Při
 implementaci podpory pro časoprostorová data bylo nastavení v této
 %% ML: uved konkretni odkaz na kapitolu
 %% DT: doplneno
@@ -144,8 +144,8 @@ vlastní JavaScript, HTML a CSS skripty. Jednotlivé komponenty dělají kód
 %% DT: opraveno
 přehlednější a aplikace výkonově méně náročnější. Protože jsou vždy
 použity jenom ty komponenty, které koncový uživatel v danou chvíli
-potřebuje. Mezi další výhody Vue.js patří mimo práce s komponenty
-jeho reaktivita, a úpravu objektového modulu dokumentu (DOM).
+potřebuje. Mezi další výhody Vue.js patří 
+jeho reaktivita, a úprava objektového modulu dokumentu (DOM).
 
 Původní verze webového klienta Gisquicku jsou psány za použití
 aplikačního rámce AngularJS. V současné chvíli je však celý klient
@@ -162,7 +162,7 @@ výhod nabízející jednoduchost Pythonu a obrovské schopnosti Qt v jednom
 celku. Díky tomu je možné jednoduše vytvářet grafické uživatelské
 rozhraní přímo za pomocí Pythonu. PyQt je software s otevřeným kódem,
 který byl vytvořen britskou firmou Riverbank Computing a je nabízen pod
-dvojí licencí GNU GPL v3 a komerční licencí společnosti Riverbank
+dvojí licencí, GNU GPL v3 a komerční licencí společnosti Riverbank
 \cite{pyqt}.
 
 \bigskip
@@ -204,11 +204,11 @@ spadají OpenLayers pod organizaci OSGeo.
 V kapitole \ref{sssec:gisquick-komponenty} jsou zmíněny soubory vytvářené
 Gisquick pluginen. 
 Jedná se o složku obsahující projekt ve formátu .qgs, data
-použita v projektu a metadatový textový soubor. Hlavním cílem úprav
+použitá v projektu a metadatový textový soubor. Hlavním cílem úprav
 Gisquick pluginu bylo vytvoření jednoduchého uživatelského rozhraní,
 %% ML: umoznuje nesedi, bude umoznovat anebo umoznujici
-%% DT: umoznujici
-umožňující definovat všechny potřebné parametry sloužící ve
+%% DT: umoznujiciho
+umožňujícího definovat všechny potřebné parametry sloužící ve
 webovém klientu k inicializaci nástroje pro práci s časovými daty. Tyto
 parametry jsou během publikace pro jednotlivé vrstvy nastavené a dále
 vepsané do metadatového souboru.
@@ -225,7 +225,7 @@ vepsané do metadatového souboru.
 
 Obrázek \ref{fig:gisquick-plugin-layers} zobrazuje dialogové okno publikace
 projektu pomocí Gisquick pluginu. V prvním kroku publikace, v záložce
-vrstvy \textit{Layers} je pro vektorové vrstvy přidáno nové nastavení. V
+vrstvy \textit{Layers}, je pro vektorové vrstvy přidáno nové nastavení. V
 %% ML: napis proc, rastrova data jsou nad ramec zadani prace
 %% DT: doplneno
 případě rastrových vrstev, jako je například v obrázku zvolená vrstva dmt,
@@ -249,13 +249,13 @@ atributu, nastavit kterýkoliv nabízený časový formát. V tomto formátu
 %% ML: klientovi, zkus ten odstavec jeste jednou projit a procistit
 %% DT: opraveno
 budou zobrazeny časové hodnoty na webovém klientu. V případě volby
-formátu je nutné znát původní data. Přejde se tím situacím, kdy
+formátu je nutné znát původní data. Předejde se tím situacím, kdy
 uživatel zvolí formát zobrazující pouze roky, zatímco původní data
 budou v rozpětí jednoho dne.
 
 %% ML: rozdelit souveti?
 %% DT: preformulovano
-V předposledním kroku publikace se lze přesvědčit, zad-li výpočet 
+V předposledním kroku publikace se lze přesvědčit, zda-li výpočet 
 proběhl korektně. Souhrn publikovaného projektu (obrázek 
 \ref{fig:summary}) obsahuje v odrážce \textit{Time layer data} nově 
 vypočítané parametry.
@@ -270,8 +270,8 @@ vypočítané parametry.
 \subsection{Funkcionalita}
 \label{sssec:plugin-functionality}
 
-Poté co uživatel v záložce \textit{Layers} nastaví všechny požadované
-parametry může svou volbu potvrdit tlačítkem \textit{Next}. V tu chvíli se
+Poté, co uživatel v záložce \textit{Layers} nastaví všechny požadované
+parametry, může svou volbu potvrdit tlačítkem \textit{Next}. V tu chvíli se
 %% ML: vypocet ceho, vysvetlit (mas to vysvetleno dale v textu), tady
 %% by stacilo jednim slovem
 %% DT: prepsano
@@ -326,7 +326,7 @@ může validační maska vypadat následovně:
 %% DT: opraveno
 Během vytváření validační masky jsou rovnou data kontrolována metodou
 \\* \verb|validate|. Díky tomu je možné zjistit jaká data maska obsahuje,
-aniž by bylo nutné její jednotlivé prvky procházet. Po její vytvoření
+aniž by bylo nutné její jednotlivé prvky procházet. Po vytvoření validační masky
 jsou možné pouze tři scénáře popsané níže a zobrazené v obrázku
 \ref{fig:plugin-chart}.
 
@@ -339,10 +339,10 @@ formát. Validační maska v tomto případě obsahuje pouze hodnoty
 \textit{-1}. Výpočet je tedy ukončen.
 \item\textit{Data jsou validní a obsahují pouze jeden časový
 formát} - v tomto případě je zjištěno, zda-li je hodnota v časovém formátu 
-vhodném pro následnou filtraci mapových prvků. Vhodný časový formát nesmí 
-obsahovat speciální znak a dále musí být pouze ve formátu 
-začínajícím rokem, nebo hodinou např. \uv{YYYY-MM-DD}, nebo \uv{HH-mm}. 
-Vhodný časový formát dále nesní obsahovat speciální znak. 
+vhodném pro následnou filtraci mapových prvků. Vhodný časový formát 
+musí být ve formátu 
+začínajícím rokem nebo hodinou, např. \uv{YYYY-MM-DD}, nebo \uv{HH-mm}. 
+Vhodný časový formát dále nesmí obsahovat speciální znak. 
 Například při použití data v textovém formátu
 \uv{YYYY-MM-DDTHH:mm:SS}, kdy je použit znak 'T' oddělující
 datum a čas, nelze textový řetězec v parametru
@@ -385,12 +385,12 @@ má návratovou hodnotu stejnou jako metoda \verb|get_min_max_mask|. K
 tomu, aby časové hodnoty byly konzistentní, je nutné metodou
 \verb|create_new_attribute| vytvořit nový atribut obsahující
 hodnoty v jednotném formátu. Toho je docíleno pomoci validační
-masky, kdy se jsou procházeny její jednotlivé hodnoty. Pokud
+masky. Její jednotlivé hodnoty jsou jednotlivě procházeny. Pokud
 pro záznam existuje formát časového textového řetězce,
 je jeho hodnota převedena do formátu \textit{UNIX TIME}. Ten
 je následně uložen v novém atributovém sloupci metodou \\*
 \verb|changeAttributeValues|. V případě časové hodnoty, která
-není validní je pole prázdné. Z nově vytvořeného atributu
+není validní, je pole prázdné. Z nově vytvořeného atributu
 jsou dále určeny minimální a maximální hodnoty časového
 atributu. V případě, že nový atribut již jednou vytvořen byl,
 jsou jeho hodnoty pouze přepsány.
@@ -403,14 +403,14 @@ jsou jeho hodnoty pouze přepsány.
 \label{fig:plugin-chart}
 \end{figure}
 
-Posledním krokem je poté pouze export zjištěných hodnot do metadatového
+Posledním krokem je export zjištěných hodnot do metadatového
 souboru. Každé časové vrstvě je vypsán časový formát pro zobrazení
 %% ML: na ?
 %% DT: preformulovano
-časových hodnot v prostředí webového klienta. Dále název časového atributu,
+časových hodnot v prostředí webového klienta, dále název časového atributu,
 minimální a maximální hodnota časového atributu ve formátu \textit{UNIX
 TIME} a další parametry, které budou popsány a vysvětleny dále. V
-případě, že data jsou validní a obsahují pouze jeden časový formát
+případě, že data jsou validní a obsahují pouze jeden časový formát,
 je vypsán tento formát. Pokud tomu tak není a je použit pomocný atribut
 s hodnoty ve formátu \textit{UNIX TIME}, je vypsán jeho název.
 
@@ -422,7 +422,7 @@ Výše popsané aplikované řešení je vhodné především v případech, kdy
 atribut obsahuje nekonzistentní časové formáty. Tento postup však není 
 příznivý pro velké množství dat, které by validační a výpočetní proces 
 během publikace značně zpomalilo. Alternativou je použití méně benevolentní 
-validace, která spoléhá na fakt, že vstupní data obsahují pouze jeden časový 
+validace, je založena na předpokladu, že vstupní data obsahují pouze jeden časový 
 formát. V takovém případě by byl navíc výpočet rozdělen do dvou částí. 
 
 První část výpočtu by byla spuštěna po zvolení časového atributu. Validace by 
@@ -487,7 +487,7 @@ určení atributu při filtrování časové vrstvy (viz. kapitola
 \item\textit{output\textunderscore datetime\textunderscore mask}
 - obsahuje formát časového řetězce, který si uživatel
 zvolil v roletovém menu \textit{Date Mask} (viz. kapitola
-\ref{sssec:plugin-ui}). Tento parametr definuje formát, kterým
+\ref{sssec:plugin-ui}). Tento parametr definuje formát, ve kterém
 jsou zobrazeny časové hodnoty na straně webového klienta.
 \item\textit{time\textunderscore values} - jedná se o pole
 obsahující minimální a maximální hodnotu časového
@@ -496,27 +496,26 @@ hodnot je na webovém klientu inicializovaný časový
 posuvník (viz. kapitoly \ref{sssec:one-layer-filtration},
 \ref{sssec:multiple-layers-filtration}).
 \item\textit{input\textunderscore datetime\textunderscore mask} - tento
-parametr je vytvořen pouze pokud není nutné vytvářet pomocný
+parametr je vytvořen, pouze pokud není nutné vytvářet pomocný
 atribut (viz. kapitola \ref{sssec:plugin-functionality}). Parametr
-obsahuje formát časového řetězce zvoleného časového
+obsahuje formát časového řetězce časového
 atributu. Díky tomuto parametru může být pro potřeby filtrování
 časové vrstvy převedena hodnota učená na časovému posuvníku
-do stejného časového formátu v jakém je uložena (viz. kapitola
+do formátu časového atributu (viz. kapitola
 \ref{sssec:time-filtration}).
 \item\textit{time\textunderscore attribute} - parametr
-je vytvořen pouze pokud je nutné vytvářet pomocný
+je vytvořen, pouze pokud je nutné vytvářet pomocný
 atribut obsahující hodnoty ve formátu \textit{UNIX TIME} a
 obsahuje název tohoto atributu. Parametr slouží stejně jako
 \textit{original\textunderscore time\textunderscore attribute}
 k specifikaci atributu při filtrování časové vrstvy.
 \end{itemize}
 
-\newpage
 \bigskip
 \noindent
 
 Níže je zobrazena ukázka části metadatového souboru. Ta obsahuje dvě
-časové vrstvy, kdy každá z nich má odlišné parametry. Pro kompaktnost
+časové vrstvy, z nichž má odlišné parametry. Pro kompaktnost
 ukázky zde parametry, které se netýkají implementovaného rozšíření,
 zobrazeny nejsou:
 
@@ -550,7 +549,7 @@ zobrazeny nejsou:
 %% DT: preformuovano
 Webový klient obsahuje převážnou část implementace nástroje pro zobrazování časoprostorových dat. Jedná se o jednoduchý nástroj, který umožňuje
 filtrovat mapové prvky jednotlivých časových vrstev na základě jejich
-časového atributu. Časový interval je možné nastavit pomoci posuvníku,
+časového atributu. Časový interval je možné nastavit pomoci posuvníku
 %% ML: na?
 %% DT: preformuovano
 nebo přímo pomocí kalendáře doplněného o hodinový ciferník. Nástroj dále 
@@ -573,13 +572,13 @@ pro práci s časoprostorovými daty (zdroj: autor)}
 
 Celý nástroj je ukrytý v postranním menu a obsahuje jen několik prvků,
 které však uživateli poskytují velké množství operací. Všechny
-jsou zobrazeny v obrázku \ref{fig:gisquick-client}. Od shora se jednotlivě
+jsou zobrazeny v obrázku \ref{fig:gisquick-client}. Od shora se
 jedná o:
 
 \begin{itemize}
 \item\textit{roletové menu s výběrem časové vrstvy} - v
 případě aktivace nástroje je toto pole jediný prvek, který
-je uživateli zobrazen. Jako první krok je nejprve nutné vybrat
+je uživateli zobrazen. Nejprve je nutné vybrat
 časovou vrstvu, která bude použita. Toho lze docílit pomocí
 zmíněného roletového menu, které obsahuje všechny časové
 %% ML: pro uvozovky pouzivej \uv{}
@@ -594,10 +593,9 @@ případě, kdy projekt obsahuje více časových vrstev s odlišným
 časovým parametrem. Při výběru možnosti \uv{All visible layers} je
 možné použít pouze vrstvy se stejným parametrem. Uživatel je tedy
 tomto případě informován pro jaký parametr jsou vrstvy vybrány.
-\item\textit{dvojitý časový posuvník} - jedná se posuvník
+\item\textit{dvojitý časový posuvník} - jedná se o posuvnou lištu
 se dvěma
-%%DT: nedokázal jsem přijít na lepší slovo, nez šoupátka
-šoupátky. Díky němu je možné snadno a rychle mapové
+posuvníky. Díky němu je možné snadno a rychle mapové
 prvky filtrovat. Uživatel tak ihned získá představu o jejich
 rozmístění na časové ose. Minimum a maximum posuvníku odpovídá
 minimu a maximu intervalu časových hodnot jednotlivé vrstvy. Pro
@@ -610,18 +608,18 @@ textové pole s minimálním a maximálním datem filtrovaných
 s hodinovým ciferníkem pro určení hodnot. Časový formát
 zobrazený v těchto polích je definován při publikaci projektu
 (viz. kapitola \ref{sssec:plugin-ui}). Pokud formát neobsahuje
-možnost zobrazení minut, nebo hodin, v tom případě se hodinový
+možnost zobrazení minut nebo hodin, tak se hodinový
 ciferník nenabízí. Stejným způsobem není nabídnuta možnost
 filtrování za pomoci kalendáře v případě, že časový formát
-obsahuje jen hodiny, nebo minuty.
+obsahuje jen hodiny nebo minuty.
 \item\textit{animační tlačítko s přepínačem} - tlačítkem \textit{PLAY}
 je možné spustit animování aktivní časové vrstvy.  Ve chvíli, kdy je
 animace aktivována, změní se tlačítko na \textit{STOP}. Tím je možné
 animování zastavit. V implicitním stavu, kdy je
-spínač \textit{cumulative} vypnutý, jsou obě šoupátka posouvána
+spínač \textit{cumulative} vypnutý, jsou oba posuvníky posouvány
 současně. V případě jeho aktivace je vždy po jedné sekundě zvyšována
-hodnota horního šoupátka až do chvíle kdy dosáhne maxima posuvníku. V
-tom případě je zvyšována hodnota spodního šoupátka
+hodnota horního posuvníku až do chvíle kdy dosáhne maxima posuvníku. V
+tom případě je zvyšována hodnota spodního posuvníku
 (viz. kapitola \ref{sssec:animation}).
 \end{itemize}
 
@@ -722,16 +720,16 @@ další uživatelské prvky jako například \textit{časové štítky}
 hodnota je získána z metadatového parametru \textit{time\textunderscore
 attribute} (viz. kapitola \ref{sssec:metadata}). Velikost kroku posuvníku
 určena jako setina rozdílu jeho maximální a minimální hodnoty. Metoda
-\verb|setSliderValue| inicializuje hodnoty šoupátek na jejich poslední
+\verb|setSliderValue| inicializuje hodnoty časového posuvníku na jejich poslední
 použité. V případě, že nebyla vrstva ještě filtrována, je hodnota
-levého šoupátka rovna minimu časového posuvníku a hodnota pravého
-šoupátka o krok časového posuvníku větší.
+levého posuvníku rovna minimu časového posuvníku a hodnota pravého
+posuvníku o krok časového posuvníku větší.
 
 Stejně jako hodnoty parametru \textit{time\textunderscore attribute},
-tak hodnoty šoupátek jsou v časovém formátu \textit{UNIX Time}, tedy
+tak hodnoty posuvníků jsou v časovém formátu \textit{UNIX Time}, tedy
 jako celočíselný datový typ. \textit{Vue.js} umožňuje nastavení
 \textit{Watched Property}. Takto jsou nastavené proměnné hodnoty
-šoupátek. Pokud se tedy jedna z hodnot změní je spuštěna metoda,
+posuvníků. Pokud se tedy jedna z hodnot změní je spuštěna metoda,
 která provede převod původního celočíselného časového formátu
 \textit{UNIX Time} do časového formátu \textit{output\textunderscore
 datetime\textunderscore mask} zvoleného během publikace projektu
@@ -851,7 +849,7 @@ odlišné časové intervaly jednotlivých časových vrstev. Metoda
 celkové maximální a minimální hodnoty. Tímto způsobem je zajištěno,
 že všechny hodnoty časového atributu pro všechny časové vrstvy budou
 náležet intervalu daného minimální a maximální hodnotou časového
-posuvníku. Hodnoty šoupátek jsou nastaveny na minimální hodnoty
+posuvníku. Hodnoty posuvníků jsou nastaveny na minimální hodnoty
 intervalu časového posuvníku, resp. na hodnotu, která je o časový
 krok větší. Není přitom zohledňováno předchozí použití časových
 vrstev při jejich filtraci tak, tako je tomu u fitrace jednotlivých vrstev.
@@ -917,6 +915,7 @@ způsoben jako u filtrace jednotlivé vrstvy.
 \label{fig:multiple-chart}
 \end{figure}
 
+\newpage
 %% ML: nazev kapitoly zni divne, zkus preformulovat
 %% DT: preformulovano
 \subsection{Tvorba animace}
@@ -933,14 +932,14 @@ hodnotu proměnné \textit{animateStop}. Pokud je tato hodnota FALSE, je
 volána metoda \verb|newFrame|. Metoda \verb|newFrame| při každém svém
 zavolání zkontroluje hodnotu spínače \textit{cumulative}:
 \begin{itemize}
-\item\textit{cumulative = TRUE} - pokud je hodnota horního šoupátka
+\item\textit{cumulative = TRUE} - pokud je hodnota horního posuvníku
 menší než maximální hodnota časového posuvníku, je zvýšena o velikost
-kroku posuvníku. Pokud je hodnota horního šoupátka vyšší a rozdíl obou
-šoupátek je větší, než velikost kroku posuvníku, je zvýšena hodnota
-spodního šoupátka.
-\item\textit{cumulative = FALSE} - pokud je hodnota horního šoupátka
+kroku posuvníku. Pokud je hodnota horního posuvníku vyšší a rozdíl obou
+posuvníků je větší, než velikost kroku posuvníku, je zvýšena hodnota
+spodního posuvníku.
+\item\textit{cumulative = FALSE} - pokud je hodnota horního posuvníku
 menší než maximální hodnota časového posuvníku, jsou zvýšeny
-společně obě hodnoty šoupátek o krok časového posuvníku.
+společně obě hodnoty posuvníků o krok časového posuvníku.
 \end{itemize}
 Po zvýšení hodnot je zavolána metoda \verb|getNewUrl| (viz. kapitola
 \ref{sssec:one-layer-filtration}), která aktualizuje mapový obsah podle
