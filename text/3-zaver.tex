@@ -3,7 +3,7 @@
 
 Hlavní cíle této práce byly dva. První spočíval v rešerši možných
 metod pro řešení podpory časoprostorových dat pro webové mapové
-publikační platformy obecně. Druhý cíl práce spočíval v implementování
+publikační platformy obecně. Druhý cíl práce spočíval v implementaci
 %% ML: na -> pro?
 %% DT: v 
 nástroje pro podporu zobrazování vektorových dat v publikační
@@ -17,18 +17,18 @@ hodnoty v nejrůznějších časových formátech. Na základě tohoto atributu
 jsou posléze dopočítány další parametry nutné pro implementovaný
 nástroj v rozhraní webového klienta.
 
-Nejvíce změn především z uživatelského hlediska bylo provedeno na již
+Nejvíce změn, především z uživatelského hlediska, bylo provedeno na již
 zmiňovaném webovém klientu. Zde byl přidán zcela nový nástroj, který
 na základě časové osy nabízí uživateli kontrolu nad výběrem
 zobrazovaných mapových prvků. Nástroj obsahuje různé způsoby určení
 časového intervalu pro selekci mapových prvků jedné nebo více
 vrstev. Nástroj dále umožňuje vytvářet jednoduché animace.
 
-Způsob, jakým byl jak samotný nástroj a změny zásuvného modulu
+Způsob, jakým byl samotný nástroj a změny zásuvného modulu
 implementovány, úzce odráží poznatky získané během rešerše. Jedná se o
 funkční řešení převzaté z časové podpory pro MapServer a
 GeoServer. Z hlediska
-uživatelského rozhraní byly použity prvky uživatelského rozhraní 
+uživatelského rozhraní byly použity prvky
 vyskytující se v aplikaci ArcGIS Online.
 
 I přes vytvoření plně funkčního nástroje, který nabízí příjemné
@@ -39,21 +39,21 @@ hlediska jeho komplexnosti, by byla implementace pro zobrazování
 pro QGIS by mohl zjednodušit validaci dat a následného výpočtu. 
 Zjednodušená validace by byla přínosná především pro projekty s 
 větším objemem dat. V
-této práci je aplikovaná validace, na úkor časově
-náročnějšího výpočtu, dosti benevolentní. Validace dovoluje 
+této práci je aplikovaná validace, která, na úkor časově
+náročnějšího výpočtu, dovoluje větší benevolenci vstupních dat. Validace dovoluje 
 uživatelům použití dat s nekonzistentním
 časovým formátem. Na straně webového klienta jde především o vývoj grafické
-stránky nástroje, která vzhledem k jeho možným budoucím změnám nebyla
+stránky nástroje, která, vzhledem k jeho možným budoucím změnám, nebyla
 brána jako důležitá.
 
 \newpage
 Pro potřeby vývoje rozšíření platformy Gisquick byl vytvořen repozitář 
 \textit{dp-tethal-2018} a dále dva pomocné repozitáře. 
 Repozitář \textit{dp-tethal-2018-gisquick}
-obsahující mimo jiné webového klienta ve větvi \textit{vue-client}.
-Dále repozitář \textit{dp-tethal-2018-gisquick-qgis-plugin}, obsahující zásuvný 
+obsahuje mimo jiné webového klienta ve větvi \textit{vue-client}.
+Dále repozitář \textit{dp-tethal-2018-gisquick-qgis-plugin}, který obsahuje zásuvný 
 modul pro program QGIS ve větvi \textit{master}.
-Oba vycházejí z původního repozitáře platformy Gisquick. Konkrétně 
+Oba vycházejí z původního repozitáře platformy Gisquick, konkrétně 
 repozitáře \textit{gisquick} resp. \textit{gisquick-qgis-plugin}
 \footnote{původní repozitáře jsou dostupné z \url{https://github.com/gislab-npo/gisquick} a \newline \url{https://github.com/gislab-npo/gisquick-qgis-plugin}}
 .
