@@ -66,18 +66,24 @@ v anglickém jazyce.
 \subsection{Instalace}
 \label{sssec:manual-instalace}
 
-Two different operations has to be done in order to fully run Gisquick platform. Web server 
-run on Docker container but so far web client runs only in development mode.
+Two different operations have to be done in order to fully run Gisquick
+platform. Web server run on Docker container but so far Vue.js web client
+runs only in development mode.
 
 \bigskip
 \noindent
 \textbf{Web server}
 
 \noindent
-In order to run Docker container, Docker application itself has to be installed first. 
-Configuration file for running web server Docker \textit{docker-compose-dev.yml} is in
-./docker file on vue-client branch inside dp-tethal-2018-gisquick repository \newline \url{https://github.com/ctu-geoforall-lab-projects/dp-tethal-2018-gisquick/tree/vue-client/docker}. Docker command might be run in this stage, but there would not be any project 
-and user would see only blank map. Before uploading the folder containing published project, folders tree has to be created using command
+In order to run Docker container, Docker application itself has to be
+installed first.  Configuration file for running web server
+Docker \textit{docker-compose-dev.yml} is located in ./docker folder in
+vue-client branch inside dp-tethal-2018-gisquick
+repository \newline \url{https://github.com/ctu-geoforall-lab-projects/dp-tethal-2018-gisquick/tree/vue-client/docker}. Docker
+command might be run in this stage, but there would not be any project
+and user would see only blank map. Before uploading the folder
+containing published project, folders tree has to be created using
+command
 \newline \verb|$ mkdir -p _data/publish _data/media _data/data _data/etc/letsencrypt/| \newline \verb|live| \cite{gisquick-manual}. 
 
 \noindent
@@ -87,8 +93,9 @@ Everything is now set and
 command might be run. If there is no error, web server is served on port 8000.
 
 \noindent
-In case of making a new user, it is recommended to follow all the steps described in 
-the official documentation of Gisquick platform. \url{http://gisquick.readthedocs.io/en/latest/administrator-manual/user-management.html}
+In case of creating a new user, it is recommended to follow all the
+steps described in the official documentation of Gisquick
+platform. \url{http://gisquick.readthedocs.io/en/latest/administrator-manual/user-management.html}
 
 \bigskip
 \noindent
@@ -99,9 +106,9 @@ Application Node.js with its minimal version 4.0.0 and the package manager npm 3
 or higher has to be installed first. Than following commands has to be run in 
 ./clients/vue-js folder.
 \newline \verb|npm install| \newline
-This command installs a packages, and any packages that it depends on
+This command installs packages, and any packages that it depends on.
 \newline \verb|npm run dev| \newline
-runs client application that is served on port 8080.
+Runs client application that is served on port 8080.
 
 \newpage
 \subsection{Grafické uživatelské rozhraní}
@@ -281,12 +288,15 @@ each time when slider value is changed.
 \end{figure}
 
 \newpage
+%% ML: nazev kapitoly zni divne, co proste jenom Ukazka?
 \section{Možnosti aplikace nástroje}
 \label{ssec:aplication}
 
 Following section contains screenshots of sample project created in QGIS 
-desktop and published using Gisquick platform. Project is composed of 
-vector layer containing Prague buildings from RIUAN together with OpenStreetMap 
+desktop and published using Gisquick platform. Project is composed of
+%% ML: vysvetli RUIAN (par slov v zavorce)
+vector layer containing Prague buildings from RIUAN together with OpenStreetMap
+%% ML: vysvetli vyznam atributu v anglictine
 as a base layer. Buildings are selected by \textit{PlatiOd}. \textit{PlatiOd} 
 is a time stamp of last feature change. 
 
