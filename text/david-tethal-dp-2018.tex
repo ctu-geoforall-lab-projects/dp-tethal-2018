@@ -83,29 +83,31 @@ bottom=35mm]
 \includegraphics[scale=0.8]{../zadani/zadanidp}
 \restoregeometry
 
+%% ML: ten abstrakt je zbytecne dlouhy a podrobny, ale uz to takto nech
 %abstract CS
 \newpage
 \selectlanguage{czech}
 \begin{abstract}
 \bigskip
 Cílem této diplomové práce je navrhnutí a vytvoření nástroje
-rozšiřujícího mapové publikační platformu Gisquick o podporu práce s
+rozšiřujícího mapové publikační platformy Gisquick o podporu práce s
 časoprostorovými daty. Nástroj nabídne uživateli přehledné uživatelské
-rozhraní, které umožní selekci mapových prvků vektorových vrstev na
-základě jejich časových hodnot. Selekci bude zároveň možné provádět
+rozhraní, které umožní výběr mapových prvků vektorových vrstev na
+základě jejich časových hodnot. Výběr bude zároveň možné provádět
 automatizovaně a vytvářet tak jednoduché animace.
 
 První část práce zahrnuje rešerši fungování webových publikačních
+%% ML: Detail je kladen zni divne
 platforem a mapových serverů. Detail je především kladen na popis
 jejich principu podpory časoprostorových dat. Na základě rešerše byla
 zvolena optimální metoda, která byla posléze vhodně aplikované na
 platformu Gisquick.
 
-Druhá část se zabývá implementací nalezeného řešení v platformě
+Druhá část se zabývá implementací nalezeného řešení pro platformu
 Gisquick. Nástroj na straně webového klienta byl vyvíjen v
 programovacím jazyce JavaScript s použitím frameworku Vue.js, do
 kterého je v tuto chvíli stávající webový klient přepisován. Spolu s
-úpravy webového klienta bylo dále nutné zahrnout novou funkcionalitu
+úpravami webového klienta bylo dále nutné zahrnout novou funkcionalitu
 do zásuvného modulu pro QGIS, sloužícího k publikaci předem
 vytvořených projektů. V zásuvném modulu je možné pro jednotlivé vrstvy
 identifikovat jejich atribut obsahující časové hodnoty.
@@ -113,10 +115,11 @@ identifikovat jejich atribut obsahující časové hodnoty.
 \bigskip
 \bigskip
 \keywords{Klíčová slova}
-časoprostorová data, selekce mapových prvků, webový klient, QGIS, JavaScript, Python, Vue.js, plugin.
+časoprostorová data, výběr mapových prvků, webový klient, QGIS, JavaScript, Python, Vue.js, plugin.
 \end{abstract}
 
-
+%% ML: neznas nekoho kdo vladne anglictinou lepe? Chybi Ti tam cleny,
+%% nektere vety nezni dobre
 %Absktrakt anglicky
 \newpage
 \selectlanguage{english}
@@ -134,6 +137,7 @@ mapping servers. Mainly on description of its spatio-temporal data
 support. Optimal solution was later applied on Gisquick platform
 filtering tool.
 
+%% ML: optimal solution se opakuje prilis casto
 Second chapter describes implementation of optimal solution on
 Gisquick platform. Filtering tool in the web client was developed in
 JavaScript programing language using Vue.js framework. Whole web
