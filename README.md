@@ -22,4 +22,4 @@ Ing. Martin Landa, Ph.D.
 
 ## Text
 
-[david-tethal-dp-2018.pdf](https://github.com/ctu-osgeorel-proj/dp-tethal-2018/raw/master/text/david-tethal-dp-2018.pdf)
+[david-tethal-dp-2018.pdf](https://github.com/ctu-osgeorel-projects/dp-tethal-2018/raw/master/text/david-tethal-dp-2018.pdf)
