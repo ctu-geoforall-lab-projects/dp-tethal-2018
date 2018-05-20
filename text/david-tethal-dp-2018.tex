@@ -83,68 +83,35 @@ bottom=35mm]
 \includegraphics[scale=0.8]{../zadani/zadanidp}
 \restoregeometry
 
-%% ML: ten abstrakt je zbytecne dlouhy a podrobny, ale uz to takto nech
 %abstract CS
 \newpage
 \selectlanguage{czech}
 \begin{abstract}
 \bigskip
-Cílem této diplomové práce je navrhnutí a vytvoření nástroje
-rozšiřujícího mapové publikační platformy Gisquick o podporu práce s
-časoprostorovými daty. Nástroj nabídne uživateli přehledné uživatelské
-rozhraní, které umožní výběr mapových prvků vektorových vrstev na
-základě jejich časových hodnot. Výběr bude zároveň možné provádět
-automatizovaně a vytvářet tak jednoduché animace.
+Cílem této diplomové práce je navrhnutí a vytvoření nástroje rozšiřujícího mapovou publikační platformu Gisquick o podporu práce s časoprostorovými daty. Nástroj nabídne uživateli přehledné uživatelské rozhraní, které umožní výběr mapových prvků vektorových vrstev na základě jejich časových hodnot. Výběr bude zároveň možné provádět automatizovaně a vytvářet tak jednoduché animace.
 
-První část práce zahrnuje rešerši fungování webových publikačních
-%% ML: Detail je kladen zni divne
-platforem a mapových serverů. Detail je především kladen na popis
-jejich principu podpory časoprostorových dat. Na základě rešerše byla
-zvolena optimální metoda, která byla posléze vhodně aplikované na
-platformu Gisquick.
+První část práce zahrnuje rešerši fungování webových publikačních platforem a mapových serverů. Detail je především kladen na popis jejich principu podpory časoprostorových dat. Na základě rešerše byla zvolena optimální metoda, která byla posléze vhodně aplikované na platformu Gisquick.
 
-Druhá část se zabývá implementací nalezeného řešení pro platformu
-Gisquick. Nástroj na straně webového klienta byl vyvíjen v
-programovacím jazyce JavaScript s použitím frameworku Vue.js, do
-kterého je v tuto chvíli stávající webový klient přepisován. Spolu s
-úpravami webového klienta bylo dále nutné zahrnout novou funkcionalitu
-do zásuvného modulu pro QGIS, sloužícího k publikaci předem
-vytvořených projektů. V zásuvném modulu je možné pro jednotlivé vrstvy
-identifikovat jejich atribut obsahující časové hodnoty.
+Druhá část se zabývá implementací nalezeného řešení v platformě Gisquick. Nástroj na straně webového klienta byl vyvíjen v programovacím jazyce JavaScript s použitím frameworku Vue.js, do kterého je v tuto chvíli stávající webový klient přepisován. Spolu s úpravy webového klienta bylo dále nutné zahrnout novou funkcionalitu do zásuvného modulu pro QGIS, sloužícího k publikaci předem vytvořených projektů. V zásuvném modulu je možné pro jednotlivé vrstvy identifikovat jejich atribut obsahující časové hodnoty.
 
 \bigskip
 \bigskip
 \keywords{Klíčová slova}
-časoprostorová data, výběr mapových prvků, webový klient, QGIS, JavaScript, Python, Vue.js, plugin.
+časoprostorová data, selekce mapových prvků, webový klient, QGIS, JavaScript, Python, Vue.js, plugin.
 \end{abstract}
 
-%% ML: neznas nekoho kdo vladne anglictinou lepe? Chybi Ti tam cleny,
-%% nektere vety nezni dobre
+
 %Absktrakt anglicky
 \newpage
 \selectlanguage{english}
 \begin{abstract}
 	\bigskip
-Main goal of my thesis was design and implementation of new tool into
-map publication platform Gisquick. This tool is focused on handling
-with spatio-temporal data. It provides simple user interface that
-enables vector layers feature filtration based on their time
-values. Selection may be done also automatically in order to make
-simple animations.
+The goal of this thesis is to design and implement a new tool in the map-publicating platform Gisquick. The new tool focus on the management of spatio-temporal data. It provides simple user interface that enables map features filtration based on their time values. Filtering tool may be applied only for vector layers. In addiction, selection could be done automatically in order to make simple animations.
 
-First part of thesis is focused on web map platforms research and web
-mapping servers. Mainly on description of its spatio-temporal data
-support. Optimal solution was later applied on Gisquick platform
-filtering tool.
+First chapter concentrates on web map platforms research and web mapping servers. This part creates a clear description of mapping severs spatio-temporal data support. Optimal solution was later applied on Gisquick platform filtering tool.
 
-%% ML: optimal solution se opakuje prilis casto
-Second chapter describes implementation of optimal solution on
-Gisquick platform. Filtering tool in the web client was developed in
-JavaScript programing language using Vue.js framework. Whole web
-client is being migrated into this framework at the moment. Another
-changed were done in Gisquick QGIS plugin. It allows set time layers
-during the publication process when attribute containing time values
-has to be identified for each time layer.
+Second chapter describes the implementation of optimal solution on Gisquick platform. Filtering tool in the web client was developed in JavaScript programing language using Vue.js framework. The entire web client is being migrated into this framework at the moment. Another change is completed in Gisquick QGIS plugin. It allows set time layers during the publication process when attribute containing time values has to be identified for each time layer.
+
 	
 	\bigskip
 	\bigskip
@@ -295,6 +262,9 @@ Dostupné z: \textless\url{https://www.draw.io}\textgreater
 \bibitem{cancer-atlas}
 The Pennsylvania Cancer Atlas: a CDC/GeoVISTA prototype.\textit{GeoVISTA Center | A Center for Innovation Across the GIScience Research Landscape}. [online] [cit. 2018-05.06]
 Dostupné z: \textless\url{https://www.geovista.psu.edu/grants/CDC/}\textgreater
+\bibitem{gay-sands}
+Gay Stamp Sands. [online] [cit. 2018-05.06]
+Dostupné z: \textless\url{http://spatial.mtri.org/stampsands/}\textgreater
 \bibitem{arcgis-logo}
 ArcGIS Online.\textit{PeaceTech Wiki}. [online] [cit. 2018-05.08]
 Dostupné na: \textless\url{http://peacetech.wiki/index.php?title=ArcGIS_Online}\textgreater

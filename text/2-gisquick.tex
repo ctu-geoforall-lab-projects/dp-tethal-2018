@@ -72,7 +72,7 @@ pluginem je v této práci věnována největší pozornost.
 %% ML: rozdelit na dve podkapitoly: UI weboveho klienta a zasuvneho modulu
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.9\textwidth]{../img/gisquick_ui.png}
+\includegraphics[width=0.9\textwidth]{./img/gisquick_ui.png}
 \caption{Ukázka uživatelského rozhraní platformy
 Gisquick\cite{gisquick-prague}}
 \label{fig:gisquick-prague}
@@ -97,8 +97,8 @@ poskytuje možnost změny velikosti a polohy výřezu zobrazovaného území.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\textwidth]{../img/gisquick_plugin.png}
-	\caption{Ukázka uživatelského rozhraní Gisquick pluginu pro QGIS}
+	\includegraphics[width=0.7\textwidth]{./img/gisquick_plugin.png}
+	\caption{Ukázka uživatelského rozhraní Gisquick pluginu pro QGIS \textit{(zdroj: autor)}}
 	\label{fig:gisquick-plugin}
 \end{figure}
 
@@ -125,7 +125,7 @@ vytvoří. Ty je posléze nutné nahrát na Gisquick publikační server.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth]{../img/technologies.png}
+\includegraphics[width=0.8\textwidth]{./img/technologies.png}
 \caption{Loga níže popsaných softwarů}
 \label{fig:technoogies}
 \end{figure}
@@ -218,8 +218,8 @@ vepsané do metadatového souboru.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.9\textwidth]{../img/gisquick-plugin.png}
-\caption{Nastavení vrstev v Gisquick pluginu}
+\includegraphics[width=0.9\textwidth]{./img/gisquick-plugin.png}
+\caption{Nastavení vrstev v Gisquick pluginu \textit{(zdroj: autor)}}
 \label{fig:gisquick-plugin-layers}
 \end{figure}
 
@@ -262,8 +262,8 @@ vypočítané parametry.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.8\textwidth]{../img/project-publishing-time-summary.png}
-	\caption{Souhrn publikovaného projektu v Gisquick pluginu}
+	\includegraphics[width=0.8\textwidth]{./img/project-publishing-time-summary.png}
+	\caption{Souhrn publikovaného projektu v Gisquick pluginu \textit{(zdroj: autor)}}
 	\label{fig:summary}
 \end{figure}
 
@@ -398,7 +398,7 @@ jsou jeho hodnoty pouze přepsány.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth]{../img/getTimeInfo.png}
+\includegraphics[width=0.8\textwidth]{./img/getTimeInfo.png}
 \caption{Vývojový diagram publikace časové vrstvy \cite{flow-chart}}
 \label{fig:plugin-chart}
 \end{figure}
@@ -422,37 +422,37 @@ Výše popsané aplikované řešení je vhodné především v případech, kdy
 atribut obsahuje nekonzistentní časové formáty. Tento postup však není 
 příznivý pro velké množství dat, které by validační a výpočetní proces 
 během publikace značně zpomalilo. Alternativou je použití méně benevolentní 
-validace, je založena na předpokladu, že vstupní data obsahují pouze jeden časový 
-formát. V takovém případě by byl navíc výpočet rozdělen do dvou částí. 
+validace, která je založena na předpokladu, že vstupní data obsahují pouze jeden časový 
+formát. V takovém případě této metody je navíc výpočet rozdělen do dvou částí. 
 
-První část výpočtu by byla spuštěna po zvolení časového atributu. Validace by 
-v tomto kroku byla prováděna pouze pro první prvek. Možnosti by byly následující:
+První část výpočtu je spuštěna po zvolení časového atributu. Validace je
+v tomto kroku prováděna pouze pro první prvek. Možnosti jsou následující:
 
 \begin{itemize}
-	\item\textit{Prvek je validní} - v tomto případě by byl na základě proměnné
+	\item\textit{Prvek je validní} - v tomto případě je na základě proměnné
 	\\* \verb|datetime_mask_array| zjištěn jeho časový formát. Pro danou časovou 
-	vrstvu by v dialogovém okně bylo zobrazeno, zda-li je nutné v dalším 
+	vrstvu je v dialogovém okně zobrazeno, zda-li je nutné v dalším 
 	kroku vytvářet pomocný atribut, nebo ne.
 	\item\textit{Prvek není validní} - data jsou v tomto případě všechna 
-	požadována za nevalidní. Uživatel by byl na tuto zkutečnost upozorněn.
+	požadována za nevalidní. Uživatel je na tuto zkutečnost upozorněn.
 \end{itemize}
 
-Další krok výpočtu by byl spuštěn tlačítkem \textit{Next} (viz. obrázek 
+Další krok výpočtu je spuštěn tlačítkem \textit{Next} (viz. obrázek 
 \ref{fig:gisquick-plugin-layers}). Na základě časového formátu zjištěného
-v předchozím kroku by byly validovány všechny ostatní hodnoty časového 
-formátu. Další postup by záležel na nutnosti vytvářet pomocný atribut:
+v předchozím kroku jsou validovány všechny ostatní hodnoty časového 
+formátu. Další postup záleží na nutnosti vytvářet pomocný atribut:
 
 \begin{itemize}
 	\item\textit{atribut je potřeba vytvořit} - validní hodnoty časového 
-	atributu by byly převedeny do formátu \textit{UNIX Time} a uloženy do 
+	atributu jsou převedeny do formátu \textit{UNIX Time} a uloženy do 
 	pomocného atributu.
-	\item\textit{atribut není potřeba vytvářet} - v tom případě by musely 
-	všechny hodnoty mít časový formát prvního prvku, nebo by musely 
-	obsahovat hodnotu \textit{NULL}. Pouze v takovém případě by byla 
+	\item\textit{atribut není potřeba vytvářet} - v tom případě musí 
+	všechny hodnoty mít časový formát prvního prvku, nebo musí 
+	obsahovat hodnotu \textit{NULL}. Pouze v takovém případě je 
 	vrstva označena jako časová.
 \end{itemize}.
 
-Po dokončení výpočtu by byl uživatel informován, jestli výpočet proběhl
+Po dokončení výpočtu je uživatel informován, jestli výpočet proběhl
 korektně a kolik záznamů bylo zpracováno.	
 
 \subsection{Metadatový soubor}
@@ -476,7 +476,7 @@ validní, jsou do nich vepsány následující hodnoty:
 \item\textit{unix} - parametr unix nabývá hodnoty \textit{TRUE}
 v případě, že byl vytvořen pomocný atribut s časovými
 hodnoty ve formátu \textit{UNIX TIME}. Slouží webovému
-klientu k určení zda-li má k filtrování časové vrstvy
+klientu k určení, zda-li má k filtrování časové vrstvy
 (viz. kapitola \ref{sssec:time-filtration}) použít daný formát
 \textit{input\textunderscore datetime\textunderscore mask}, nebo
 \textit{UNIX TIME}.
@@ -564,9 +564,9 @@ vrstvy, nebo pro více vrstev současně.
 %% DT: autor
 \begin{figure}[h!]
 \centering
-\includegraphics[width=1\textwidth]{../img/gisquick-time-tool.png}
+\includegraphics[width=1\textwidth]{./img/gisquick-time-tool.png}
 \caption{Webové rozhraní Gisquick platformy s aktivovaným nástrojem
-pro práci s časoprostorovými daty (zdroj: autor)}
+pro práci s časoprostorovými daty \textit{(zdroj: autor)}}
 \label{fig:gisquick-client}
 \end{figure}
 
@@ -644,9 +644,9 @@ REQUEST=GetMap
 
 Tato skutečnost dovoluje filtrovat časové vrstvy na základě jejich
 časového atributu resp. jeho názvu a hodnoty. Lze tak filtrovat jednu
-i více vrstev najednou. Za použití speciálních znaků jako jsou
+i více vrstev najednou. Za použití speciálních znaků, jako jsou
 \textit{‘AND’, ’OR’, ’IN’, ’=’, ’<’, ’>=’,  ‘>’,
-’>=’, ’!=*,’(‘,’)’} lze rovněž filtrovat intervaly hodnot
+’>=’, ’!=*,’(‘,’)’}, lze rovněž filtrovat intervaly hodnot
 a jejich sjednocení \cite{qgis-service}.
 
 V implementovaném nástroji pro časovou filtraci je při filtrování použit
@@ -661,13 +661,13 @@ AND
 \end{verbatim}
 
 Parametr \textit{FILTER} podporuje hodnoty časového atributu v datovém
-typu textového řetězce, nebo jako celé číslo. Pro zachování
+typu textového řetězce nebo jako celé číslo. Pro zachování
 konzistence výsledků filtrování je nutné, aby časový formát hodnoty
-vstupující do parametru \textit{FILTER} korespondovaly s příslušným
+vstupující do parametru \textit{FILTER} korespondoval s příslušným
 formátem časového atributu. Z toho důvodu je při publikaci projektu
 ve speciálních případech nutné vytvoření pomocného atributu
 (\ref{sssec:plugin-functionality}). Ten obsahuje hodnoty časového atributu
-převedeny do formátu \textit{UNIX TIME}. To dovoluje k časovým hodnotám
+převedené do formátu \textit{UNIX TIME}. To dovoluje k časovým hodnotám
 přistupovat jako k celým číslům. V případě časového filtrování
 této vrstvy není tedy použit námi zvolený časový atribut, ale nově
 vytvořený.
@@ -687,23 +687,24 @@ aktivaci nástroje pro práci s časoprostorovými daty
 použit \textit{Lifecycle Hook Created}. Jedná se o funkci, která se
 %% ML: komponenta?
 %% DT: opraveno
-spustí jakmile je Vue komponenta inicializována. V ní je původní
+spustí jakmile je Vue komponenta inicializována. V této funkci je původní
 instance třídy \textit{ImageLayer} uložena do
 %% ML: a skryta??
 %% DT: odstraneno
 proměnné \textit{originalLayer}. Následně je vytvořena
-instance nová, která obsahuje stejné mapové vrstvy jako původní. Ta je
+instance nová, která obsahuje stejné mapové vrstvy jako instance původní. 
+Nová instance je
 poté nastavena jako aktivní. V případě, že mapový obraz má být
 aktualizován, je nutné vždy specifikací WMS
 (viz. kapitola \ref{sssec:ogc}) znovu generovat jeho obsah. Pokud je
-nástroj vypnut je použita původní instance a webový klient je tedy
+nástroj vypnut, je použita původní instance a webový klient je tedy
 opět v původním nastavení.
 
 \subsection{Filtrace jedné časové vrstvy}
 \label{sssec:one-layer-filtration}
 
 První a také jediný krok, který lze po inicializaci časového nástroje
-udělat je volba časové vrstvy. Zde je možno zvolit jednotlivé časové
+udělat, je volba časové vrstvy. Zde je možné zvolit jednotlivé časové
 vrstvy, nebo filtraci všech viditelných časových vrstev. Pokud je
 vybrána možnost filtrace mapových prvků pouze jedné vrstvy, je tato
 vrstva v případě jejího skrytí znovu zviditelněna. Následný postup
@@ -715,21 +716,21 @@ je popsán dále.
 %% ML: je nutna? I tak zkus prepsat
 %% DT: prepsano
 Nejprve je inicializován časový posuvník. Na něm jsou závislé
-další uživatelské prvky jako například \textit{časové štítky}
+další uživatelské prvky, jako například \textit{časové štítky}
 (viz. kapitola \ref{sssec:gisquick-client-ui}). Jeho minimální a maximální
 hodnota je získána z metadatového parametru \textit{time\textunderscore
 attribute} (viz. kapitola \ref{sssec:metadata}). Velikost kroku posuvníku
 určena jako setina rozdílu jeho maximální a minimální hodnoty. Metoda
-\verb|setSliderValue| inicializuje hodnoty časového posuvníku na jejich poslední
+\verb|setSliderValue| inicializuje hodnoty časového posuvníků na jejich poslední
 použité. V případě, že nebyla vrstva ještě filtrována, je hodnota
 levého posuvníku rovna minimu časového posuvníku a hodnota pravého
-posuvníku o krok časového posuvníku větší.
+posuvníku o krok časového posuvníku vyšší.
 
 Stejně jako hodnoty parametru \textit{time\textunderscore attribute},
-tak hodnoty posuvníků jsou v časovém formátu \textit{UNIX Time}, tedy
+hodnoty posuvníků jsou v časovém formátu \textit{UNIX Time}, tedy
 jako celočíselný datový typ. \textit{Vue.js} umožňuje nastavení
 \textit{Watched Property}. Takto jsou nastavené proměnné hodnoty
-posuvníků. Pokud se tedy jedna z hodnot změní je spuštěna metoda,
+posuvníků. Pokud se jedna z hodnot změní, je spuštěna metoda,
 která provede převod původního celočíselného časového formátu
 \textit{UNIX Time} do časového formátu \textit{output\textunderscore
 datetime\textunderscore mask} zvoleného během publikace projektu
@@ -740,10 +741,10 @@ datetime\textunderscore mask} zvoleného během publikace projektu
 \bigskip
 \noindent \textbf{Filtrace}
 %\ref{appendix}
-Způsob, jakým je aktualizována mapa na základě změny časových hodnot je
+Způsob, jakým je aktualizována mapa na základě změny časových hodnot, je
 %% ML: kde je dokumentace?
 %% DT: dokumentace jeste nebyla vytvorena. Doplneno o referenci
-popsána v dokumentaci časového nástroje \ref{sssec:manual-gui}. Zde je popsán princip, kterým je
+popsán v dokumentaci časového nástroje \ref{sssec:manual-gui}. Zde je popsán princip, kterým je
 mapový obraz dle stávajícího nastavení časového nástroje aktualizován.
 
 Při spuštění časové filtrace je v metodě \verb|updateSingleLayer|
@@ -751,20 +752,19 @@ provedeno několik po sobě jdoucích operací:
 \begin{itemize}
 \item\textit{detekce předem filtrovaných vrstev} - nejprve je
 nutné zjistit, zda-li ostatní viditelné časové vrstvy již
-filtrovány byly. V takovém případě je potřeba do parametru
+filtrovány byly. V případě že ano, je potřeba do parametru
 \textit{FILTER} zahrnout nastavení předem filtrovaných
 vrstev. Pokud by tak nebylo provedeno, z těchto časových
-vrstev by byly zobrazeny všechny jejich mapové prvky. To
-je provedeno metodou \verb|getFilterFromLayers|, která vrací
+vrstev by byly zobrazeny všechny jejich mapové prvky. Detekce
+je provedena metodou \verb|getFilterFromLayers|, která vrací
 textový řetězec obsahující obsah parametru \textit{FILTER}
 (viz. kapitola \ref{sssec:time-filtration}) časových vrstev,
 které byly již předem filtrovány.
 \item\textit{sestavení filtru pro danou vrstvu} - další krok
 zahrnuje vytvoření obsahu parametru \textit{FILTER} pro právě
 filtrovanou vrstvu. Tento krok se liší v závislosti na existenci
-pomocného časového atributu s hodnoty ve formátu \textit{UNIX
-TIME} (viz. kapitola \ref{sssec:plugin-functionality}). Parametr
-\textit{unix} v metadatovém souboru (viz. kapitola
+pomocného časového atributu (viz. kapitola \ref{sssec:plugin-functionality}). 
+Parametr \textit{unix} v metadatovém souboru (viz. kapitola
 \ref{sssec:metadata}) obsahuje informaci o jeho vytvoření.
 \begin{itemize}
 \item\textit{unix = TRUE} - znamená to, že filtrace není
@@ -786,21 +786,21 @@ atributu je součástí metadatového souboru jako
 řetězce je poté obdobné jako v předchozím případě.
 \end{itemize}
 Na konci tohoto kroku jsou poté spojeny dohromady obsahy parametru
-\textit{FILTER} z ostatních časových vrstev a nově vytvořený.
+\textit{FILTER} z ostatních časových vrstev obsahu nově vytvořeného.
 \item\textit{nastavení filtrované vrstvy} - tento krok je nezbytný
 %% ML: interpunkce
 %% DT: opraveno
 z několika důvodů. Je nutné uložit hodnoty časového posuvníku
-v případě, že vrstva bude v budoucnu filtrována znovu. Dále je
+pro případ, že vrstva bude v budoucnu filtrována znovu. Dále je
 nutné uložit použitý obsah parametru \textit{FILTER}, který
-je použit při filtrování ostatních časových vrstev. nakonec
+je použit při filtrování ostatních časových vrstev. Nakonec
 %% ML: ta veta zni divne
 %% DT: preformulovano
 je změněn název vrstvy. Ten obsahuje její původní název doplněný o
 mezní hodnoty časového intervalu. Tímto způsobem uživatel ihned
 ví, které vrstvy byly již filtrovány.
 \item\textit{provedení operace GetMap} - v posledním kroku je
-metodou \verb|updateParams| poslán požadavek na server obsahující
+metodou \verb|updateParams| poslán na server požadavek obsahující
 parametr \textit{FILTER} s obsahem složeným z filtru pro všechny
 viditelné časové vrstvy. Server vrátí v odpovědi mapový obraz s
 filtrovanými mapovými prvky, pomocí kterých je původní mapový
@@ -809,7 +809,7 @@ obraz nahrazen.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.5\textwidth]{../img/getSingleLayer.png}
+\includegraphics[width=0.5\textwidth]{./img/getSingleLayer.png}
 \caption{Vývojový diagram filtrace více časových vrstev najednou
 	\cite{flow-chart}}
 \label{fig:single-chart}
@@ -828,17 +828,17 @@ všechny viditelné časové vrstvy najednou.
 
 Jednotlivé časové vrstvy mohou obsahovat navzájem odlišné
 časové atributy, které v jistých případech nedovolují společnou
-filtraci. Například pokud by projekt obsahoval dvě odlišné časové
-vrstvy, kdy jedna by zachycovala časový průběh v intervalu jednoho dne
+filtraci, například pokud by projekt obsahoval dvě odlišné časové
+vrstvy, z nichž jedna by zachycovala časový průběh v intervalu jednoho dne
 a druhá v intervalu jednoho roku. Výsledný krok časového posuvníku by
 v takovém případě nebyl schopný postihnout nekonzistentní rozdělení
 mapových prvků na časové ose. Z toho důvodu je při výběru možnosti
 \textit{Select all visible layers} nejprve zjištěno, zda-li všechny
-viditelné časové vrstvy mají zvoleny stejný, nebo odlišný časový
-atribut. Tato zkutečnost je zjištěna metodou \verb|checkMultipleAttributes|,
+viditelné časové vrstvy mají zvoleny stejný, časový
+atribut. Tato skutečnost je zjištěna metodou \verb|checkMultipleAttributes|,
 která pro všechny viditelné časové vrstvy zjistí unikátní časové
-atributy a uloží je do pole. Pokud takové pole obsahuje více, než jeden
-prvek je zobrazeno další roletové menu ve kterém je nutné časový
+atributy a uloží je do pole. Pokud takové pole obsahuje více než jeden
+prvek, je zobrazeno další roletové menu, ve kterém je nutné časový
 atribut specifikovat.
 
 Při inicializaci časového posuvníku je nutné brát v potaz
@@ -850,31 +850,31 @@ celkové maximální a minimální hodnoty. Tímto způsobem je zajištěno,
 že všechny hodnoty časového atributu pro všechny časové vrstvy budou
 náležet intervalu daného minimální a maximální hodnotou časového
 posuvníku. Hodnoty posuvníků jsou nastaveny na minimální hodnoty
-intervalu časového posuvníku, resp. na hodnotu, která je o časový
+intervalu časového posuvníku a na hodnotu, která je o jeden časový
 krok větší. Není přitom zohledňováno předchozí použití časových
-vrstev při jejich filtraci tak, tako je tomu u fitrace jednotlivých vrstev.
+vrstev při jejich filtraci tak, jako je tomu u filtrace jednotlivých vrstev.
 
 Dále je nutné zajistit, aby časové hodnoty zobrazované na webovém
-klientu, při filtraci více vrstev najednou, měly společný časový
+klientovi, při filtraci více vrstev najednou, měly společný časový
 formát. Časový formát je pro jednotlivé vrstvy definovaný v metadatovém
 souboru (viz kapitola \ref{sssec:metadata}). Metoda \verb|setDateMask|
-má za úkol mezi časovými formáty filtrovaných vrstev najít takový,
+má za úkol mezi časovými formáty filtrovaných vrstev najít takový formát,
 který poskytuje nejdetailnější zobrazení. Pokud tedy jedna z vrstev
 má nastaveno zobrazování s podrobností minut, je její časový
 formát upřednostněn. Metoda pro jednotlivé časové formáty nejprve
-zjišťuje zda-li obsahují zároveň roky, hodiny a minuty. Pokud ano je
+zjišťuje zda-li obsahují zároveň roky, hodiny a minuty. Pokud ano, je
 první nalezený formát použit. Pokud tomu tak není je hledán formát
 obsahující alespoň roky. V případě, že ani takový není nalezen,
 je použit časový formát první časové vrstvy.
 
-Pro správné zobrazení kalendáře, hodinového ciferníků a
-pro výběr hodnot časových štítků je nutné zjistit, jestli
+Pro správné zobrazení kalendáře, hodinového ciferníku a
+pro výběr hodnot časových štítků je nutné zjistit, zda-li
 nalezený časový formát obsahuje datum a čas. K tomu slouží metoda
 \verb|maskIncludeDate|. Na základě jejího výsledku je skryta možnost
 výběru časových hodnot pomocí kalendáře. Zobrazení hodinového
-ciferníku je řešeno obdobně s tím rozdílem, že k detekci času v
+ciferníku je řešeno obdobně, ale s tím rozdílem, že k detekci času v
 časovém formátu je použito JavaScriptové metody \verb|includes|. Tato
-metodika je provedena jak při výběru více časových vrstev, tak při
+metodika je provedena při výběru více časových vrstev i při
 výběru jednotlivé vrstvy.
 
 \bigskip
@@ -885,7 +885,7 @@ zobrazené časové vrstvy odpovídají popsanému principu pro filtraci
 jednotlivých vrstev. Je zde však jedna podstatná změna při vytváření
 obsahu parametru \textit{FILTER}. V metodě \verb|updateMultipleLayers| je
 oproti metodě \verb|updateSingleLayer| přidán cyklus, který prochází
-jednotlivě všechny viditelné časové vrstvy a zjišťuje jestli jejich
+jednotlivě všechny viditelné časové vrstvy a zjišťuje zda jejich
 časový atribut je shodný s časovým atributem filtrovaných časových
 vrstev. Dále je sestaven obsah parametru \textit{FILTER}. Pro každou vrstvu
 mohou nastat dva případy:
@@ -904,13 +904,13 @@ vrstev. Pokud by tedy vrstva byla znovu samostatně
 filtrována, inicializuje se časový posuvník naposledy
 uloženými hodnoty.
 \end{itemize}
-Pokud jsou všechny viditelné časové vrstvy zpracovány je nově vytvořený
+Pokud jsou všechny viditelné časové vrstvy zpracovány, je nově vytvořený
 obsah parametru \textit{FILTER} použit při operaci \textit{GetMap} stejným
-způsoben jako u filtrace jednotlivé vrstvy.
+způsobem jako u filtrace jednotlivé vrstvy.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.9\textwidth]{../img/getMultipleLayers.png}
+\includegraphics[width=0.9\textwidth]{./img/getMultipleLayers.png}
 \caption{Vývojový diagram filtrace více časových vrstev najednou \cite{flow-chart}}
 \label{fig:multiple-chart}
 \end{figure}
@@ -921,13 +921,13 @@ způsoben jako u filtrace jednotlivé vrstvy.
 \subsection{Tvorba animace}
 \label{sssec:animation}
 
-Jak pro jednotlivé vrstvy, tak pro více vrstev najednou je možnost
+Pro jednotlivé vrstvy i pro více vrstev najednou, je možnost
 provádět filtraci mapových prvků automatizovaně a vytvářet tak
 jednoduché animace. K tomu slouží tlačítko \textit{PLAY} na spodní
 straně nástroje viz. kapitola \ref{sssec:gisquick-client-ui}.
 
-Jedná se o jednoduchou metodu \verb|animate|, která s prodlevou jedna
-sekunda mění hodnotu časového posuvníku. Tato metoda pouze kontroluje
+Jedná se o jednoduchou metodu \verb|animate|, která s prodlevou jedné
+sekundy mění hodnotu časového posuvníku. Tato metoda pouze kontroluje
 hodnotu proměnné \textit{animateStop}. Pokud je tato hodnota FALSE, je
 volána metoda \verb|newFrame|. Metoda \verb|newFrame| při každém svém
 zavolání zkontroluje hodnotu spínače \textit{cumulative}:
@@ -944,11 +944,11 @@ společně obě hodnoty posuvníků o krok časového posuvníku.
 Po zvýšení hodnot je zavolána metoda \verb|getNewUrl| (viz. kapitola
 \ref{sssec:one-layer-filtration}), která aktualizuje mapový obsah podle
 nově nastavených filtrovaných hodnot. Nakonec v případě, že hodnota
-\textit{animateStop = FALSE}, zavolá metoda \verb|newFrame| rekurzivně sama sebe s časovou prodlevou jedna sekunda.
+\textit{animateStop = FALSE}, zavolá metoda \verb|newFrame| rekurzivně sama sebe s časovou prodlevou jedné sekundy.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.9\textwidth]{../img/animate.png}
+\includegraphics[width=0.9\textwidth]{./img/animate.png}
 \caption{Vývojový diagram metody animate}
 \label{fig:animate-chart}
 \end{figure}

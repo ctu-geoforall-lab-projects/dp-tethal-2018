@@ -21,34 +21,37 @@ Nejvíce změn především z uživatelského hlediska bylo provedeno na již
 zmiňovaném webovém klientu. Zde byl přidán zcela nový nástroj, který
 na základě časové osy nabízí uživateli kontrolu nad výběrem
 zobrazovaných mapových prvků. Nástroj obsahuje různé způsoby určení
-časového intervalu pro selekci mapových prvků jedné, nebo více
+časového intervalu pro selekci mapových prvků jedné nebo více
 vrstev. Nástroj dále umožňuje vytvářet jednoduché animace.
 
-Způsob jakým byl jak samotný nástroj, tak změny zásuvného modulu
-implementovány úzce odráží poznatky získané během rešerše. Jedná se o
+Způsob, jakým byl jak samotný nástroj a změny zásuvného modulu
+implementovány, úzce odráží poznatky získané během rešerše. Jedná se o
 funkční řešení převzaté z časové podpory pro MapServer a
-GeoServer. Stejnou mírou také o aplikované řešení z hlediska
-uživatelského rozhraní použité v produktech firmy Esri. Konkrétně
-ArcGIS Server a ArcGIS Online.
+GeoServer. Z hlediska
+uživatelského rozhraní byly použity prvky uživatelského rozhraní 
+vyskytující se v aplikaci ArcGIS Online.
 
 I přes vytvoření plně funkčního nástroje, který nabízí příjemné
 uživatelské rozhraní a širokou škálu možností, je zapotřebí budoucího
-vývoje nástroje. Nejdůležitější pro časový nástroj především z
-hlediska jeho komplexnosti by byla implementace pro zobrazování
-časoprostorových rastrových vrstev. Dále se jedná na straně zásuvného modulu
-pro QGIS o zjednodušení validace dat a následného výpočtu,
-které by bylo přínosné především pro projekty s větším objemem dat. V
-této práci je aplikovaná validace dosti benevolentní, kdy na úkor časově
-náročnějšího výpočtu dovoluje uživatelům použití dat s nekonzistentním
-časovým formátem. Na straně webového klienta jde především o grafickou
-stránku nástroje, která vzhledem k jeho možným budoucím změnám nebyla
+vývoje nástroje. Nejdůležitější pro časový nástroj, především z
+hlediska jeho komplexnosti, by byla implementace pro zobrazování
+časoprostorových rastrových vrstev. Další vývoj na straně zásuvného modulu
+pro QGIS by mohl zjednodušit validaci dat a následného výpočtu. 
+Zjednodušená validace by byla přínosná především pro projekty s 
+větším objemem dat. V
+této práci je aplikovaná validace, na úkor časově
+náročnějšího výpočtu, dosti benevolentní. Validace dovoluje 
+uživatelům použití dat s nekonzistentním
+časovým formátem. Na straně webového klienta jde především o vývoj grafické
+stránky nástroje, která vzhledem k jeho možným budoucím změnám nebyla
 brána jako důležitá.
 
 \newpage
-Pro potřeby vývoje rozšíření platformy Gisquick byly vytvořeny dva repozitáře. 
+Pro potřeby vývoje rozšíření platformy Gisquick byl vytvořen repozitář 
+\textit{dp-tethal-2018} a dále dva pomocné repozitáře. 
 Repozitář \textit{dp-tethal-2018-gisquick}
 obsahující mimo jiné webového klienta ve větvi \textit{vue-client}.
-Dále repozitář \textit{dp-tethal-2018-gisquick-qgis-plugin} obsahující zásuvný 
+Dále repozitář \textit{dp-tethal-2018-gisquick-qgis-plugin}, obsahující zásuvný 
 modul pro program QGIS ve větvi \textit{master}.
 Oba vycházejí z původního repozitáře platformy Gisquick. Konkrétně 
 repozitáře \textit{gisquick} resp. \textit{gisquick-qgis-plugin}
