@@ -14,7 +14,7 @@ Ing. Martin Landa, Ph.D.
 
 ## Oponent
 
-???
+Mgr. Rostislav Nétek, Ph.D., katedra geoinformatiky, Univerzita Palackého v Olomouci
 
 ## Obhajoba
 
